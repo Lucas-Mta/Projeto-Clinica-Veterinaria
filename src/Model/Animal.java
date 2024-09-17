@@ -6,17 +6,17 @@ public class Animal {
     private int age;
     private char gender;
     private Double weight;
-    private Client owner;
-    private Species specie;
+    private int ownerId;
+    private int specieId;
 
-    public Animal(int animalId, String name, int age, char gender, Double weight, Client owner, Species specie) {
+    public Animal(int animalId, String name, int age, char gender, Double weight, int ownerId, int specieId) {
         this.animalId = animalId;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.weight = weight;
-        this.owner = owner;
-        this.specie = specie;
+        this.ownerId = ownerId;
+        this.specieId = specieId;
     }
 
     // Getters
@@ -36,12 +36,16 @@ public class Animal {
         return gender;
     }
 
-    public Species getSpecie() {
-        return specie;
+    public Double getWeight() {
+        return weight;
     }
 
-    public Client getOwner() {
-        return owner;
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public int getSpecieId() {
+        return specieId;
     }
 
     // Setters
