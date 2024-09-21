@@ -51,8 +51,8 @@ public class Appointment {
         return symptoms;
     }
 
-    // Setters
 
+    // Setters
     public void setDate(Date date) {
         this.date = date;
     }
@@ -64,5 +64,4 @@ public class Appointment {
     public void setSymptoms(String symptoms) {
         this.symptoms = symptoms;
     }
-
 }

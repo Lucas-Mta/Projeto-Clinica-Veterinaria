@@ -1,72 +1,99 @@
+/*
+* CLASSE RELATÓRIO (REPORT):
+*
+* Essa classe vai buscar informações do banco de dados.
+* Por isso, ela vai interagir unicamente e diretamente com o DAO
+* para realizar consultas específicas. Dessa forma, os dados vão ser
+* obtidos dinamicamente quando foremacessados no banco.
+*
+* Em vez de armazenar as quantidades em atributos da classe,
+* vão haver métodos que retornam os valores diretamente das consultas SQL.
+*/
+
 package Model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 public class Report {
-    private int quantAnimals;
-    private int quantTreatments;
-    private int quantAppointments;
-    private int quantMedicines;
 
-    public Report(int quantAnimals, int quantTreatments, int quantAppointments, int quantMedicines) {
-        this.quantAnimals = quantAnimals;
-        this.quantTreatments = quantTreatments;
-        this.quantAppointments = quantAppointments;
-        this.quantMedicines = quantMedicines;
+    private Connection connection;
+
+    // Construtor que recebe a conexão do banco de dados
+    public Report(Connection connection) {
+        this.connection = connection;
     }
 
-    // Getters
-    public int getQuantAnimals() {
-        return quantAnimals;
+    // Metódo Geral para pegar a quantidade de algo
+    public int getQuant(String query) throws SQLException {
+        // Consulta SQL de acordo com a query
+        PreparedStatement statement = connection.prepareStatement(query);
+        ResultSet resultSet = statement.executeQuery();
+
+        // Recupera a quantidade
+        if (resultSet.next()) {
+            return resultSet.getInt(1);
+        }
+
+        return 0;
     }
 
-    public int getQuantTreatments() {
-        return quantTreatments;
+    // Pega a quantidade de Animais
+    public int getQuantAnimals() throws SQLException {
+        String query = "SELECT COUNT(*) FROM Animal;";
+        return getQuant(query);
     }
 
-    public int getQuantAppointments() {
-        return quantAppointments;
+    // Pega a quantidade de Clientes
+    public int getQuantClients() throws SQLException {
+        String query = "SELECT COUNT(*) FROM Cliente;";
+        return getQuant(query);
     }
 
-    public int getQuantMedicines() {
-        return quantMedicines;
+    // Pega a quantidade de Funcionários
+    public int getQuantEmployees() throws SQLException {
+        String query = "SELECT COUNT(*) FROM Funcionario;";
+        return getQuant(query);
     }
 
-    // Setters
-    public void setQuantAnimals(int quantAnimals) {
-        this.quantAnimals = quantAnimals;
+    // Pega a quantidade de Veterinários
+    public int getQuantVets() throws SQLException {
+        String query = "SELECT COUNT(*) FROM Veterinario;";
+        return getQuant(query);
     }
 
-    public void setQuantTreatments(int quantTreatments) {
-        this.quantTreatments = quantTreatments;
+    // Pega a quantidade de Secretários
+    public int getQuantSecrs() throws SQLException {
+        String query = "SELECT COUNT(*) FROM Secretario;";
+        return getQuant(query);
     }
 
-    public void setQuantAppointments(int quantAppointments) {
-        this.quantAppointments = quantAppointments;
+    // Pega a quantidade de Medicamentos
+    public int getQuantMedicines() throws SQLException {
+        String query = "SELECT COUNT(*) FROM Medicamento;";
+        return getQuant(query);
     }
 
-    public void setQuantMedicines(int quantMedicines) {
-        this.quantMedicines = quantMedicines;
+    // Pega a quantidade de Tratamentos em andamento
+    public int getQuantTreatments() throws SQLException {
+        String query = "SELECT COUNT(*) FROM Tratamento WHERE encerrado = false;";
+        return getQuant(query);
     }
 
-    // Métodos de Model.Report
-    public void consultasPorPeriodo(Date inicio, Date fim) {
-        // Implementação de filtro de consultas por período
-        System.out.println("Consultas realizadas entre " + inicio + " e " + fim);
-        // Ver como fazer a busca de dados de consultas do sistema
-    }
 
-    public void tratamentosPorPeriodo(Date inicio, Date fim) {
-        // Implementação de filtro de tratamentos por período
-        System.out.println("Tratamentos realizados entre " + inicio + " e " + fim);
-        // Ver como fazer a busca de dados de consultas do sistema
-    }
 
-    public void mostrarInfos() {
-        System.out.println("Relatório de Informações:");
+    // Exibe o relatório completo
+    public void showInfos() throws SQLException {
+        System.out.println("Relatório de Informações: ");
+        System.out.println("Quantidade de Clientes: " + getQuantClients());
+        System.out.println("Quantidade de Funcionários: " + getQuantEmployees());
+        System.out.println("Quantidade de Secretários(as): " + getQuantSecrs());
+        System.out.println("Quantidade de Veterinários(as): " + getQuantVets());
         System.out.println("Quantidade de Animais: " + getQuantAnimals());
-        System.out.println("Quantidade de Tratamentos: " + getQuantTreatments());
-        System.out.println("Quantidade de Consultas: " + getQuantAppointments());
+        System.out.println("Quantidade de Tratamentos em andamento: " + getQuantTreatments());
         System.out.println("Quantidade de Medicamentos: " + getQuantMedicines());
     }
 

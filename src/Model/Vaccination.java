@@ -56,4 +56,5 @@ public class Vaccination {
     public void setNextDose(Date nextDose) {
         this.nextDose = nextDose;
     }
+
 }

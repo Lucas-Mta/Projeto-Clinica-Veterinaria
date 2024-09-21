@@ -48,9 +48,22 @@ public class Animal {
         return specieId;
     }
 
+
     // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
     }
 
 }

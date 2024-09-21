@@ -3,24 +3,31 @@ package Model;
 import java.util.Date;
 
 public class Exam {
-    private Appointment appointment;
+    private int examId;
+    private int appointmentId;
     private String examType;
     private String description;
     private Date requestDate;
     private String status;
     private String results;
 
-    public Exam(Appointment appointment, String examType, String description, Date requestDate, String status) {
-        this.appointment = appointment;
+    public Exam(int examId, int appointmentId, String examType, String description, Date requestDate, String status, String results) {
+        this.examId = examId;
+        this.appointmentId = appointmentId;
         this.examType = examType;
         this.description = description;
         this.requestDate = requestDate;
         this.status = status;
+        this.results = results;
     }
 
     // Getters
-    public Appointment getAppointment() {
-        return appointment;
+    public int getExamId() {
+        return examId;
+    }
+
+    public int getAppointmentId() {
+        return appointmentId;
     }
 
     public String getExamType() {
@@ -44,12 +51,24 @@ public class Exam {
     }
 
     // Setters
-    public void setDescription(String description) { this.description = description; }
+    public void setExamType(String examType) {
+        this.examType = examType;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
+    }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public void setResults(String results) { this.results = results; }
+    public void setResults(String results) {
+        this.results = results;
+    }
 
 }

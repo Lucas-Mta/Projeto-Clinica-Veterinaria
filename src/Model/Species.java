@@ -18,4 +18,9 @@ public class Species {
         return specieName;
     }
 
+    // Setter
+    public void setSpecieName(String specieName) {
+        this.specieName = specieName;
+    }
+
 }

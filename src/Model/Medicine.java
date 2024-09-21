@@ -23,4 +23,14 @@ public class Medicine {
     public int getMinStock() {
         return minStock;
     }
+
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMinStock(int minStock) {
+        this.minStock = minStock;
+    }
+
 }

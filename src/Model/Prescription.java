@@ -1,14 +1,16 @@
 package Model;
 
 public class Prescription {
+    private int prescriptionId;
     private int vetId;
     private int appointmentId;
     private int drugId;
     private String healthProblem;
-    private int dosage;
+    private float dosage;
     private String instructions;
 
-    public Prescription(int vetId, int appointmentId, int drugId, String healthProblem, int dosage, String instructions) {
+    public Prescription(int prescriptionId, int vetId, int appointmentId, int drugId, String healthProblem, float dosage, String instructions) {
+        this.prescriptionId = prescriptionId;
         this.vetId = vetId;
         this.appointmentId = appointmentId;
         this.drugId = drugId;
@@ -18,6 +20,10 @@ public class Prescription {
     }
 
     // Getters
+    public int getPrescriptionId() {
+        return prescriptionId;
+    }
+
     public int getVetId() {
         return vetId;
     }
@@ -34,7 +40,7 @@ public class Prescription {
         return healthProblem;
     }
 
-    public int getDosage() {
+    public float getDosage() {
         return dosage;
     }
 
@@ -43,19 +49,16 @@ public class Prescription {
     }
 
     // Setters
-    public void setDrugId(int drugId) {
-        this.drugId = drugId;
-    }
-
     public void setHealthProblem(String healthProblem) {
         this.healthProblem = healthProblem;
     }
 
-    public void setDosage(int dosage) {
+    public void setDosage(float dosage) {
         this.dosage = dosage;
     }
 
     public void setInstructions(String instructions) {
         this.instructions = instructions;
     }
+
 }

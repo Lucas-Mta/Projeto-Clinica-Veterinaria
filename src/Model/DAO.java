@@ -7,258 +7,255 @@ package Model;
  */
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 public class DAO {
-    public static String URL = "";
+    public static String URL = ""; // Colocar o Path do banco de dados
     private static Connection connection;
-    protected static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    // Connect to SQLite
+    // Conecta ao SQL
     public static Connection getConnection() {
         if (connection ==  null) {
             try {
                 connection = DriverManager.getConnection(URL);
                 if (connection != null) {
                     DatabaseMetaData meta = connection.getMetaData();
+                    System.out.println("Conectando ao banco de dados: " + meta.getDriverName());
                 }
             } catch (SQLException exception) {
-                System.err.println("Erro: " + exception.getMessage());
+                System.err.println("Erro de conexão: " + exception.getMessage());
             }
         }
         return connection;
     }
 
-    /* Pega o resultado no banco de dados de uma query especificada */
+    // Executa uma consulta de SELECT e retorna o ResultSet
     protected ResultSet getResultSet(String query) {
-        Statement statement; // Declaração
-        ResultSet resultSet = null; // Resultados
         try {
-            statement = (Statement) connection.createStatement();
-            resultSet = statement.executeQuery(query);
+            Statement statement = connection.createStatement();
+            return statement.executeQuery(query);
         } catch (SQLException exception) {
-            System.err.println("Erro: " + exception.getMessage());
+            System.err.println("Erro na consulta: " + exception.getMessage());
         }
-        return resultSet;
+        return null;
     }
 
-    //?????
+    // Executa uma atualização no banco de dados (INSERT, UPDATE, DELETE)
     protected int executeUpdate(PreparedStatement queryStatement) throws SQLException {
-        int update;
-        update = queryStatement.executeUpdate();
-        return update;
+        return queryStatement.executeUpdate();
     }
 
-    // Pega o último id
+    // Recupera o último ID inserido em uma tabela específica
     protected int lastId(String tableName, String primaryKey) {
-        Statement statement;
-        int lastId = -1;
         try {
-            statement = (Statement) connection.createStatement();
+            Statement statement = (Statement)connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT MAX(" + primaryKey + ") AS id FROM" + tableName);
             if (resultSet.next()) {
-                lastId = resultSet.getInt("id");
+                return resultSet.getInt("id");
             }
         } catch (SQLException exception) {
-            System.err.println("Erro: " + exception.getMessage());
+            System.err.println("Erro ao obter o último ID: " + exception.getMessage());
         }
-        return lastId;
+        return -1;
     }
 
-    // Encerra conexão com o banco
+    // Encerra conexão com o banco de dados
     public static void endConecction() {
         try {
-            (DAO.getConnection()).close();
+            if (!connection.isClosed() && connection != null) {
+                connection.close();
+                System.out.println("Conexão encerrada com o banco de dados.");
+            }
         } catch (SQLException exception) {
-            System.err.println("Erro: " + exception.getMessage());
+            System.err.println("Erro ao fechar a conexão: " + exception.getMessage());
         }
     }
 
-    // Cria tabela SQLite
+    // Cria todas as tabelas necessárias no banco de dados
     protected final boolean createTable() {
-        // Criação de tabelas e seus atributos.
         try {
             PreparedStatement statement;
 
-            // Tabela pessoa
+            // Tabela Pessoa
             statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS pessoa(\s
-                    cpf VARCHAR PRIMARY KEY,\s
-                    nome VARCHAR,\s
-                    endereco VARCHAR,\s
-                    telefone VARCHAR,\s
-                    email VARCHAR\s
-                    );""");
+                CREATE TABLE IF NOT EXISTS Pessoa (
+                cpf VARCHAR(11) PRIMARY KEY,
+                nome VARCHAR(80) NOT NULL,
+                endereco VARCHAR(100),
+                telefone VARCHAR(11),
+                email VARCHAR(60) UNIQUE
+                );""");
             executeUpdate(statement);
 
-            // Tabela funcionário
+            // Tabela Funcionário
             statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS funcionario(\s
-                    idLogin INTEGER PRIMARY KEY AUTOINCREMENT,\s
-                    login VARCHAR,\s
-                    senha VARCHAR,\s
-                    nivelAcesso INTEGER\s
-                    );""");
+                CREATE TABLE IF NOT EXISTS Funcionario (
+                cpf VARCHAR PRIMARY KEY,
+                nivelAcesso INTEGER NOT NULL,
+                login VARCHAR UNIQUE NOT NULL,
+                senha VARCHAR NOT NULL,
+                FOREIGN KEY(cpf) REFERENCES Pessoa(cpf) ON DELETE CASCADE,
+                CHECK (nivelAcesso == 0 || nivelAcesso == 1)
+                );""");
             executeUpdate(statement);
 
-            // Tabela Cliente (herda de pessoa)
+            // Tabela Secretária (herda de Funcionário)
             statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS cliente(\s
-                    idCliente INTEGER PRIMARY KEY AUTOINCREMENT,\s
-                    cpf VARCHAR,\s
-                    FOREIGN KEY(cpf) REFERENCES pessoa(cpf)\s
-                    );""");
+                CREATE TABLE IF NOT EXISTS Secretario (
+                idSecretario INTEGER PRIMARY KEY AUTOINCREMENT,
+                cpf VARCHAR UNIQUE NOT NULL,
+                turno VARCHAR,
+                FOREIGN KEY(cpf) REFERENCES Funcionario(cpf) ON DELETE CASCADE
+                );""");
             executeUpdate(statement);
 
-            // Tabela Secretária (herda de funcionário)
+            // Tabela Veterinário (herda de Funcionário)
             statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS secretaria(\s
-                    idSecretaria INTEGER PRIMARY KEY AUTOINCREMENT,\s
-                    turno VARCHAR,\s
-                    idLogin INTEGER,\s
-                    FOREING KEY(idLogin) REFERENCES funcionario(idLogin)\s
-                    );""");
+                CREATE TABLE IF NOT EXISTS Veterinario (
+                idVeterinario INTEGER PRIMARY KEY AUTOINCREMENT,
+                cpf VARCHAR UNIQUE NOT NULL,
+                especialidade VARCHAR,
+                horaAtendimento TIME,
+                numSala INTEGER,
+                FOREIGN KEY(cpf) REFERENCES Funcionario(cpf) ON DELETE CASCADE
+                );""");
             executeUpdate(statement);
 
-            // Tabela Veterinário (herda de funcionário)
+            // Tabela Cliente (herda de Pessoa)
             statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS veterinario (\s
-                    idVeterinario INTEGER PRIMARY KEY AUTOINCREMENT,\s
-                    especialidade VARCHAR,\s
-                    horaAtendimento TIME,\s
-                    numSala INTEGER,\s
-                    idLogin INTEGER,\s
-                    FOREING KEY(idLogin) REFERENCES funcionario(idLogin)\s
-                    );""");
+                CREATE TABLE IF NOT EXISTS Cliente (
+                idCliente INTEGER PRIMARY KEY AUTOINCREMENT,
+                cpf VARCHAR UNIQUE NOT NULL,
+                FOREIGN KEY(cpf) REFERENCES Pessoa(cpf) ON DELETE CASCADE
+                );""");
+            executeUpdate(statement);
+
+            // Tabela Espécie
+            statement = DAO.getConnection().prepareStatement("""
+                CREATE TABLE IF NOT EXISTS Especie(\s
+                idEspecie INTEGER PRIMARY KEY AUTOINCREMENT,\s
+                nomeEspecie VARCHAR\s
+                );""");
             executeUpdate(statement);
 
             // Tabela Animal
             statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS animal(\s
-                    idAnimal INTEGER PRIMARY KEY AUTOINCREMENT,\s
-                    nome VARCHAR,\s
-                    idade INTEGER \s
-                    sexo CHAR,\s
-                    peso DOUBLE,\s
-                    cpfProprietario VARCHAR,\s
-                    idEspecie INTEGER,\s
-                    FOREIGN KEY(cpfProprietario) REFERENCES cliente(cpf),\s
-                    FOREIGN KEY(idEspecie) REFERENCES especie(idEspecie)\s
-                    );""");
-            executeUpdate(statement);
-
-            // Tabela Especie
-            statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS especie(\s
-                    idEspecie INTEGER PRIMARY KEY AUTOINCREMENT,\s
-                    nomeEspecie VARCHAR\s
-                    );""");
-            executeUpdate(statement);
-
-            // Tabela Internacao
-            statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS internacao(\s
-                    idInternacao INTEGER PRIMARY KEY AUTOINCREMENT,\s
-                    idVeterinario INTEGER,\s
-                    idAnimal INTEGER,\s
-                    dataInicio DATE,\s
-                    dataFim DATE,\s
-                    evolucao VARCHAR,\s
-                    FOREIGN KEY(idVeterinario) REFERENCES veterinario(idVeterinario),\s
-                    FOREIGN KEY(idAnimal) REFERENCES animal(idAnimal)\s
-                    );""");
-            executeUpdate(statement);
-
-            // Tabela Vacinacao
-            statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS vacinacao(\s
-                    idVacinacao INTEGER PRIMARY KEY AUTOINCREMENT,\s
-                    idVeterinario INTEGER,\s
-                    idAnimal INTEGER,\s
-                    vacina VARCHAR,\s
-                    data DATE,\s
-                    proximaDose DATE,\s
-                    FOREIGN KEY(idVeterinario) REFERENCES veterinario(idVeterinario),\s
-                    FOREIGN KEY(idAnimal) REFERENCES animal(idAnimal)\s
-                    );""");
+                CREATE TABLE IF NOT EXISTS Animal (
+                idAnimal INTEGER PRIMARY KEY AUTOINCREMENT,
+                nome VARCHAR NOT NULL,
+                idade INTEGER,
+                sexo CHAR(1),
+                peso DOUBLE,
+                idProprietario VARCHAR not NULL,
+                idEspecie INTEGER NOT NULL,
+                FOREIGN KEY(idProprietario) REFERENCES Cliente(idCliente),
+                FOREIGN KEY(idEspecie) REFERENCES Especie(idespecie)
+                );""");
             executeUpdate(statement);
 
             // Tabela Tratamento
             statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS tratamento(\s
-                    idTratamento INTEGER PRIMARY KEY AUTOINCREMENT, \s
-                    idAnimal INTEGER, \s
-                    dataInicio DATE, \s
-                    dataFim DATE, \s
-                    descricao VARCHAR, \s
-                    FOREING KEY(idAnimal) REFERENCES animal(idAnimal) \s
+                    CREATE TABLE IF NOT EXISTS Tratamento (
+                    idTratamento INTEGER PRIMARY KEY AUTOINCREMENT,
+                    idAnimal INTEGER NOT NULL,
+                    dataInicial DATE NOT NULL,
+                    dataFinal DATE NULL,
+                    descricao VARCHAR,
+                    encerrado BOOLEAN DEFAULT FALSE,
+                    FOREIGN KEY(idAnimal) REFERENCES Animal(idanimal)
                     );""");
-                    // como colocar o atributo finalizado aqui??
             executeUpdate(statement);
 
             // Tabela Consulta
             statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS consulta(\s
-                    idConsulta INTEGER PRIMARY KEY AUTOINCREMENT,\s
-                    data DATE,\s
-                    hora TIME,\s
-                    idAnimal INTEGER,\s
-                    idVeterinario INTEGER,\s
-                    idTratamento INTEGER, \s
-                    sintomas VARCHAR,\s
-                    FOREIGN KEY(idAnimal) REFERENCES animal(idAnimal),\s
-                    FOREIGN KEY(idVeterinario) REFERENCES veterinario(idVeterinario)\s
-                    FOREING KEY(idTratamento) REFERENCES tratamento(idTratamento), \s
+                    CREATE TABLE IF NOT EXISTS Consulta (
+                    idConsulta INTEGER PRIMARY KEY AUTOINCREMENT,
+                    data DATE not NULL,
+                    hora TIME NOT NULL,
+                    idAnimal INTEGER Not NULL,
+                    idVeterinario INTEGER not NULL,
+                    idTratamento INTEGER NOT NULL,
+                    sintomas VARCHAR,
+                    FOREIGN KEY(idAnimal) REFERENCES Animal(idanimal),
+                    FOREIGN KEY(idVeterinario) REFERENCES Veterinario(idveterinario),
+                    FOREIGN KEY(idTratamento) REFERENCES Tratamento(idtratamento)
                     );""");
             executeUpdate(statement);
 
             // Tabela Exame
             statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS exame(\s
-                    idExame INTEGER PRIMARY KEY AUTOINCREMENT,\s
-                    tipo VARCHAR,\s
-                    idConsulta INTEGER,\s
-                    descricaoExame VARCHAR,\s
-                    dataSolicitacao DATE,\s
-                    status VARCHAR,\s
-                    resultados VARCHAR,\s
-                    FOREIGN KEY(idConsulta) REFERENCES consulta(idConsulta)\s
-                    );""");
-            executeUpdate(statement);
-
-            // Tabela Prescricao
-            statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS prescricao(\s
-                    idPrescricao INTEGER PRIMARY KEY AUTOINCREMENT,\s
-                    idVeterinario INTEGER,\s
-                    idConsulta INTEGER,\s
-                    idMedicamento INTEGER,\s
-                    problemaSaude VARCHAR,\s
-                    dosagem INTEGER,\s
-                    instrucoes VARCHAR,\s
-                    FOREIGN KEY(idVeterinario) REFERENCES veterinario(idVeterinario),\s
-                    FOREIGN KEY(idConsulta) REFERENCES consulta(idConsulta),\s
-                    FOREIGN KEY(idMedicamento) REFERENCES medicamento(idMedicamento)\s
+                    CREATE TABLE IF NOT EXISTS Exame (
+                    idExame INTEGER PRIMARY KEY AUTOINCREMENT,
+                    idConsulta INTEGER Not NULL,
+                    tipo VARCHAR NOT NULL,
+                    descricao VARCHAR,
+                    dataSolicitacao DATE,
+                    status VARCHAR NOT NULL,
+                    resultados VARCHAR,
+                    FOREIGN KEY(idConsulta) REFERENCES Consulta(idconsulta)
                     );""");
             executeUpdate(statement);
 
             // Tabela Medicamento
             statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS medicamento(\s
-                    idMedicamento INTEGER PRIMARY KEY AUTOINCREMENT,\s
-                    nome VARCHAR,\s
-                    estoqueMinimo INTEGER\s
+                    CREATE TABLE IF NOT EXISTS Medicamento (
+                    idMedicamento INTEGER PRIMARY KEY AUTOINCREMENT,
+                    nome VARCHAR NOT NULL,
+                    estoqueMinimo INTEGER NOT NULL
+                    );""");
+            executeUpdate(statement);
+
+            // Tabela Prescrição
+            statement = DAO.getConnection().prepareStatement("""
+                    CREATE TABLE IF NOT EXISTS Prescricao (
+                    idPrescricao INTEGER PRIMARY KEY AUTOINCREMENT,
+                    idVeterinario INTEGER NOT NULL,
+                    idConsulta INTEGER NOT NULL,
+                    idMedicamento INTEGER not NULL,
+                    problemaSaude VARCHAR not NULL,
+                    dosagem FLOAT not NULL,
+                    instrucoes VARCHAR Not NULL,
+                    FOREIGN KEY(idVeterinario) REFERENCES Veterinario(idveterinario),
+                    FOREIGN KEY(idConsulta) REFERENCES Consulta(idconsulta),
+                    FOREIGN KEY(idMedicamento) REFERENCES Medicamento(idmedicamento)
+                    );""");
+            executeUpdate(statement);
+
+            // Tabela Internação
+            statement = DAO.getConnection().prepareStatement("""
+                    CREATE TABLE IF NOT EXISTS Internacao (
+                    idInternacao INTEGER PRIMARY KEY AUTOINCREMENT,
+                    idVeterinario INTEGER not NULL,
+                    idAnimal INTEGER not NULL,
+                    dataInicio DATE,
+                    dataFim DATE NULL,
+                    evolucao VARCHAR,
+                    FOREIGN KEY(idVeterinario) REFERENCES Veterinario(idveterinario),
+                    FOREIGN KEY(idAnimal) REFERENCES Animal(idanimal)
+                    );""");
+            executeUpdate(statement);
+
+            // Tabela Vacinação
+            statement = DAO.getConnection().prepareStatement("""
+                    CREATE TABLE Vacinacao (
+                    idVacinacao INTEGER PRIMARY KEY AUTOINCREMENT,
+                    idVeterinario INTEGER NOT NULL,
+                    idAnimal INTEGER not NULL,
+                    nomeVacina VARCHAR not NULL,
+                    data DATE,
+                    proximaDose DATE NULL,
+                    FOREIGN KEY(idVeterinario) REFERENCES Veterinario(idveterinario),
+                    FOREIGN KEY(idAnimal) REFERENCES Animal(idanimal)
                     );""");
             executeUpdate(statement);
 
             return true;
         } catch (SQLException exception) {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, exception);
+            return false;
         }
-        return false;
     }
 
 }

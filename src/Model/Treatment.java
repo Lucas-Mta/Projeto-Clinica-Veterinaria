@@ -13,12 +13,13 @@ public class Treatment {
     private List<Exam> exams;
     private boolean finished;
 
-    public Treatment(int treatmentId, int animalId, Date startDate, List<Exam> exams, boolean finished) {
+    public Treatment(int treatmentId, int animalId, Date startDate, Date endDate, String description, boolean finished) {
         this.treatmentId = treatmentId;
         this.animalId = animalId;
         this.startDate = startDate;
-        this.exams = new ArrayList<Exam>(); // Cria uma lista vazia para armazenar os exames
-        this.finished = false;
+        this.endDate = endDate;
+        this.description = description;
+        this.finished = finished;
     }
 
     // Getters
@@ -49,7 +50,6 @@ public class Treatment {
     public boolean isFinished() {
         return finished;
     }
-
 
     // Setters
     public void setStartDate(Date startDate) {

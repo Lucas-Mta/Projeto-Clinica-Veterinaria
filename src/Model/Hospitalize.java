@@ -10,11 +10,13 @@ public class Hospitalize {
     private Date endDate;
     private String progress;
 
-    public Hospitalize(int hospitalizationId, int vetId, int animalId, Date startDate) {
+    public Hospitalize(int hospitalizationId, int vetId, int animalId, Date startDate, Date endDate, String progress) {
         this.hospitalizationId = hospitalizationId;
         this.vetId = vetId;
         this.animalId = animalId;
         this.startDate = startDate;
+        this.endDate = endDate;
+        this.progress = progress;
     }
 
     // Getters
@@ -43,10 +45,6 @@ public class Hospitalize {
     }
 
     // Setters
-    public void setVetId(int vetId) {
-        this.vetId = vetId;
-    }
-
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
@@ -58,4 +56,5 @@ public class Hospitalize {
     public void setProgress(String progress) {
         this.progress = progress;
     }
+
 }

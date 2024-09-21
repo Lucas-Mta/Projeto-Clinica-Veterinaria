@@ -2,15 +2,14 @@ package Model;
 
 import java.sql.Time;
 
-public class Veterinarian extends EmployeeUser {
+public class Veterinarian extends Employee {
     private int vetId;
     private String specialty;
     private Time serviceHour;
     private int roomNum;
 
-    public Veterinarian(String cpf, String name, String address, String phone, String email, int vetId, String specialty, Time serviceHour, int roomNum) {
-        super(cpf, name, address, phone, email);
-        this.vetId = vetId;
+    public Veterinarian(String cpf, String name, String address, String phone, String email, String login, String password, String specialty, Time serviceHour, int roomNum) {
+        super(cpf, name, address, phone, email, 1, login, password); // Nível de Acesso: 1 -> Veterinário(a)
         this.specialty = specialty;
         this.serviceHour = serviceHour;
         this.roomNum = roomNum;
@@ -34,6 +33,11 @@ public class Veterinarian extends EmployeeUser {
     }
 
     // Setters
+
+    public void setVetId(int vetId) {
+        this.vetId = vetId;
+    }
+
     public void setServiceHour(Time serviceHour) {
         this.serviceHour = serviceHour;
     }
