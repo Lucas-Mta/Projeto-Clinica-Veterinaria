@@ -13,6 +13,7 @@ public class Client extends Person {
     }
 
     // Getters
+
     public int getClientId() { return clientId; }
 
     public List<Animal> getAnimals() {
@@ -26,4 +27,10 @@ public class Client extends Person {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Cliente [Nome: " + getName() + ", CPF: " + getCpf()
+                + ", Telefone: " + getPhone() + ", Email: " + getEmail()
+                + ", ID: " + clientId + "]";
+    }
 }

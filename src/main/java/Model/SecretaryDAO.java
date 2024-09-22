@@ -148,10 +148,24 @@ public class SecretaryDAO extends DAO {
     // DELETE --------------------------------------
     public void delete(Secretary secretary) {
         try {
+            // Exclui na tabela Secretario
             PreparedStatement statement = DAO.getConnection().prepareStatement(
                     "DELETE FROM Secretario WHERE idSecretario = ?");
             statement.setInt(1, secretary.getSecretaryId());
             executeUpdate(statement);
+
+            // Exclui na tabela Funcionário
+            statement = DAO.getConnection().prepareStatement(
+                    "DELETE FROM Funcionario WHERE cpf = ?");
+            statement.setString(1, secretary.getCpf());
+            executeUpdate(statement);
+
+            // Exclui na tabela Pessoa
+            statement = DAO.getConnection().prepareStatement(
+                    "DELETE FROM Pessoa WHERE cpf = ?");
+            statement.setString(1, secretary.getCpf());
+            executeUpdate(statement);
+
         } catch (SQLException exception) {
             System.err.println("Erro: " + exception.getMessage());
         }

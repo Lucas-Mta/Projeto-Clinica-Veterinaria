@@ -51,7 +51,7 @@ public class DAO {
     protected int lastId(String tableName, String primaryKey) {
         try {
             Statement statement = (Statement)connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT MAX(" + primaryKey + ") AS id FROM" + tableName);
+            ResultSet resultSet = statement.executeQuery("SELECT MAX(" + primaryKey + ") AS id FROM " + tableName);
             if (resultSet.next()) {
                 return resultSet.getInt("id");
             }
@@ -96,7 +96,7 @@ public class DAO {
                 nivelAcesso INTEGER NOT NULL,
                 login VARCHAR UNIQUE NOT NULL,
                 senha VARCHAR NOT NULL,
-                FOREIGN KEY(cpf) REFERENCES Pessoa(cpf) ON DELETE CASCADE,
+                FOREIGN KEY(cpf) REFERENCES Pessoa(cpf),
                 CHECK (nivelAcesso == 0 || nivelAcesso == 1)
                 );""");
             executeUpdate(statement);
@@ -107,7 +107,7 @@ public class DAO {
                 idSecretario INTEGER PRIMARY KEY AUTOINCREMENT,
                 cpf VARCHAR UNIQUE NOT NULL,
                 turno VARCHAR,
-                FOREIGN KEY(cpf) REFERENCES Funcionario(cpf) ON DELETE CASCADE
+                FOREIGN KEY(cpf) REFERENCES Funcionario(cpf)
                 );""");
             executeUpdate(statement);
 
@@ -119,7 +119,7 @@ public class DAO {
                 especialidade VARCHAR,
                 horaAtendimento TIME,
                 numSala INTEGER,
-                FOREIGN KEY(cpf) REFERENCES Funcionario(cpf) ON DELETE CASCADE
+                FOREIGN KEY(cpf) REFERENCES Funcionario(cpf)
                 );""");
             executeUpdate(statement);
 
@@ -128,7 +128,7 @@ public class DAO {
                 CREATE TABLE IF NOT EXISTS Cliente (
                 idCliente INTEGER PRIMARY KEY AUTOINCREMENT,
                 cpf VARCHAR UNIQUE NOT NULL,
-                FOREIGN KEY(cpf) REFERENCES Pessoa(cpf) ON DELETE CASCADE
+                FOREIGN KEY(cpf) REFERENCES Pessoa(cpf)
                 );""");
             executeUpdate(statement);
 

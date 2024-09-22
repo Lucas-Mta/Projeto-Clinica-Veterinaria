@@ -121,12 +121,22 @@ public class ClientDAO extends DAO {
     // DELETE --------------------------------------
     public void delete(Client client) {
         try {
+            // Primeiro, exclui o cliente da tabela Cliente
             PreparedStatement statement = DAO.getConnection().prepareStatement(
                     "DELETE FROM Cliente WHERE idCliente = ?");
             statement.setInt(1, client.getClientId());
             executeUpdate(statement);
+
+            //Depois, exclui a pessoa associada na tabela Pessoa
+            statement = DAO.getConnection().prepareStatement(
+                    "DELETE FROM Pessoa WHERE cpf = ?");
+            statement.setString(1, client.getCpf());
+            executeUpdate(statement);
+
         } catch (SQLException exception) {
             System.err.println("Erro: " + exception.getMessage());
         }
     }
+
+
 }

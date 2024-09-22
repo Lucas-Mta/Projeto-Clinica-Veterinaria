@@ -159,6 +159,19 @@ public class VeterinarianDAO extends DAO {
                     "DELETE FROM Veterinario WHERE idVeterinario = ?");
             statement.setInt(1, veterinarian.getVetId());
             executeUpdate(statement);
+
+            // Exclui na tabela Funcionário
+            statement = DAO.getConnection().prepareStatement(
+                    "DELETE FROM Funcionario WHERE cpf = ?");
+            statement.setString(1, veterinarian.getCpf());
+            executeUpdate(statement);
+
+            // Exclui na tabela Pessoa
+            statement = DAO.getConnection().prepareStatement(
+                    "DELETE FROM Pessoa WHERE cpf = ?");
+            statement.setString(1, veterinarian.getCpf());
+            executeUpdate(statement);
+
         } catch (SQLException exception) {
             System.err.println("Erro: " + exception.getMessage());
         }

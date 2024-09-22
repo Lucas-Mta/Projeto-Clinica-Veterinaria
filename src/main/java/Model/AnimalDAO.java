@@ -86,7 +86,7 @@ public class AnimalDAO extends DAO {
     // Recupera por Id do animal
     public Animal retrieveById(int id) {
         List<Animal> animals = this.retrieve("SELECT * FROM Animal WHERE idAnimal = " + id);
-        return (animals.isEmpty() ? null : animals.getFirst());
+        return (animals.isEmpty() ? null : animals.get(0));
     }
 
     // Recupera por Id do Dono
