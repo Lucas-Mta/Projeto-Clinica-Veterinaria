@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 
 public class DAO {
-    public static String URL = ""; // Colocar o Path do banco de dados
+    public static String URL = "jdbc:sqlite:./clinicaVeterinaria.db";
     private static Connection connection;
 
     // Conecta ao SQL
@@ -239,7 +239,7 @@ public class DAO {
 
             // Tabela Vacinação
             statement = DAO.getConnection().prepareStatement("""
-                    CREATE TABLE Vacinacao (
+                    CREATE TABLE IF NOT EXISTS Vacinacao (
                     idVacinacao INTEGER PRIMARY KEY AUTOINCREMENT,
                     idVeterinario INTEGER NOT NULL,
                     idAnimal INTEGER not NULL,
