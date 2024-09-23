@@ -24,4 +24,14 @@ public class Secretary extends Employee {
         this.workShift = workShift;
     }
 
+    @Override
+    public String toString() {
+        return "Secretário(a) [Nome: " + getName()
+                + ", CPF: " + getCpf()
+                + ", Telefone: " + getPhone()
+                + ", Email: " + getEmail()
+                + ", ID: " + secretaryId
+                + ", Turno: " + workShift
+                + "]";
+    }
 }

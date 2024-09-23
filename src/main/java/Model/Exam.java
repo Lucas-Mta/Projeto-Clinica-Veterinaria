@@ -71,4 +71,14 @@ public class Exam {
         this.results = results;
     }
 
+    @Override
+    public String toString() {
+        return "Exame [ ID: " + examId
+                + ", Tipo: " + examType
+                + ", Descrição: " + description
+                + ", Data de Requisição: " + requestDate
+                + ", Status: " + status
+                + ", Resultados: " + results
+                + "]";
+    }
 }

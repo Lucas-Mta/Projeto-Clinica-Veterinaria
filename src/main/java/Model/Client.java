@@ -29,8 +29,11 @@ public class Client extends Person {
 
     @Override
     public String toString() {
-        return "Cliente [Nome: " + getName() + ", CPF: " + getCpf()
-                + ", Telefone: " + getPhone() + ", Email: " + getEmail()
-                + ", ID: " + clientId + "]";
+        return "Cliente [Nome: " + getName()
+                + ", CPF: " + getCpf()
+                + ", Telefone: " + getPhone()
+                + ", Email: " + getEmail()
+                + ", ID: " + clientId
+                + "]";
     }
 }

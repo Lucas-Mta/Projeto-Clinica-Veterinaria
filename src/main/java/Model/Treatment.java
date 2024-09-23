@@ -73,4 +73,14 @@ public class Treatment {
         this.exams.add(exam);
     }
 
+    @Override
+    public String toString() {
+        return "Tratamento [ID: " + treatmentId
+                + ", ID do Animal: " + animalId
+                + ", Data do Início: " + startDate
+                + ", Data do Fim: " + endDate
+                + ", Descrição: " + description
+                + ", Encerrado: " + finished
+                + "]";
+    }
 }

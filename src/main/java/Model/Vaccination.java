@@ -57,4 +57,14 @@ public class Vaccination {
         this.nextDose = nextDose;
     }
 
+    @Override
+    public String toString() {
+        return "Vacinação [ID: " + vaccinationId
+                + ", ID do Veterinário: " + vetId
+                + ", ID do Animal: " + animalId
+                + ", Nome da Vacina: " + vaccineName
+                + ", Data da Vacinação: " + vaccineDate
+                + ", Próxima Dose: " + nextDose
+                + "]";
+    }
 }

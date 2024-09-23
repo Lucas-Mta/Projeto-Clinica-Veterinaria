@@ -57,4 +57,14 @@ public class Hospitalize {
         this.progress = progress;
     }
 
+    @Override
+    public String toString() {
+        return "Internação [ID: " + hospitalizationId
+                + ", ID do Veterinário: " + vetId
+                + ", ID do Animal: " + animalId
+                + ", Data Começo: " + startDate
+                + ", Data Fim: " + endDate
+                + ", Progresso: " + progress
+                + "]";
+    }
 }

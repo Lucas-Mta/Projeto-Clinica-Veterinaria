@@ -64,4 +64,16 @@ public class Appointment {
     public void setSymptoms(String symptoms) {
         this.symptoms = symptoms;
     }
+
+    @Override
+    public String toString() {
+        return "Consulta [ID: " + appointmentId
+                + ", Data: "+  date
+                + ", Hora: " + hour
+                + ", ID do Animal: " + animalId
+                + ", ID do Veterinário: " + vetId
+                + ", ID do Tratamento: " + treatmentId
+                + ", Sintomas: " + symptoms
+                + "]";
+    }
 }

@@ -61,4 +61,15 @@ public class Prescription {
         this.instructions = instructions;
     }
 
+    @Override
+    public String toString() {
+        return "Prescrição [ID: " + prescriptionId
+                + ", ID do Veterinário: " + vetId
+                + ", ID da Consulta: " + appointmentId
+                + ", ID do Medicamento: " + drugId
+                + ", Problema de Saúde: " + healthProblem
+                + ", Dosagem: " + dosage
+                + ", Instruções: " + instructions
+                + "]";
+    }
 }

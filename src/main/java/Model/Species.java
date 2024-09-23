@@ -23,4 +23,10 @@ public class Species {
         this.specieName = specieName;
     }
 
+    @Override
+    public String toString() {
+        return "Espécie [ID: " + specieId
+                + ", Nome: " + specieName
+                + "]";
+    }
 }

@@ -46,4 +46,16 @@ public class Veterinarian extends Employee {
         this.roomNum = roomNum;
     }
 
+    @Override
+    public String toString() {
+        return "Veterinário(a) [Nome: " + getName()
+                + ", CPF: " + getCpf()
+                + ", Telefone: " + getPhone()
+                + ", Email: " + getEmail()
+                + ", ID: " + vetId
+                + ", Especialidade: " + specialty
+                + ", Hora de Atendimento: " + serviceHour
+                + ", Número da Sala: " + roomNum
+                + "]";
+    }
 }

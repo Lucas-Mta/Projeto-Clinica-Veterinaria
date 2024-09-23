@@ -66,4 +66,15 @@ public class Animal {
         this.weight = weight;
     }
 
+    @Override
+    public String toString() {
+        return "Animal [ID: " + animalId
+                + ", Nome: " + name
+                + ", Idade: " + age
+                + ", Sexo: " + gender
+                + ", Peso: " + weight
+                + ", ID do Dono: " + ownerId
+                + ", ID da Espécie: " + specieId
+                + "]";
+    }
 }

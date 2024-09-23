@@ -33,4 +33,11 @@ public class Medicine {
         this.minStock = minStock;
     }
 
+    @Override
+    public String toString() {
+        return "Medicamento [ID: " + drugId
+                + ", Nome: " + name
+                + ", Estoque Mínimo: " + minStock
+                + "]";
+    }
 }

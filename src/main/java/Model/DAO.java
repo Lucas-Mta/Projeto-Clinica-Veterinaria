@@ -50,7 +50,7 @@ public class DAO {
     // Recupera o último ID inserido em uma tabela específica
     protected int lastId(String tableName, String primaryKey) {
         try {
-            Statement statement = (Statement)connection.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT MAX(" + primaryKey + ") AS id FROM " + tableName);
             if (resultSet.next()) {
                 return resultSet.getInt("id");
