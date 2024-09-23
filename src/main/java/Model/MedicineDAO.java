@@ -77,8 +77,8 @@ public class MedicineDAO extends DAO {
 
     // Recupera medicamento por ID
     public Medicine retrieveById(int id) {
-        List<Medicine> medicines = this.retrieve("SELECT * FROM Medicametno WHERE idMedicamento = " + id);
-        return (medicines.isEmpty() ? null : medicines.get(0));
+        List<Medicine> medicines = this.retrieve("SELECT * FROM Medicamento WHERE idMedicamento = " + id);
+        return (medicines.isEmpty() ? null : medicines.getFirst());
     }
 
     // Recupera medicamento por nome

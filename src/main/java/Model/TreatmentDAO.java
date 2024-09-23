@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,13 +25,13 @@ public class TreatmentDAO extends DAO {
     // OPERAÇÕES CRUD
 
     // CREATE --------------------------------------
-    public Treatment create(int animalId, Date startDate, Date endDate, String description) {
+    public Treatment create(int animalId, String startDate, String description) {
         try {
             PreparedStatement statement = DAO.getConnection().prepareStatement(
                     "INSERT INTO Tratamento (idAnimal, dataInicial, dataFinal, descricao, encerrado) VALUES (?, ?, ?, ?, ?)");
             statement.setInt(1, animalId);
-            statement.setDate(2, new java.sql.Date(startDate.getTime()));
-            statement.setDate(3, new java.sql.Date(endDate.getTime()));
+            statement.setString(2, startDate);
+            statement.setString(3, null); // null por padrão
             statement.setString(4, description);
             statement.setBoolean(5, false); // Tratamento em andamento
             executeUpdate(statement);
@@ -50,8 +49,8 @@ public class TreatmentDAO extends DAO {
             treatment = new Treatment(
                     resultSet.getInt("idTratamento"),
                     resultSet.getInt("idAnimal"),
-                    resultSet.getDate("dataInicial"),
-                    resultSet.getDate("dataFinal"),
+                    resultSet.getString("dataInicial"),
+                    resultSet.getString("dataFinal"),
                     resultSet.getString("descricao"),
                     resultSet.getBoolean("encerrado")
             );
@@ -98,8 +97,8 @@ public class TreatmentDAO extends DAO {
             PreparedStatement statement = DAO.getConnection().prepareStatement(
                     "UPDATE Tratamento SET idAnimal=?, dataInicial=?, dataFinal=?, descricao=?, encerrado=? WHERE idTratamento=?");
             statement.setInt(1, treatment.getAnimalId());
-            statement.setDate(2, new java.sql.Date(treatment.getStartDate().getTime()));
-            statement.setDate(3, new java.sql.Date(treatment.getEndDate().getTime()));
+            statement.setString(2, treatment.getStartDate());
+            statement.setString(3, treatment.getEndDate());
             statement.setString(4, treatment.getDescription());
             statement.setBoolean(5, treatment.isFinished());
             statement.setInt(6, treatment.getTreatmentId());

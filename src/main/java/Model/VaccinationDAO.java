@@ -3,7 +3,6 @@ package Model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,15 +25,15 @@ public class VaccinationDAO extends DAO {
     // OPERAÇÕES CRUD
 
     // CREATE --------------------------------------
-    public Vaccination create(int vetId, int animalId, String vaccineName, java.util.Date vaccineDate, java.util.Date nextDose) {
+    public Vaccination create(int vetId, int animalId, String vaccineName, String vaccineDate) {
         try {
             PreparedStatement statement = DAO.getConnection().prepareStatement(
                     "INSERT INTO Vacinacao (idVeterinario, idAnimal, nomeVacina, data, proximaDose) VALUES (?, ?, ?, ?, ?)");
             statement.setInt(1, vetId);
             statement.setInt(2, animalId);
             statement.setString(3, vaccineName);
-            statement.setDate(4, new Date(vaccineDate.getTime()));
-            statement.setDate(5, new Date(nextDose.getTime()));
+            statement.setString(4, vaccineDate);
+            statement.setString(5, null);
             executeUpdate(statement);
 
         } catch (SQLException exception) {
@@ -52,8 +51,8 @@ public class VaccinationDAO extends DAO {
                     resultSet.getInt("idVeterinario"),
                     resultSet.getInt("idAnimal"),
                     resultSet.getString("nomeVacina"),
-                    resultSet.getDate("data"),
-                    resultSet.getDate("proximaDose")
+                    resultSet.getString("data"),
+                    resultSet.getString("proximaDose")
             );
         } catch (SQLException exception) {
             System.err.println("Erro: " + exception.getMessage());
@@ -105,8 +104,8 @@ public class VaccinationDAO extends DAO {
             statement.setInt(1, vaccination.getVetId());
             statement.setInt(2, vaccination.getAnimalId());
             statement.setString(3, vaccination.getVaccineName());
-            statement.setDate(4, new Date(vaccination.getVaccineDate().getTime()));
-            statement.setDate(5, new Date(vaccination.getNextDose().getTime()));
+            statement.setString(4, vaccination.getVaccineDate());
+            statement.setString(5, vaccination.getNextDose());
             statement.setInt(6, vaccination.getVaccinationId());
             executeUpdate(statement);
         } catch (SQLException exception) {

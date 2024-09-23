@@ -3,8 +3,6 @@ package Model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,13 +25,13 @@ public class AppointmentDAO extends DAO {
     // OPERAÇÕES CRUD
 
     // CREATE --------------------------------------
-    public Appointment create(Date date, Time hour, int animalId, int vetId, int treatmentId, String symptoms) {
+    public Appointment create(String date, String hour, int animalId, int vetId, int treatmentId, String symptoms) {
         try {
             PreparedStatement statement = DAO.getConnection().prepareStatement(
                     "INSERT INTO Consulta (data, hora, idAnimal, idVeterinario, idTratamento, sintomas) "
                             + "VALUES (?, ?, ?, ?, ?, ?)");
-            statement.setDate(1, date);
-            statement.setTime(2, hour);
+            statement.setString(1, date);
+            statement.setString(2, hour);
             statement.setInt(3, animalId);
             statement.setInt(4, vetId);
             statement.setInt(5, treatmentId);
@@ -51,8 +49,8 @@ public class AppointmentDAO extends DAO {
         Appointment appointment = null;
         try {
             appointment = new Appointment(resultSet.getInt("idConsulta"),
-                    resultSet.getDate("data"),
-                    resultSet.getTime("hora"),
+                    resultSet.getString("data"),
+                    resultSet.getString("hora"),
                     resultSet.getInt("idAnimal"),
                     resultSet.getInt("idVeterinario"),
                     resultSet.getInt("idTratamento"),
@@ -92,7 +90,7 @@ public class AppointmentDAO extends DAO {
     }
 
     // Recupera por Id do Veterinário
-    public List<Appointment> retrieveByVetId(int vetId) {
+    public List<Appointment> retrieveByVetId(String vetId) {
         return this.retrieve("SELECT * FROM Consulta WHERE idVeterinario = " + vetId);
     }
 
@@ -107,8 +105,8 @@ public class AppointmentDAO extends DAO {
         try {
             PreparedStatement statement = DAO.getConnection().prepareStatement(
                     "UPDATE Consulta SET data=?, hora=?, idAnimal=?, idVeterinario=?, idTratamento=?, sintomas=? WHERE idConsulta=?");
-            statement.setDate(1, appointment.getDate());
-            statement.setTime(2, appointment.getHour());
+            statement.setString(1, appointment.getDate());
+            statement.setString(2, appointment.getHour());
             statement.setInt(3, appointment.getAnimalId());
             statement.setInt(4, appointment.getVetId());
             statement.setInt(5, appointment.getTreatmentId());

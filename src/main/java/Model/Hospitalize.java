@@ -1,16 +1,14 @@
 package Model;
 
-import java.util.Date;
-
 public class Hospitalize {
     private int hospitalizationId;
     private int vetId;
     private int animalId;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String progress;
 
-    public Hospitalize(int hospitalizationId, int vetId, int animalId, Date startDate, Date endDate, String progress) {
+    public Hospitalize(int hospitalizationId, int vetId, int animalId, String startDate, String endDate, String progress) {
         this.hospitalizationId = hospitalizationId;
         this.vetId = vetId;
         this.animalId = animalId;
@@ -32,11 +30,11 @@ public class Hospitalize {
         return animalId;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
@@ -45,11 +43,19 @@ public class Hospitalize {
     }
 
     // Setters
-    public void setStartDate(Date startDate) {
+    public void setVetId(int vetId) {
+        this.vetId = vetId;
+    }
+
+    public void setAnimalId(int animalId) {
+        this.animalId = animalId;
+    }
+
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

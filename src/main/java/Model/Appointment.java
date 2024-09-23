@@ -1,18 +1,17 @@
 package Model;
 
-import java.sql.Time;
-import java.util.Date;
+
 
 public class Appointment {
     private int appointmentId;
-    private Date date;
-    private Time hour;
+    private String date;
+    private String hour;
     private int animalId;
     private int vetId;
     private int treatmentId;
     private String symptoms;
 
-    public Appointment(int appointmentId, Date date, Time hour, int animalId, int vetId, int treatmentId, String symptoms) {
+    public Appointment(int appointmentId, String date, String hour, int animalId, int vetId, int treatmentId, String symptoms) {
         this.appointmentId = appointmentId;
         this.date = date;
         this.hour = hour;
@@ -27,11 +26,11 @@ public class Appointment {
         return appointmentId;
     }
 
-    public java.sql.Date getDate() {
-        return (java.sql.Date) date;
+    public String getDate() {
+        return date;
     }
 
-    public Time getHour() {
+    public String getHour() {
         return hour;
     }
 
@@ -53,12 +52,24 @@ public class Appointment {
 
 
     // Setters
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public void setHour(Time hour) {
+    public void setHour(String hour) {
         this.hour = hour;
+    }
+
+    public void setAnimalId(int animalId) {
+        this.animalId = animalId;
+    }
+
+    public void setVetId(int vetId) {
+        this.vetId = vetId;
+    }
+
+    public void setTreatmentId(int treatmentId) {
+        this.treatmentId = treatmentId;
     }
 
     public void setSymptoms(String symptoms) {

@@ -1,12 +1,8 @@
 package Model;
 
-/* DAO Implementation
- *
- * @author: Lucas de Jesus Mota Ferreira - luccas.mta@gmail.com
- *
- */
-
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -106,7 +102,7 @@ public class DAO {
                 CREATE TABLE IF NOT EXISTS Secretario (
                 idSecretario INTEGER PRIMARY KEY AUTOINCREMENT,
                 cpf VARCHAR UNIQUE NOT NULL,
-                turno VARCHAR,
+                turno VARCHAR NOT NULL,
                 FOREIGN KEY(cpf) REFERENCES Funcionario(cpf)
                 );""");
             executeUpdate(statement);
@@ -116,9 +112,9 @@ public class DAO {
                 CREATE TABLE IF NOT EXISTS Veterinario (
                 idVeterinario INTEGER PRIMARY KEY AUTOINCREMENT,
                 cpf VARCHAR UNIQUE NOT NULL,
-                especialidade VARCHAR,
-                horaAtendimento TIME,
-                numSala INTEGER,
+                especialidade VARCHAR NOT NULL,
+                horaAtendimento VARCHAR NOT NULL,
+                numSala INTEGER NOT NULL,
                 FOREIGN KEY(cpf) REFERENCES Funcionario(cpf)
                 );""");
             executeUpdate(statement);
@@ -134,9 +130,9 @@ public class DAO {
 
             // Tabela Espécie
             statement = DAO.getConnection().prepareStatement("""
-                CREATE TABLE IF NOT EXISTS Especie(\s
+                CREATE TABLE IF NOT EXISTS Especie (\s
                 idEspecie INTEGER PRIMARY KEY AUTOINCREMENT,\s
-                nomeEspecie VARCHAR\s
+                nomeEspecie VARCHAR UNIQUE NOT NULL\s
                 );""");
             executeUpdate(statement);
 
@@ -148,10 +144,10 @@ public class DAO {
                 idade INTEGER,
                 sexo CHAR(1),
                 peso DOUBLE,
-                idProprietario VARCHAR not NULL,
+                idProprietario INTEGER NOT NULL,
                 idEspecie INTEGER NOT NULL,
                 FOREIGN KEY(idProprietario) REFERENCES Cliente(idCliente),
-                FOREIGN KEY(idEspecie) REFERENCES Especie(idespecie)
+                FOREIGN KEY(idEspecie) REFERENCES Especie(idEspecie)
                 );""");
             executeUpdate(statement);
 
@@ -160,8 +156,8 @@ public class DAO {
                     CREATE TABLE IF NOT EXISTS Tratamento (
                     idTratamento INTEGER PRIMARY KEY AUTOINCREMENT,
                     idAnimal INTEGER NOT NULL,
-                    dataInicial DATE NOT NULL,
-                    dataFinal DATE NULL,
+                    dataInicial VARCHAR NOT NULL,
+                    dataFinal VARCHAR NULL,
                     descricao VARCHAR,
                     encerrado BOOLEAN DEFAULT FALSE,
                     FOREIGN KEY(idAnimal) REFERENCES Animal(idanimal)
@@ -172,14 +168,14 @@ public class DAO {
             statement = DAO.getConnection().prepareStatement("""
                     CREATE TABLE IF NOT EXISTS Consulta (
                     idConsulta INTEGER PRIMARY KEY AUTOINCREMENT,
-                    data DATE not NULL,
-                    hora TIME NOT NULL,
-                    idAnimal INTEGER Not NULL,
-                    idVeterinario INTEGER not NULL,
+                    data VARCHAR NOT NULL,
+                    hora VARCHAR NOT NULL,
+                    idAnimal INTEGER NOT NULL,
+                    idVeterinario INTEGER NOT NULL,
                     idTratamento INTEGER NOT NULL,
                     sintomas VARCHAR,
                     FOREIGN KEY(idAnimal) REFERENCES Animal(idanimal),
-                    FOREIGN KEY(idVeterinario) REFERENCES Veterinario(idveterinario),
+                    FOREIGN KEY(idVeterinario) REFERENCES Veterinario(idVeterinario),
                     FOREIGN KEY(idTratamento) REFERENCES Tratamento(idtratamento)
                     );""");
             executeUpdate(statement);
@@ -188,10 +184,10 @@ public class DAO {
             statement = DAO.getConnection().prepareStatement("""
                     CREATE TABLE IF NOT EXISTS Exame (
                     idExame INTEGER PRIMARY KEY AUTOINCREMENT,
-                    idConsulta INTEGER Not NULL,
+                    idConsulta INTEGER NOT NULL,
                     tipo VARCHAR NOT NULL,
                     descricao VARCHAR,
-                    dataSolicitacao DATE,
+                    dataSolicitacao VARCHAR NOT NULL,
                     status VARCHAR NOT NULL,
                     resultados VARCHAR,
                     FOREIGN KEY(idConsulta) REFERENCES Consulta(idconsulta)
@@ -213,10 +209,10 @@ public class DAO {
                     idPrescricao INTEGER PRIMARY KEY AUTOINCREMENT,
                     idVeterinario INTEGER NOT NULL,
                     idConsulta INTEGER NOT NULL,
-                    idMedicamento INTEGER not NULL,
-                    problemaSaude VARCHAR not NULL,
-                    dosagem FLOAT not NULL,
-                    instrucoes VARCHAR Not NULL,
+                    idMedicamento INTEGER NOT NULL,
+                    problemaSaude VARCHAR NOT NULL,
+                    dosagem FLOAT NOT NULL,
+                    instrucoes VARCHAR NOT NULL,
                     FOREIGN KEY(idVeterinario) REFERENCES Veterinario(idveterinario),
                     FOREIGN KEY(idConsulta) REFERENCES Consulta(idconsulta),
                     FOREIGN KEY(idMedicamento) REFERENCES Medicamento(idmedicamento)
@@ -227,10 +223,10 @@ public class DAO {
             statement = DAO.getConnection().prepareStatement("""
                     CREATE TABLE IF NOT EXISTS Internacao (
                     idInternacao INTEGER PRIMARY KEY AUTOINCREMENT,
-                    idVeterinario INTEGER not NULL,
-                    idAnimal INTEGER not NULL,
-                    dataInicio DATE,
-                    dataFim DATE NULL,
+                    idVeterinario INTEGER NOT NULL,
+                    idAnimal INTEGER NOT NULL,
+                    dataInicio VARCHAR NOT NULL,
+                    dataFim VARCHAR NULL,
                     evolucao VARCHAR,
                     FOREIGN KEY(idVeterinario) REFERENCES Veterinario(idveterinario),
                     FOREIGN KEY(idAnimal) REFERENCES Animal(idanimal)
@@ -242,10 +238,10 @@ public class DAO {
                     CREATE TABLE IF NOT EXISTS Vacinacao (
                     idVacinacao INTEGER PRIMARY KEY AUTOINCREMENT,
                     idVeterinario INTEGER NOT NULL,
-                    idAnimal INTEGER not NULL,
-                    nomeVacina VARCHAR not NULL,
-                    data DATE,
-                    proximaDose DATE NULL,
+                    idAnimal INTEGER NOT NULL,
+                    nomeVacina VARCHAR NOT NULL,
+                    data VARCHAR NOT NULL,
+                    proximaDose VARCHAR NULL,
                     FOREIGN KEY(idVeterinario) REFERENCES Veterinario(idveterinario),
                     FOREIGN KEY(idAnimal) REFERENCES Animal(idanimal)
                     );""");

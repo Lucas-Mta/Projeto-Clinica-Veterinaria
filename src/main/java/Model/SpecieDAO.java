@@ -8,89 +8,89 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SpeciesDAO extends DAO {
+public class SpecieDAO extends DAO {
 
-    private static SpeciesDAO instance;
+    private static SpecieDAO instance;
 
-    private SpeciesDAO() {
+    private SpecieDAO() {
         getConnection();
         createTable();
     }
 
-    // Singleton - Mantém uma única instância da classe SpeciesDAO
-    public static SpeciesDAO getInstance() {
-        return (instance == null ? (instance = new SpeciesDAO()) : instance);
+    // Singleton - Mantém uma única instância da classe SpecieDAO
+    public static SpecieDAO getInstance() {
+        return (instance == null ? (instance = new SpecieDAO()) : instance);
     }
 
     // OPERAÇÕES CRUD
 
     // CREATE --------------------------------------
-    public Species create(String specieName) {
+    public Specie create(String specieName) {
         try {
-            // Inserir na tabela Species
+            // Inserir na tabela Specie
             PreparedStatement statement = DAO.getConnection().prepareStatement(
                     "INSERT INTO Especie (nomeEspecie) VALUES (?)");
             statement.setString(1, specieName);
             executeUpdate(statement);
 
         } catch (SQLException exception) {
-            Logger.getLogger(SpeciesDAO.class.getName()).log(Level.SEVERE, null, exception);
+            Logger.getLogger(SpecieDAO.class.getName()).log(Level.SEVERE, null, exception);
         }
         return this.retrieveById(lastId("Especie", "idEspecie"));
     }
 
     // Criando um objeto a partir de um ResultSet do Banco de Dados
-    private Species buildObject(ResultSet resultSet) {
-        Species species = null;
+    private Specie buildObject(ResultSet resultSet) {
+        Specie specie = null;
         try {
-            species = new Species(
-                    resultSet.getInt("especieId"),
+            specie = new Specie(
+                    resultSet.getInt("idEspecie"),
                     resultSet.getString("nomeEspecie")
             );
         } catch (SQLException exception) {
             System.err.println("Erro: " + exception.getMessage());
         }
-        return species;
+        return specie;
     }
 
     // RETRIEVE --------------------------------------
     // Recuperador geral de espécies
-    public List<Species> retrieve(String query) {
-        List<Species> speciesList = new ArrayList<>();
+    public List<Specie> retrieve(String query) {
+        List<Specie> specieList = new ArrayList<>();
         ResultSet resultSet = getResultSet(query);
         try {
             while (resultSet.next()) {
-                speciesList.add(buildObject(resultSet));
+                specieList.add(buildObject(resultSet));
             }
         } catch (SQLException exception) {
             System.err.println("Erro: " + exception.getMessage());
         }
-        return speciesList;
+        return specieList;
     }
 
     // Recupera todas as espécies
-    public List<Species> retrieveAll() {
+    public List<Specie> retrieveAll() {
         return this.retrieve("SELECT * FROM Especie");
     }
 
     // Recupera espécie por ID
-    public Species retrieveById(int id) {
-        List<Species> speciesList = this.retrieve("SELECT * FROM Especie WHERE idEspecie = " + id);
-        return (speciesList.isEmpty() ? null : speciesList.get(0));
+    public Specie retrieveById(int id) {
+        List<Specie> specieList = this.retrieve("SELECT * FROM Especie WHERE idEspecie = " + id);
+        return (specieList.isEmpty() ? null : specieList.get(0));
     }
 
     // Recupera espécie por nome
-    public List<Species> retrieveByName(String specieName) {
+    public List<Specie> retrieveByName(String specieName) {
         return this.retrieve("SELECT * FROM Especie WHERE nomeEspecie LIKE '%" + specieName + "%'");
     }
 
     // UPDATE --------------------------------------
-    public void update(Species species) {
+    public void update(Specie specie) {
         try {
             PreparedStatement statement = DAO.getConnection().prepareStatement(
                     "UPDATE Especie SET nomeEspecie=? WHERE idEspecie=?");
-            statement.setString(1, species.getSpecieName());
-            statement.setInt(2, species.getSpecieId());
+            statement.setString(1, specie.getSpecieName());
+            statement.setInt(2, specie.getSpecieId());
             executeUpdate(statement);
         } catch (SQLException exception) {
             System.err.println("Erro: " + exception.getMessage());
@@ -98,11 +98,11 @@ public class SpeciesDAO extends DAO {
     }
 
     // DELETE --------------------------------------
-    public void delete(Species species) {
+    public void delete(Specie specie) {
         try {
             PreparedStatement statement = DAO.getConnection().prepareStatement(
                     "DELETE FROM Especie WHERE idEspecie = ?");
-            statement.setInt(1, species.getSpecieId());
+            statement.setInt(1, specie.getSpecieId());
             executeUpdate(statement);
         } catch (SQLException exception) {
             System.err.println("Erro: " + exception.getMessage());

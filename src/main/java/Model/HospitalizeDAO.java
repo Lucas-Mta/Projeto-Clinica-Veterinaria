@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,15 +25,14 @@ public class HospitalizeDAO extends DAO {
     // OPERAÇÕES CRUD
 
     // CREATE --------------------------------------
-    public Hospitalize create(int vetId, int animalId, Date startDate, Date endDate, String progress) {
+    public Hospitalize create(int vetId, int animalId, String startDate, String progress) {
         try {
-            // Inserir na tabela Hospitalization
             PreparedStatement statement = DAO.getConnection().prepareStatement(
                     "INSERT INTO Internacao (idVeterinario, idAnimal, dataInicio, dataFim, evolucao) VALUES (?, ?, ?, ?, ?)");
             statement.setInt(1, vetId);
             statement.setInt(2, animalId);
-            statement.setDate(3, new java.sql.Date(startDate.getTime()));
-            statement.setDate(4, new java.sql.Date(endDate.getTime()));
+            statement.setString(3, startDate);
+            statement.setString(4, null);
             statement.setString(5, progress);
             executeUpdate(statement);
 
@@ -52,8 +50,8 @@ public class HospitalizeDAO extends DAO {
                     resultSet.getInt("idInternacao"),
                     resultSet.getInt("idVeterinario"),
                     resultSet.getInt("idAnimal"),
-                    resultSet.getDate("dataInicio"),
-                    resultSet.getDate("dataFim"),
+                    resultSet.getString("dataInicio"),
+                    resultSet.getString("dataFim"),
                     resultSet.getString("evolucao")
             );
         } catch (SQLException exception) {
@@ -100,8 +98,8 @@ public class HospitalizeDAO extends DAO {
                     "UPDATE Internacao SET idVeterinario=?, idAnimal=?, dataInicio=?, dataFim=?, evolucao=? WHERE idInternacao=?");
             statement.setInt(1, hospitalization.getVetId());
             statement.setInt(2, hospitalization.getAnimalId());
-            statement.setDate(3, new java.sql.Date(hospitalization.getStartDate().getTime()));
-            statement.setDate(4, new java.sql.Date(hospitalization.getEndDate().getTime()));
+            statement.setString(3, hospitalization.getStartDate());
+            statement.setString(4, hospitalization.getEndDate());
             statement.setString(5, hospitalization.getProgress());
             statement.setInt(6, hospitalization.getHospitalizationId());
             executeUpdate(statement);

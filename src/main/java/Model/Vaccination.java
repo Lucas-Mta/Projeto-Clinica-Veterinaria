@@ -1,16 +1,14 @@
 package Model;
 
-import java.util.Date;
-
 public class Vaccination {
     private int vaccinationId;
     private int vetId;
     private int animalId;
     private String vaccineName;
-    private Date vaccineDate;
-    private Date nextDose;
+    private String vaccineDate;
+    private String nextDose;
 
-    public Vaccination(int vaccinationId, int vetId, int animalId, String vaccineName, Date vaccineDate, Date nextDose) {
+    public Vaccination(int vaccinationId, int vetId, int animalId, String vaccineName, String vaccineDate, String nextDose) {
         this.vaccinationId = vaccinationId;
         this.vetId = vetId;
         this.animalId = animalId;
@@ -36,24 +34,32 @@ public class Vaccination {
         return vaccineName;
     }
 
-    public Date getVaccineDate() {
+    public String getVaccineDate() {
         return vaccineDate;
     }
 
-    public Date getNextDose() {
+    public String getNextDose() {
         return nextDose;
     }
 
     // Setters
+    public void setVetId(int vetId) {
+        this.vetId = vetId;
+    }
+
+    public void setAnimalId(int animalId) {
+        this.animalId = animalId;
+    }
+
     public void setVaccineName(String vaccineName) {
         this.vaccineName = vaccineName;
     }
 
-    public void setVaccineDate(Date vaccineDate) {
+    public void setVaccineDate(String vaccineDate) {
         this.vaccineDate = vaccineDate;
     }
 
-    public void setNextDose(Date nextDose) {
+    public void setNextDose(String nextDose) {
         this.nextDose = nextDose;
     }
 

@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,15 +17,15 @@ public class ExamDAO extends DAO {
         createTable();
     }
 
-    // Singleton
+    // Singleton - Mantém uma única instância da classe HospitalizeDAO
     public static ExamDAO getInstance() {
         return (instance == null ? (instance = new ExamDAO()) : instance);
     }
 
-    // CRUD
+    // OPERAÇÕES CRUD
 
-    // Create
-    public Exam create(int appointmentId, String examType, String description, Date requestDate, String status, String results) {
+    // CREATE --------------------------------------
+    public Exam create(int appointmentId, String examType, String description, String requestDate, String status, String results) {
         try {
             PreparedStatement statement;
             statement = DAO.getConnection().prepareStatement(
@@ -34,7 +33,7 @@ public class ExamDAO extends DAO {
             statement.setInt(1, appointmentId);
             statement.setString(2, examType);
             statement.setString(3, description);
-            statement.setDate(4, new java.sql.Date(requestDate.getTime()));
+            statement.setString(4, requestDate);
             statement.setString(5, status);
             statement.setString(6, results);
             executeUpdate(statement);
@@ -44,7 +43,7 @@ public class ExamDAO extends DAO {
         return this.retrieveById(lastId("Exame", "idExame"));
     }
 
-    // Build object from ResultSet
+    // Criando um objeto a partir de um ResultSet do Banco de Dados
     private Exam buildObject(ResultSet resultSet) {
         Exam exam = null;
         try {
@@ -53,7 +52,7 @@ public class ExamDAO extends DAO {
                     resultSet.getInt("idConsulta"),
                     resultSet.getString("tipo"),
                     resultSet.getString("descricao"),
-                    resultSet.getDate("dataSolicitacao"),
+                    resultSet.getString("dataSolicitacao"),
                     resultSet.getString("status"),
                     resultSet.getString("resultados"));
         } catch (SQLException exception) {
@@ -62,7 +61,8 @@ public class ExamDAO extends DAO {
         return exam;
     }
 
-    // Generic Retriever
+    // RETRIEVE --------------------------------------
+    // Recuperador geral de exames
     public List<Exam> retrieve(String query) {
         List<Exam> exams = new ArrayList<>();
         ResultSet resultSet = getResultSet(query);
@@ -76,23 +76,23 @@ public class ExamDAO extends DAO {
         return exams;
     }
 
-    // Retrieve all exams
+    // Recupera todos os exames
     public List<Exam> retrieveAll() {
         return this.retrieve("SELECT * FROM Exame");
     }
 
-    // Retrieve exam by ID
+    // Recupera exame por Id
     public Exam retrieveById(int id) {
         List<Exam> exams = this.retrieve("SELECT * FROM Exame WHERE idExame = " + id);
         return (exams.isEmpty() ? null : exams.getFirst());
     }
 
-    // Retrieve by similar exam type
+    // Recupera exames por tipos
     public List<Exam> retrieveBySimilarType(String examType) {
         return this.retrieve("SELECT * FROM Exame WHERE tipo LIKE '%" + examType + "%'");
     }
 
-    // Update
+    // UPDATE --------------------------------------
     public void update(Exam exam) {
         try {
             PreparedStatement statement;
@@ -101,7 +101,7 @@ public class ExamDAO extends DAO {
             statement.setInt(1, exam.getAppointmentId());
             statement.setString(2, exam.getExamType());
             statement.setString(3, exam.getDescription());
-            statement.setDate(4, new java.sql.Date(exam.getRequestDate().getTime()));
+            statement.setString(4, exam.getRequestDate());
             statement.setString(5, exam.getStatus());
             statement.setString(6, exam.getResults());
             statement.setInt(7, exam.getExamId());
@@ -111,7 +111,7 @@ public class ExamDAO extends DAO {
         }
     }
 
-    // Delete
+    // DELETE --------------------------------------
     public void delete(Exam exam) {
         PreparedStatement statement;
         try {

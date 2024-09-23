@@ -3,7 +3,6 @@ package Model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,7 +25,7 @@ public class VeterinarianDAO extends DAO {
     // OPERAÇÕES CRUD
 
     // CREATE --------------------------------------
-    public Veterinarian create(String cpf, String name, String address, String phone, String email, String login, String password, String specialty, Time serviceHour, int roomNum) {
+    public Veterinarian create(String cpf, String name, String address, String phone, String email, String login, String password, String specialty, String serviceHour, int roomNum) {
         try {
             // Inserir na tabela Pessoa (herança de Veterinarian)
             PreparedStatement statement = DAO.getConnection().prepareStatement(
@@ -52,7 +51,7 @@ public class VeterinarianDAO extends DAO {
                     "INSERT INTO Veterinario (cpf, especialidade, horaAtendimento, numSala) VALUES (?, ?, ?, ?)");
             statement.setString(1, cpf);
             statement.setString(2, specialty);
-            statement.setTime(3, serviceHour);
+            statement.setString(3, serviceHour);
             statement.setInt(4, roomNum);
             executeUpdate(statement);
 
@@ -76,7 +75,7 @@ public class VeterinarianDAO extends DAO {
                     resultSet.getString("senha"),
                     resultSet.getInt("idVeterinario"),
                     resultSet.getString("especialidade"),
-                    resultSet.getTime("horaAtendimento"),
+                    resultSet.getString("horaAtendimento"),
                     resultSet.getInt("numSala")
             );
         } catch (SQLException exception) {
@@ -142,7 +141,7 @@ public class VeterinarianDAO extends DAO {
             statement = DAO.getConnection().prepareStatement(
                     "UPDATE Veterinario SET especialidade=?, horaAtendimento=?, numSala=? WHERE cpf=?");
             statement.setString(1, veterinarian.getSpecialty());
-            statement.setTime(2, veterinarian.getServiceHour());
+            statement.setString(2, veterinarian.getServiceHour());
             statement.setInt(3, veterinarian.getRoomNum());
             statement.setString(4, veterinarian.getCpf());
             executeUpdate(statement);

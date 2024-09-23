@@ -89,7 +89,7 @@ public class AnimalDAO extends DAO {
         return (animals.isEmpty() ? null : animals.get(0));
     }
 
-    // Recupera por Id do Dono
+    // Recupera por ID do Dono
     public List<Animal> retrieveByOwnerId(int ownerId) {
         return this.retrieve("SELECT * FROM Animal WHERE idProprietario = " + ownerId);
     }
@@ -97,6 +97,11 @@ public class AnimalDAO extends DAO {
     // Recupera por Nome parecido
     public List<Animal> retrieveBySimilarName(String name) {
         return this.retrieve("SELECT * FROM Animal WHERE nome LIKE '%" + name + "%'");
+    }
+
+    // Recupera por Sexo
+    public List<Animal> retrieveByGender(char sex) {
+        return this.retrieve("SELECT * FROM Animal WHERE sexo = '" + sex + "'");
     }
 
 

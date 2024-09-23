@@ -49,6 +49,18 @@ public class Prescription {
     }
 
     // Setters
+    public void setVetId(int vetId) {
+        this.vetId = vetId;
+    }
+
+    public void setAppointmentId(int appointmentId) {
+        this.appointmentId = appointmentId;
+    }
+
+    public void setDrugId(int drugId) {
+        this.drugId = drugId;
+    }
+
     public void setHealthProblem(String healthProblem) {
         this.healthProblem = healthProblem;
     }

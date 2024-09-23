@@ -1,19 +1,17 @@
 package Model;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Treatment {
     private int treatmentId;
     private int animalId;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String description;
     private List<Exam> exams;
     private boolean finished;
 
-    public Treatment(int treatmentId, int animalId, Date startDate, Date endDate, String description, boolean finished) {
+    public Treatment(int treatmentId, int animalId, String startDate, String endDate, String description, boolean finished) {
         this.treatmentId = treatmentId;
         this.animalId = animalId;
         this.startDate = startDate;
@@ -31,11 +29,11 @@ public class Treatment {
         return animalId;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
@@ -43,20 +41,20 @@ public class Treatment {
         return description;
     }
 
-    public List<Exam> getExams() {
-        return new ArrayList<Exam>(exams);
-    }
-
     public boolean isFinished() {
         return finished;
     }
 
     // Setters
-    public void setStartDate(Date startDate) {
+    public void setAnimalId(int animalId) {
+        this.animalId = animalId;
+    }
+
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

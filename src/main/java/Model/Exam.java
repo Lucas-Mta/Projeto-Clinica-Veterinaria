@@ -1,17 +1,16 @@
 package Model;
 
-import java.util.Date;
 
 public class Exam {
     private int examId;
     private int appointmentId;
     private String examType;
     private String description;
-    private Date requestDate;
+    private String requestDate;
     private String status;
     private String results;
 
-    public Exam(int examId, int appointmentId, String examType, String description, Date requestDate, String status, String results) {
+    public Exam(int examId, int appointmentId, String examType, String description, String requestDate, String status, String results) {
         this.examId = examId;
         this.appointmentId = appointmentId;
         this.examType = examType;
@@ -38,7 +37,7 @@ public class Exam {
         return description;
     }
 
-    public Date getRequestDate() {
+    public String getRequestDate() {
         return requestDate;
     }
 
@@ -51,6 +50,10 @@ public class Exam {
     }
 
     // Setters
+    public void setAppointmentId(int appointmentId) {
+        this.appointmentId = appointmentId;
+    }
+
     public void setExamType(String examType) {
         this.examType = examType;
     }
@@ -59,7 +62,7 @@ public class Exam {
         this.description = description;
     }
 
-    public void setRequestDate(Date requestDate) {
+    public void setRequestDate(String requestDate) {
         this.requestDate = requestDate;
     }
 

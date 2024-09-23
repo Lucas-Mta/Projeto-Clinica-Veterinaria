@@ -48,7 +48,6 @@ public class Animal {
         return specieId;
     }
 
-
     // Setters
     public void setName(String name) {
         this.name = name;
@@ -64,6 +63,14 @@ public class Animal {
 
     public void setWeight(Double weight) {
         this.weight = weight;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public void setSpecieId(int specieId) {
+        this.specieId = specieId;
     }
 
     @Override

@@ -1,10 +1,10 @@
 package Model;
 
-public class Species {
+public class Specie {
     private int specieId;
     private String specieName;
 
-    public Species(int specieId, String specieName) {
+    public Specie(int specieId, String specieName) {
         this.specieId = specieId;
         this.specieName = specieName;
     }
