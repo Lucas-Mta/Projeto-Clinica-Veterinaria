@@ -3,21 +3,6 @@ package Model;
 public class Main {
     public static void main(String[] args) {
 
-
-        /*
-         * Fazer testes com a criação de todas as classes para ver se
-         * os comandos sql estão todos certos
-         *
-         * Observar a questão das listas, por exemplo:
-         * Cliente tem lista de animais que vão armazenar os objetos que vão ser recuperados
-         * do banco de dados. Ver se essa recuperação e atribuição está a ser feita
-         * corretamente.
-         * Talvez nem seja necessário criar essa lista na própria classe cliente, pode
-         * ser que até que crie uma lista bem quando vai recuperar no main.
-         * ou não também, não sei
-         */
-
-
         // OBTENDO INSTÂNCIAS DAS CLASSES: -----------------------------------
 
         AnimalDAO animalDAO = AnimalDAO.getInstance();
@@ -306,7 +291,7 @@ public class Main {
         System.out.println("\n----------------------\n");
 
 
-        // DELETES: -----------------------------------
+   /*     // DELETES: -----------------------------------
 
         // --- DELETAR CLIENTE ---
         System.out.println("\nDeletando cliente...");
@@ -376,7 +361,7 @@ public class Main {
         if (internamentoRecuperado != null) {
             hospitalizeDAO.delete(internamentoRecuperado);
             System.out.println("Internação deletada.");
-        }
+        }*/
 
     }
 }
