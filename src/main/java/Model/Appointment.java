@@ -1,7 +1,5 @@
 package Model;
 
-
-
 public class Appointment {
     private int appointmentId;
     private String date;
@@ -58,18 +56,6 @@ public class Appointment {
 
     public void setHour(String hour) {
         this.hour = hour;
-    }
-
-    public void setAnimalId(int animalId) {
-        this.animalId = animalId;
-    }
-
-    public void setVetId(int vetId) {
-        this.vetId = vetId;
-    }
-
-    public void setTreatmentId(int treatmentId) {
-        this.treatmentId = treatmentId;
     }
 
     public void setSymptoms(String symptoms) {

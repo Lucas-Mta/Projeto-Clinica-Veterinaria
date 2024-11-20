@@ -58,7 +58,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="382" max="-2" attributes="0"/>
-                  <Component id="jLabel1" pref="505" max="32767" attributes="0"/>
+                  <Component id="clinicNameLabel" pref="505" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="317" max="-2" attributes="0"/>
                   <Component id="profileButton" min="-2" pref="70" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -67,13 +67,13 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jLabel1" alignment="2" pref="52" max="32767" attributes="0"/>
+              <Component id="clinicNameLabel" alignment="2" pref="52" max="32767" attributes="0"/>
               <Component id="profileButton" alignment="2" min="-2" pref="30" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="clinicNameLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial Black" size="36" style="1"/>
@@ -194,9 +194,9 @@
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="selectedNameLabel" min="-2" pref="37" max="-2" attributes="0"/>
+                                          <Component id="selectedAnimalNameLabel" min="-2" pref="37" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="selectedNameTextField" min="-2" pref="360" max="-2" attributes="0"/>
+                                          <Component id="selectedAnimalNameTextField" min="-2" pref="360" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="selectedSpeciesLabel" min="-2" max="-2" attributes="0"/>
@@ -223,8 +223,8 @@
                           <Component id="selectedAnimalLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="selectedNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="selectedNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="selectedAnimalNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="selectedAnimalNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -253,7 +253,7 @@
                     <Property name="text" type="java.lang.String" value="Animal Selecionado"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="selectedNameLabel">
+                <Component class="javax.swing.JLabel" name="selectedAnimalNameLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="12" style="1"/>
@@ -264,7 +264,7 @@
                     <Property name="text" type="java.lang.String" value="Nome:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="selectedNameTextField">
+                <Component class="javax.swing.JTextField" name="selectedAnimalNameTextField">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -474,7 +474,7 @@
             <Property name="verticalGap" type="int" value="0"/>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JTabbedPane" name="TabbedPaneContent">
+            <Container class="javax.swing.JTabbedPane" name="pagesTabbedPane">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -3412,9 +3412,9 @@
                                   <Component id="reportLabel" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jButton1" min="-2" pref="310" max="-2" attributes="0"/>
+                                          <Component id="generateNewReportButton" min="-2" pref="310" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="jButton2" min="-2" pref="310" max="-2" attributes="0"/>
+                                          <Component id="sabeReportButton" min="-2" pref="310" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="reportScrollPane" min="-2" pref="664" max="-2" attributes="0"/>
                                   </Group>
@@ -3432,8 +3432,8 @@
                               <Component id="reportScrollPane" min="-2" pref="294" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jButton2" pref="35" max="32767" attributes="0"/>
-                                  <Component id="jButton1" max="32767" attributes="0"/>
+                                  <Component id="sabeReportButton" pref="35" max="32767" attributes="0"/>
+                                  <Component id="generateNewReportButton" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace pref="45" max="32767" attributes="0"/>
                           </Group>
@@ -3478,7 +3478,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JButton" name="jButton1">
+                    <Component class="javax.swing.JButton" name="generateNewReportButton">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="58" green="a3" red="9" type="rgb"/>
@@ -3495,7 +3495,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton2">
+                    <Component class="javax.swing.JButton" name="sabeReportButton">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="58" green="a3" red="9" type="rgb"/>

@@ -28,14 +28,14 @@ public class MainView extends javax.swing.JFrame {
     private void initComponents() {
 
         headerSection = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        clinicNameLabel = new javax.swing.JLabel();
         profileButton = new javax.swing.JButton();
         contentSection = new javax.swing.JPanel();
         fixedInfoContent = new javax.swing.JPanel();
         selectedAnimalPanel = new javax.swing.JPanel();
         selectedAnimalLabel = new javax.swing.JLabel();
-        selectedNameLabel = new javax.swing.JLabel();
-        selectedNameTextField = new javax.swing.JTextField();
+        selectedAnimalNameLabel = new javax.swing.JLabel();
+        selectedAnimalNameTextField = new javax.swing.JTextField();
         selectedClientLabel = new javax.swing.JLabel();
         selectedClientTextField = new javax.swing.JTextField();
         selectedSpeciesLabel = new javax.swing.JLabel();
@@ -47,7 +47,7 @@ public class MainView extends javax.swing.JFrame {
         nextVaccLabel = new javax.swing.JLabel();
         nextVaccTextField = new javax.swing.JTextField();
         pagesContent = new javax.swing.JPanel();
-        TabbedPaneContent = new javax.swing.JTabbedPane();
+        pagesTabbedPane = new javax.swing.JTabbedPane();
         ClientAnimals = new javax.swing.JPanel();
         Top0 = new javax.swing.JPanel();
         Info1 = new javax.swing.JPanel();
@@ -189,8 +189,8 @@ public class MainView extends javax.swing.JFrame {
         reportLabel = new javax.swing.JLabel();
         reportScrollPane = new javax.swing.JScrollPane();
         reportTextArea = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        generateNewReportButton = new javax.swing.JButton();
+        sabeReportButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Interface Principal");
@@ -204,12 +204,12 @@ public class MainView extends javax.swing.JFrame {
         headerSection.setMinimumSize(new java.awt.Dimension(1280, 50));
         headerSection.setPreferredSize(new java.awt.Dimension(1280, 50));
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("VITALPET");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel1.setPreferredSize(new java.awt.Dimension(209, 50));
+        clinicNameLabel.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
+        clinicNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        clinicNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        clinicNameLabel.setText("VITALPET");
+        clinicNameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        clinicNameLabel.setPreferredSize(new java.awt.Dimension(209, 50));
 
         profileButton.setBackground(new java.awt.Color(44, 122, 28));
         profileButton.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -233,14 +233,14 @@ public class MainView extends javax.swing.JFrame {
             headerSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerSectionLayout.createSequentialGroup()
                 .addGap(382, 382, 382)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                .addComponent(clinicNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
                 .addGap(317, 317, 317)
                 .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         headerSectionLayout.setVerticalGroup(
             headerSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+            .addComponent(clinicNameLabel, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
             .addComponent(profileButton, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
@@ -263,15 +263,15 @@ public class MainView extends javax.swing.JFrame {
         selectedAnimalLabel.setForeground(new java.awt.Color(0, 0, 0));
         selectedAnimalLabel.setText("Animal Selecionado");
 
-        selectedNameLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        selectedNameLabel.setForeground(new java.awt.Color(0, 0, 0));
-        selectedNameLabel.setText("Nome:");
+        selectedAnimalNameLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        selectedAnimalNameLabel.setForeground(new java.awt.Color(0, 0, 0));
+        selectedAnimalNameLabel.setText("Nome:");
 
-        selectedNameTextField.setEditable(false);
-        selectedNameTextField.setBackground(new java.awt.Color(250, 250, 250));
-        selectedNameTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        selectedNameTextField.setForeground(new java.awt.Color(102, 102, 102));
-        selectedNameTextField.setText("NomeAnimal");
+        selectedAnimalNameTextField.setEditable(false);
+        selectedAnimalNameTextField.setBackground(new java.awt.Color(250, 250, 250));
+        selectedAnimalNameTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        selectedAnimalNameTextField.setForeground(new java.awt.Color(102, 102, 102));
+        selectedAnimalNameTextField.setText("NomeAnimal");
 
         selectedClientLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         selectedClientLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -304,9 +304,9 @@ public class MainView extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addGroup(selectedAnimalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(selectedAnimalPanelLayout.createSequentialGroup()
-                                .addComponent(selectedNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(selectedAnimalNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(selectedNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(selectedAnimalNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(selectedAnimalPanelLayout.createSequentialGroup()
                                 .addComponent(selectedSpeciesLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -325,8 +325,8 @@ public class MainView extends javax.swing.JFrame {
                 .addComponent(selectedAnimalLabel)
                 .addGap(18, 18, 18)
                 .addGroup(selectedAnimalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(selectedNameLabel)
-                    .addComponent(selectedNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selectedAnimalNameLabel)
+                    .addComponent(selectedAnimalNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(selectedAnimalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(selectedClientLabel)
@@ -407,12 +407,12 @@ public class MainView extends javax.swing.JFrame {
         pagesContent.setBackground(new java.awt.Color(243, 243, 243));
         pagesContent.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
 
-        TabbedPaneContent.setBackground(new java.awt.Color(204, 204, 204));
-        TabbedPaneContent.setForeground(java.awt.SystemColor.activeCaptionText);
-        TabbedPaneContent.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        TabbedPaneContent.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        TabbedPaneContent.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TabbedPaneContent.setPreferredSize(new java.awt.Dimension(1220, 500));
+        pagesTabbedPane.setBackground(new java.awt.Color(204, 204, 204));
+        pagesTabbedPane.setForeground(java.awt.SystemColor.activeCaptionText);
+        pagesTabbedPane.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        pagesTabbedPane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pagesTabbedPane.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        pagesTabbedPane.setPreferredSize(new java.awt.Dimension(1220, 500));
 
         ClientAnimals.setBackground(new java.awt.Color(217, 217, 217));
         ClientAnimals.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -635,7 +635,7 @@ public class MainView extends javax.swing.JFrame {
 
         ClientAnimals.add(Bottom0);
 
-        TabbedPaneContent.addTab("<html> <b>Clientes e Animais<b> </html>", ClientAnimals);
+        pagesTabbedPane.addTab("<html> <b>Clientes e Animais<b> </html>", ClientAnimals);
 
         Treatment.setBackground(new java.awt.Color(217, 217, 217));
         Treatment.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -854,7 +854,7 @@ public class MainView extends javax.swing.JFrame {
 
         Treatment.add(Bottom1);
 
-        TabbedPaneContent.addTab("<html> <b>Tratamentos<b> </html>", Treatment);
+        pagesTabbedPane.addTab("<html> <b>Tratamentos<b> </html>", Treatment);
 
         ScheduleAppointment.setBackground(new java.awt.Color(217, 217, 217));
         ScheduleAppointment.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -1102,7 +1102,7 @@ public class MainView extends javax.swing.JFrame {
 
         ScheduleAppointment.add(Bottom2);
 
-        TabbedPaneContent.addTab("<html> <b>Consultas<b> </html>", ScheduleAppointment);
+        pagesTabbedPane.addTab("<html> <b>Consultas<b> </html>", ScheduleAppointment);
 
         ExamRequest.setBackground(new java.awt.Color(217, 217, 217));
         ExamRequest.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -1317,7 +1317,7 @@ public class MainView extends javax.swing.JFrame {
 
         ExamRequest.add(Bottom3);
 
-        TabbedPaneContent.addTab("<html> <b>Exames<b> </html>", ExamRequest);
+        pagesTabbedPane.addTab("<html> <b>Exames<b> </html>", ExamRequest);
 
         Vaccination.setBackground(new java.awt.Color(217, 217, 217));
         Vaccination.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -1592,7 +1592,7 @@ public class MainView extends javax.swing.JFrame {
 
         Vaccination.add(Bottom4);
 
-        TabbedPaneContent.addTab("<html> <b>Vacinações<b> </html>", Vaccination);
+        pagesTabbedPane.addTab("<html> <b>Vacinações<b> </html>", Vaccination);
 
         Hospitalize.setBackground(new java.awt.Color(217, 217, 217));
         Hospitalize.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -1896,7 +1896,7 @@ public class MainView extends javax.swing.JFrame {
 
         Hospitalize.add(Bottom5);
 
-        TabbedPaneContent.addTab("<html> <b>Internações<b> </html>", Hospitalize);
+        pagesTabbedPane.addTab("<html> <b>Internações<b> </html>", Hospitalize);
 
         Reports.setBackground(new java.awt.Color(217, 217, 217));
         Reports.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -1916,17 +1916,17 @@ public class MainView extends javax.swing.JFrame {
         reportTextArea.setRows(5);
         reportScrollPane.setViewportView(reportTextArea);
 
-        jButton1.setBackground(new java.awt.Color(9, 163, 88));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Gerar Novo Relatório");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        generateNewReportButton.setBackground(new java.awt.Color(9, 163, 88));
+        generateNewReportButton.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        generateNewReportButton.setForeground(new java.awt.Color(255, 255, 255));
+        generateNewReportButton.setText("Gerar Novo Relatório");
+        generateNewReportButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jButton2.setBackground(new java.awt.Color(9, 163, 88));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Salvar Relatório");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sabeReportButton.setBackground(new java.awt.Color(9, 163, 88));
+        sabeReportButton.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        sabeReportButton.setForeground(new java.awt.Color(255, 255, 255));
+        sabeReportButton.setText("Salvar Relatório");
+        sabeReportButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout ReportsLayout = new javax.swing.GroupLayout(Reports);
         Reports.setLayout(ReportsLayout);
@@ -1938,9 +1938,9 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(reportLabel)
                     .addGroup(ReportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ReportsLayout.createSequentialGroup()
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(generateNewReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(sabeReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(reportScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(244, Short.MAX_VALUE))
         );
@@ -1953,15 +1953,15 @@ public class MainView extends javax.swing.JFrame {
                 .addComponent(reportScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(ReportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(sabeReportButton, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(generateNewReportButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
-        TabbedPaneContent.addTab("<html> <b>Relatório<b> </html>", Reports);
+        pagesTabbedPane.addTab("<html> <b>Relatório<b> </html>", Reports);
 
-        pagesContent.add(TabbedPaneContent);
-        TabbedPaneContent.getAccessibleContext().setAccessibleName("");
+        pagesContent.add(pagesTabbedPane);
+        pagesTabbedPane.getAccessibleContext().setAccessibleName("");
 
         contentSection.add(pagesContent, java.awt.BorderLayout.CENTER);
 
@@ -2123,7 +2123,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel Info8;
     private javax.swing.JPanel Reports;
     private javax.swing.JPanel ScheduleAppointment;
-    private javax.swing.JTabbedPane TabbedPaneContent;
     private javax.swing.JPanel Top0;
     private javax.swing.JPanel Top1;
     private javax.swing.JPanel Top2;
@@ -2164,6 +2163,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTable clientListTable0;
     private javax.swing.JLabel clientSearchLabel0;
     private javax.swing.JTextField clientSearchTextField0;
+    private javax.swing.JLabel clinicNameLabel;
     private javax.swing.JPanel contentSection;
     private javax.swing.JButton deleteAnimalButton0;
     private javax.swing.JButton deleteAppointmentButton1;
@@ -2188,10 +2188,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel followHospitalizeLabel;
     private javax.swing.JScrollPane followHospitalizeScrollPane;
     private javax.swing.JTextArea followHospitalizeTextArea;
+    private javax.swing.JButton generateNewReportButton;
     private javax.swing.JPanel headerSection;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton newAnimalButton0;
     private javax.swing.JButton newAppointmentButton1;
     private javax.swing.JLabel newAppointmentLabel2;
@@ -2210,6 +2208,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel nextVaccLabel;
     private javax.swing.JTextField nextVaccTextField;
     private javax.swing.JPanel pagesContent;
+    private javax.swing.JTabbedPane pagesTabbedPane;
     private javax.swing.JButton profileButton;
     private javax.swing.JLabel progressLabel;
     private javax.swing.JScrollPane progressScrollPane;
@@ -2220,10 +2219,13 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel reportLabel;
     private javax.swing.JScrollPane reportScrollPane;
     private javax.swing.JTextArea reportTextArea;
+    private javax.swing.JButton sabeReportButton;
     private javax.swing.JButton scheduleAppointmentButton2;
     private javax.swing.JLabel selectedAnimalHospitalizeLabel;
     private javax.swing.JTextField selectedAnimalHospitalizeTextField;
     private javax.swing.JLabel selectedAnimalLabel;
+    private javax.swing.JLabel selectedAnimalNameLabel;
+    private javax.swing.JTextField selectedAnimalNameTextField;
     private javax.swing.JPanel selectedAnimalPanel;
     private javax.swing.JButton selectedAnimalTreatmentsButton1;
     private javax.swing.JLabel selectedAnimalVaccLabel;
@@ -2234,8 +2236,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextArea selectedAnimalVaccsTable;
     private javax.swing.JLabel selectedClientLabel;
     private javax.swing.JTextField selectedClientTextField;
-    private javax.swing.JLabel selectedNameLabel;
-    private javax.swing.JTextField selectedNameTextField;
     private javax.swing.JLabel selectedSpeciesLabel;
     private javax.swing.JTextField selectedSpeciesTextField;
     private javax.swing.JLabel selectedVetHospitalizeLabel;

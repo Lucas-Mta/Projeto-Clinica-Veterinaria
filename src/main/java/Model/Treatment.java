@@ -46,10 +46,6 @@ public class Treatment {
     }
 
     // Setters
-    public void setAnimalId(int animalId) {
-        this.animalId = animalId;
-    }
-
     public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
