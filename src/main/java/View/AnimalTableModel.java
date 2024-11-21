@@ -2,8 +2,7 @@ package View;
 
 // TableModel específico para a classe Animal
 
-import Model.Animal;
-import Model.AnimalDAO;
+import Model.*;
 
 import java.util.List;
 
@@ -21,8 +20,8 @@ public class AnimalTableModel extends GenericTableModel {
             case 2 -> Integer.class; // Idade
             case 3 -> Character.class; // Sexo
             case 4 -> Double.class; // Peso
-            case 5 -> Integer.class; // ID do Proprietário
-            case 6 -> Integer.class; // ID da Espécie
+            case 5 -> String.class; // Nome do Proprietário
+            case 6 -> String.class; // Nome da Espécie
             default -> throw new IndexOutOfBoundsException("ColumnIndex out of bounds.");
         };
     }
@@ -31,16 +30,34 @@ public class AnimalTableModel extends GenericTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Animal animal = (Animal) dataVector.get(rowIndex);
 
-        return switch (columnIndex) {
-            case 0 -> animal.getAnimalId();
-            case 1 -> animal.getName();
-            case 2 -> animal.getAge();
-            case 3 -> animal.getGender();
-            case 4 -> animal.getWeight();
-            case 5 -> animal.getOwnerId();
-            case 6 -> animal.getSpecieId();
-            default -> throw new IndexOutOfBoundsException("ColumnIndex out of bounds.");
-        };
+        switch (columnIndex) {
+            case 0:
+                return animal.getAnimalId(); // ID
+            case 1:
+                return animal.getName(); // Nome
+            case 2:
+                return animal.getAge(); // Idade
+            case 3:
+                return animal.getGender(); // Sexo(Gênero)
+            case 4:
+                return animal.getWeight(); // Peso
+            case 5:
+                // Nome do Cliente
+                Client client = ClientDAO.getInstance().retrieveById(animal.getOwnerId());
+                if (client != null)  {
+                    return client.getName();
+                }
+                return "";
+            case 6:
+                // Nome da Espécie
+                Specie specie = SpecieDAO.getInstance().retrieveById(animal.getSpecieId());
+                if (specie != null) {
+                    return specie.getSpecieName();
+                }
+                return "";
+            default:
+                throw new IndexOutOfBoundsException("ColumnIndex out of bounds.");
+        }
     }
 
     @Override
@@ -48,23 +65,24 @@ public class AnimalTableModel extends GenericTableModel {
         Animal animal = (Animal) dataVector.get(rowIndex);
 
         switch (columnIndex) {
-            case 1:
+            case 1: // Nome do animal
                 animal.setName((String) aValue);
                 break;
-            case 2:
+            case 2: // Idade do Animal
                 animal.setAge((Integer) aValue);
                 break;
-            case 3:
+            case 3: // Sexo(Gênero) do Animal
                 animal.setGender((Character) aValue);
                 break;
-            case 4:
+            case 4: // Peso
                 animal.setWeight((Double) aValue);
                 break;
-            case 5:
-                animal.setOwnerId((Integer) aValue);
-                break;
-            case 6:
-                animal.setSpecieId((Integer) aValue);
+            case 6: // Nome da Espécie
+                Specie specie = (Specie) SpecieDAO.getInstance().retrieveByName((String) aValue);
+                if (specie == null) {
+                    specie = SpecieDAO.getInstance().create((String) aValue); // Cria uma nova espécie com esse nome
+                }
+                animal.setSpecieId(specie.getSpecieId());
                 break;
             default:
                 throw new IndexOutOfBoundsException("ColumnIndex out of bounds.");
@@ -76,7 +94,7 @@ public class AnimalTableModel extends GenericTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        // Permitimos edição em todos os campos, exceto o ID
-        return columnIndex > 0;
+        // Permitir edição em todos os campos, exceto o ID e o Nome do Cliente
+        return columnIndex > 0 && columnIndex != 5;
     }
 }

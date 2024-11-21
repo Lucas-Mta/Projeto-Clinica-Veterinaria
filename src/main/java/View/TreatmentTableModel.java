@@ -1,6 +1,9 @@
 package View;
 
 import java.util.List;
+
+import Model.Animal;
+import Model.AnimalDAO;
 import Model.Treatment;
 import Model.TreatmentDAO;
 
@@ -9,7 +12,7 @@ import Model.TreatmentDAO;
 public class TreatmentTableModel extends GenericTableModel {
 
     public TreatmentTableModel(List<Treatment> vDados) {
-        super(vDados, new String[]{"ID", "Nome do Animal", "Data Inicial", "Data Final", "Descrição", "Encerrado"});
+        super(vDados, new String[]{"ID", "Nome do Animal", "Data Inicial", "Data Final", "Encerrado"});
     }
 
     @Override
@@ -18,8 +21,7 @@ public class TreatmentTableModel extends GenericTableModel {
             case 0 -> Integer.class; // ID
             case 1 -> String.class; // Nome do Animal
             case 2, 3 -> String.class; // Datas (Inicial e Final)
-            case 4 -> String.class; // Descrição
-            case 5 -> Boolean.class; // Encerrado
+            case 4 -> Boolean.class; // Encerrado
             default -> throw new IndexOutOfBoundsException("columnIndex out of bounds");
         };
     }
@@ -28,16 +30,25 @@ public class TreatmentTableModel extends GenericTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Treatment treatment = (Treatment) dataVector.get(rowIndex);
 
-        return switch (columnIndex) {
-            case 0 -> treatment.getTreatmentId();
-            // TODO Fazer alguma coisa que coloque o nome do animal e não o ID
-            // case 1 -> treatment.getAnimalName();
-            case 2 -> treatment.getStartDate();
-            case 3 -> treatment.getEndDate();
-            case 4 -> treatment.getDescription();
-            case 5 -> treatment.isFinished();
-            default -> throw new IndexOutOfBoundsException("columnIndex out of bounds");
-        };
+        switch (columnIndex) {
+            case 0:
+                return treatment.getTreatmentId(); // ID
+            case 1:
+                // Nome do Animal
+                Animal animal = AnimalDAO.getInstance().retrieveById(treatment.getAnimalId());
+                if (animal != null) {
+                    return animal.getName();
+                }
+                return "";
+            case 2:
+                return treatment.getStartDate(); // Data Início
+            case 3:
+                return treatment.getEndDate(); // Data Fim
+            case 4:
+                return treatment.isFinished(); // Encerrado
+            default:
+                throw new IndexOutOfBoundsException("columnIndex out of bounds");
+        }
     }
 
     @Override
@@ -52,9 +63,6 @@ public class TreatmentTableModel extends GenericTableModel {
                 treatment.setEndDate((String) aValue);
                 break;
             case 4:
-                treatment.setDescription((String) aValue);
-                break;
-            case 5:
                 treatment.setFinished((Boolean) aValue);
                 break;
             default:

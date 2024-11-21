@@ -51,9 +51,6 @@ public class VeterinarianTableModel extends GenericTableModel {
                 vet.setSpecialty((String) aValue);
                 break;
             case 4:
-                vet.setServiceHour((String) aValue);
-                break;
-            case 5:
                 vet.setRoomNum((Integer) aValue);
                 break;
             default:

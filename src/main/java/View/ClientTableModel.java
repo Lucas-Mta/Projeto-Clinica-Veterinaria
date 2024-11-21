@@ -10,18 +10,13 @@ import java.util.List;
 public class ClientTableModel extends GenericTableModel {
 
     public ClientTableModel(List<Client> dataVector) {
-        super(dataVector, new String[] {"ID", "CPF", "Nome", "Endereço", "Telefone", "Email"});
+        super(dataVector, new String[] {"CPF", "Nome", "Email", "Telefone", "Endereço"});
     }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         return switch (columnIndex) {
-            case 0 -> Integer.class; // Id
-            case 1 -> String.class; // CPF
-            case 2 -> String.class; // Nome
-            case 3 -> String.class; // Endereço
-            case 4 -> String.class; // Telefone
-            case 5 -> String.class; // Email
+            case 0, 1, 2, 3, 4, 5 -> String.class; // Todas as colunas são Strings
             default -> throw new IndexOutOfBoundsException("ColumnIndex out of bounds.");
         };
     }
@@ -32,12 +27,11 @@ public class ClientTableModel extends GenericTableModel {
         Client client = (Client) dataVector.get(rowIndex);
 
         return switch (columnIndex) {
-            case 0 -> client.getClientId(); // ID do cliente
-            case 1 -> client.getCpf(); // CPF
-            case 2 -> client.getName(); // Nome
-            case 3 -> client.getAddress(); // Endereço
-            case 4 -> client.getPhone(); // Telefone
-            case 5 -> client.getEmail(); // Email
+            case 0 -> client.getCpf(); // CPF
+            case 1 -> client.getName(); // Nome
+            case 2 -> client.getEmail(); // Email
+            case 3 -> client.getPhone(); // Telefone
+            case 4 -> client.getAddress(); // Endereço
             default -> throw new IndexOutOfBoundsException("ColumnIndex out of bounds.");
         };
     }
@@ -47,19 +41,19 @@ public class ClientTableModel extends GenericTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         Client client = (Client) dataVector.get(rowIndex);
 
-        // Não é possível mudar nem o Id, nem o CPF
+        // Não é possível mudar o CPF
         switch (columnIndex) {
-            case 2:
+            case 1:
                 client.setName((String) aValue);
                 break;
-            case 3:
-                client.setAddress((String) aValue);
+            case 2:
+                client.setEmail((String) aValue);
                 break;
-            case 4:
+            case 3:
                 client.setPhone((String) aValue);
                 break;
-            case 5:
-                client.setEmail((String) aValue);
+            case 4:
+                client.setAddress((String) aValue);
                 break;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -69,10 +63,10 @@ public class ClientTableModel extends GenericTableModel {
         ClientDAO.getInstance().update(client);
     }
 
-    // Verifica quais células são editáveis -> As células de ID e CPF NÃO SÃO EDITÁVEIS
+    // Verifica quais células são editáveis -> CPF NÃO É EDITÁVEL
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex > 1;
+        return columnIndex > 0;
     }
 
 }
