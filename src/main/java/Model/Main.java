@@ -13,6 +13,119 @@ public class Main {
         MedicineDAO medicineDAO = MedicineDAO.getInstance();
         PrescriptionDAO prescriptionDAO = PrescriptionDAO.getInstance();
         SecretaryDAO secretaryDAO = SecretaryDAO.getInstance();
+        SpecieDAO specieDAO = SpecieDAO.getInstance();
+        TreatmentDAO treatmentDAO = TreatmentDAO.getInstance();
+        VaccinationDAO vaccinationDAO = VaccinationDAO.getInstance();
+        VeterinarianDAO veterinarianDAO = VeterinarianDAO.getInstance();
+
+        System.out.println("\n----------------------\n");
+
+// INSERINDO EXEMPLOS EM CADA CLASSE: -----------------------------------
+
+// --- CLIENTES ---
+        System.out.println("\nInserindo CLIENTES...");
+        Client client1 = clientDAO.create("12345678910", "Lucas", "Rua A, 10", "71912345678", "lucas@email.com");
+        Client client2 = clientDAO.create("98765432100", "Carla", "Rua D, 25", "71999887766", "carla@email.com");
+        Client client3 = clientDAO.create("11223344556", "Pedro", "Rua E, 45", "71988776655", "pedro@email.com");
+        System.out.println("Clientes inseridos: " + client1 + ", " + client2 + ", " + client3);
+
+// --- SECRETÁRIAS ---
+        System.out.println("\nInserindo SECRETÁRIAS...");
+        Secretary secretary1 = secretaryDAO.create("11122233345", "Josefa", "Rua B, 15", "71987654321", "jose@email.com", "jose31s", "senhajose", "Matutino");
+        Secretary secretary2 = secretaryDAO.create("22233344455", "Maria", "Rua F, 30", "71912344321", "maria@email.com", "maria24", "senhamaria", "Noturno");
+        System.out.println("Secretárias inseridas: " + secretary1 + ", " + secretary2);
+
+// --- VETERINÁRIOS ---
+        System.out.println("\nInserindo VETERINÁRIOS...");
+        Veterinarian vet1 = veterinarianDAO.create("99988877765", "Marcos", "Rua C, 20", "11911223344", "marcos@email.com", "marcosvet", "amocachorros", "Anestesiologia", "09:00", 5);
+        Veterinarian vet2 = veterinarianDAO.create("88877766655", "Joana", "Rua G, 40", "11933445566", "joana@email.com", "joanavet", "petsarelife", "Cardiologia", "08:00", 8);
+        System.out.println("Veterinários inseridos: " + vet1 + ", " + vet2);
+
+// --- ESPÉCIES ---
+        System.out.println("\nInserindo ESPÉCIES...");
+        Specie specie1 = specieDAO.create("Cachorro");
+        Specie specie2 = specieDAO.create("Gato");
+        Specie specie3 = specieDAO.create("Pássaro");
+        System.out.println("Espécies inseridas: " + specie1 + ", " + specie2 + ", " + specie3);
+
+// --- ANIMAIS ---
+        System.out.println("\nInserindo ANIMAIS...");
+        Animal animal1 = animalDAO.create("Jack", 3, 'M', 55.5, client1.getClientId(), specie1.getSpecieId());
+        Animal animal2 = animalDAO.create("Mia", 2, 'F', 10.2, client2.getClientId(), specie2.getSpecieId());
+        Animal animal3 = animalDAO.create("Bob", 1, 'M', 1.5, client3.getClientId(), specie3.getSpecieId());
+        System.out.println("Animais inseridos: " + animal1 + ", " + animal2 + ", " + animal3);
+
+// --- TRATAMENTOS ---
+        System.out.println("\nInserindo TRATAMENTOS...");
+        Treatment treatment1 = treatmentDAO.create(animal1.getAnimalId(), "20/09/2024", "Tratamento para febre");
+        Treatment treatment2 = treatmentDAO.create(animal2.getAnimalId(), "25/09/2024", "Tratamento para alergia");
+        System.out.println("Tratamentos inseridos: " + treatment1 + ", " + treatment2);
+
+// --- CONSULTAS ---
+        System.out.println("\nInserindo CONSULTAS...");
+        Appointment app1 = appointmentDAO.create("21/09/2024", "10:00", animal1.getAnimalId(), vet1.getVetId(), treatment1.getTreatmentId(), "Febre alta e vômito");
+        Appointment app2 = appointmentDAO.create("26/09/2024", "15:00", animal2.getAnimalId(), vet2.getVetId(), treatment2.getTreatmentId(), "Coceira intensa");
+        System.out.println("Consultas inseridas: " + app1 + ", " + app2);
+
+// --- EXAMES ---
+        System.out.println("\nInserindo EXAMES...");
+        Exam exam1 = examDAO.create(app1.getAppointmentId(), "Hemograma", "Exame de sangue", "21/09/2024", "Aguardando", null);
+        Exam exam2 = examDAO.create(app2.getAppointmentId(), "Raio-X", "Exame de imagem", "26/09/2024", "Concluído", "Sem alterações");
+        System.out.println("Exames inseridos: " + exam1 + ", " + exam2);
+
+// --- MEDICAMENTOS ---
+        System.out.println("\nInserindo MEDICAMENTOS...");
+        Medicine med1 = medicineDAO.create("Ibuprofeno", 20);
+        Medicine med2 = medicineDAO.create("Antialérgico", 15);
+        System.out.println("Medicamentos inseridos: " + med1 + ", " + med2);
+
+// --- PRESCRIÇÕES ---
+        System.out.println("\nInserindo PRESCRIÇÕES...");
+        Prescription pres1 = prescriptionDAO.create(vet1.getVetId(), app1.getAppointmentId(), med1.getDrugId(), "Infecção", 500, "Tomar 2x ao dia por 7 dias");
+        Prescription pres2 = prescriptionDAO.create(vet2.getVetId(), app2.getAppointmentId(), med2.getDrugId(), "Alergia", 200, "Aplicar 1x ao dia por 5 dias");
+        System.out.println("Prescrições inseridas: " + pres1 + ", " + pres2);
+
+// --- INTERNAÇÕES ---
+        System.out.println("\nInserindo INTERNAÇÕES...");
+        Hospitalize hosp1 = hospitalizeDAO.create(vet1.getVetId(), animal1.getAnimalId(), "22/09/2024", "Paciente estável, febre controlada");
+        Hospitalize hosp2 = hospitalizeDAO.create(vet2.getVetId(), animal2.getAnimalId(), "27/09/2024", "Paciente em observação para alergia");
+        System.out.println("Internações inseridas: " + hosp1 + ", " + hosp2);
+
+// --- VACINAÇÕES ---
+        System.out.println("\nInserindo VACINAÇÕES...");
+        Vaccination vacc1 = vaccinationDAO.create(vet1.getVetId(), animal1.getAnimalId(), "Vacina Anti alérgica", "10/10/2024");
+        Vaccination vacc2 = vaccinationDAO.create(vet2.getVetId(), animal2.getAnimalId(), "Vacina Contra Pulgas", "15/10/2024");
+        System.out.println("Vacinações inseridas: " + vacc1 + ", " + vacc2);
+
+        System.out.println("\n----------------------\n");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+        // OBTENDO INSTÂNCIAS DAS CLASSES: -----------------------------------
+
+        AnimalDAO animalDAO = AnimalDAO.getInstance();
+        AppointmentDAO appointmentDAO = AppointmentDAO.getInstance();
+        ClientDAO clientDAO = ClientDAO.getInstance();
+        ExamDAO examDAO = ExamDAO.getInstance();
+        HospitalizeDAO hospitalizeDAO = HospitalizeDAO.getInstance();
+        MedicineDAO medicineDAO = MedicineDAO.getInstance();
+        PrescriptionDAO prescriptionDAO = PrescriptionDAO.getInstance();
+        SecretaryDAO secretaryDAO = SecretaryDAO.getInstance();
         SpecieDAO specieDAO = Model.SpecieDAO.getInstance();
         TreatmentDAO treatmentDAO = TreatmentDAO.getInstance();
         VaccinationDAO vaccinationDAO = VaccinationDAO.getInstance();
@@ -291,7 +404,7 @@ public class Main {
         System.out.println("\n----------------------\n");
 
 
-   /*     // DELETES: -----------------------------------
+        // DELETES: -----------------------------------
 
         // --- DELETAR CLIENTE ---
         System.out.println("\nDeletando cliente...");

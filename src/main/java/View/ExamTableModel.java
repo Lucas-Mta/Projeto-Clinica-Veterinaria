@@ -9,14 +9,13 @@ import Model.ExamDAO;
 public class ExamTableModel extends GenericTableModel {
 
     public ExamTableModel(List<Exam> dataVector) {
-        super(dataVector, new String[]{"ID da Consulta", "Tipo", "Data da Solicitação", "Status"});
+        super(dataVector, new String[]{"Tipo", "Data da Solicitação", "Status"});
     }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         return switch (columnIndex) {
-            case 0 -> Integer.class; // ID
-            case 1, 2, 3 -> String.class; // Strings
+            case 0, 1, 2 -> String.class; // Strings
             default -> throw new IndexOutOfBoundsException("columnIndex out of bounds");
         };
     }
@@ -26,10 +25,9 @@ public class ExamTableModel extends GenericTableModel {
         Exam exam = (Exam) dataVector.get(rowIndex);
 
         return switch (columnIndex) {
-            case 0 -> exam.getExamId();
-            case 1 -> exam.getExamType();
-            case 2 -> exam.getRequestDate();
-            case 3 -> exam.getStatus();
+            case 0 -> exam.getExamType();
+            case 1 -> exam.getRequestDate();
+            case 2 -> exam.getStatus();
             default -> throw new IndexOutOfBoundsException("columnIndex out of bounds");
         };
     }
@@ -39,10 +37,10 @@ public class ExamTableModel extends GenericTableModel {
         Exam exam = (Exam) dataVector.get(rowIndex);
 
         switch (columnIndex) {
-            case 1:
+            case 0:
                 exam.setExamType((String) aValue);
                 break;
-            case 3:
+            case 2:
                 exam.setStatus((String) aValue);
                 break;
             default:
@@ -54,7 +52,7 @@ public class ExamTableModel extends GenericTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        // Permitindo edição apenas no Tipo e Status
-        return columnIndex == 1 || columnIndex == 3;
+        // Só não pode editar a data de solicitação
+        return columnIndex != 1;
     }
 }

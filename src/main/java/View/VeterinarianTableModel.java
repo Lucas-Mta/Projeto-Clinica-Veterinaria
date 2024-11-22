@@ -9,17 +9,16 @@ import Model.VeterinarianDAO;
 public class VeterinarianTableModel extends GenericTableModel {
 
     public VeterinarianTableModel(List<Veterinarian> dataVector) {
-        super(dataVector, new String[]{"ID", "CPF", "Nome", "Especialidade", "Sala"});
+        super(dataVector, new String[]{"Nome", "CPF", "Especialidade", "Sala"});
     }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         return switch (columnIndex) {
-            case 0 -> Integer.class; // ID
+            case 0 -> String.class; // Nome
             case 1 -> String.class; // CPF
-            case 2 -> String.class; // Nome
-            case 3 -> String.class; // Especialidade
-            case 4  -> Integer.class; // Número da Sala
+            case 2 -> String.class; // Especialidade
+            case 3  -> Integer.class; // Número da Sala
             default -> throw new IndexOutOfBoundsException("columnIndex out of bounds");
         };
     }
@@ -30,11 +29,10 @@ public class VeterinarianTableModel extends GenericTableModel {
         Veterinarian vet = (Veterinarian) dataVector.get(rowIndex);
 
         return switch (columnIndex) {
-            case 0 -> vet.getVetId();
+            case 0 -> vet.getName();
             case 1 -> vet.getCpf();
-            case 2 -> vet.getName();
-            case 3 -> vet.getSpecialty();
-            case 4 -> vet.getRoomNum();
+            case 2 -> vet.getSpecialty();
+            case 3 -> vet.getRoomNum();
             default -> throw new IndexOutOfBoundsException("columnIndex out of bounds");
         };
     }
@@ -44,13 +42,13 @@ public class VeterinarianTableModel extends GenericTableModel {
         Veterinarian vet = (Veterinarian) dataVector.get(rowIndex);
 
         switch (columnIndex) {
-            case 2:
+            case 0:
                 vet.setName((String) aValue);
                 break;
-            case 3:
+            case 2:
                 vet.setSpecialty((String) aValue);
                 break;
-            case 4:
+            case 3:
                 vet.setRoomNum((Integer) aValue);
                 break;
             default:
@@ -62,7 +60,7 @@ public class VeterinarianTableModel extends GenericTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        // Permitimos edição em todos os campos, exceto o ID e CPF
-        return columnIndex > 1;
+        // Permitimos edição em todos os campos, exceto CPF
+        return columnIndex != 1;
     }
 }
