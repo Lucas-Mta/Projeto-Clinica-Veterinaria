@@ -1,4 +1,4 @@
-package View;
+package View.TableModels;
 
 import java.util.List;
 import Model.Veterinarian;

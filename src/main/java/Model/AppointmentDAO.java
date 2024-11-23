@@ -99,6 +99,16 @@ public class AppointmentDAO extends DAO {
         return this.retrieve("SELECT * FROM Consulta WHERE idAnimal = " + animalId);
     }
 
+    // Recupera por Id do Tratamento
+    public List<Appointment> retrieveByTreatmentId(int treatmentId) {
+        return this.retrieve("SELECT * FROM Consulta WHERE idTratamento = " + treatmentId);
+    }
+
+    // Recupera as 3 Consultas recentes dado o Id do Animal
+    public List<Appointment> retrieveRecentAppointments(int animalId) {
+        return this.retrieve("SELECT * FROM Consulta WHERE idAnimal = " + animalId + " ORDER BY data ASC LIMIT 3");
+    }
+
 
     // UPDATE --------------------------------------
     public void update(Appointment appointment) {

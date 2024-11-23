@@ -92,6 +92,18 @@ public class ExamDAO extends DAO {
         return this.retrieve("SELECT * FROM Exame WHERE tipo LIKE '%" + examType + "%'");
     }
 
+    // Recupera exame por Id da Consulta
+    public List<Exam> retrieveByAppointmentId(int appointmentId) {
+        return this.retrieve("SELECT * FROM Exame WHERE idConsulta = " + appointmentId);
+    }
+
+    // Recupera todos os exames de um Tratamento
+    public List<Exam> retrieveAllExamsOfATreatment(int appointmentId) {
+        return this.retrieve("SELECT e.* FROM Exame e " +
+                "JOIN Consulta c ON e.idConsulta = c.idConsulta " +
+                "WHERE c.idTratamento = " + appointmentId);
+    }
+
     // UPDATE --------------------------------------
     public void update(Exam exam) {
         try {

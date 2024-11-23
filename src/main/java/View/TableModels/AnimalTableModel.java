@@ -1,4 +1,4 @@
-package View;
+package View.TableModels;
 
 // TableModel específico para a classe Animal
 
