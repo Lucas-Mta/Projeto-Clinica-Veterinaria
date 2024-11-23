@@ -5,15 +5,9 @@
 package View.Interfaces;
 
 import Controller.Controller;
-import Model.AppointmentDAO;
-import Model.ClientDAO;
-import Model.TreatmentDAO;
-import Model.VeterinarianDAO;
-import View.*;
+import View.TableModels.*;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import java.util.ArrayList;
 
 /**
  * @author Lucca
@@ -26,16 +20,11 @@ public class MainView extends javax.swing.JFrame {
     public MainView() {
         initComponents(); // Código do NetBeans
         setTextFields(); // Coloca os TextFields que mostram os itens selecionados
-        setTablesToModify(); // Coloca as tabelas que serão modificadas com eventos
         setLocationRelativeTo(null);
     }
 
     public void setTextFields() {
         Controller.setTextFields(selectedClientTextField, selectedAnimalNameTextField, selectedSpeciesTextField);
-    }
-
-    public void setTablesToModify() {
-        Controller.setTablesToModifyAfter(animalListTable0, appointmentsListTable1, examListTable1, animalAppointmentsTable3);
     }
 
     @SuppressWarnings("unchecked")
@@ -93,14 +82,14 @@ public class MainView extends javax.swing.JFrame {
         Bottom1 = new javax.swing.JPanel();
         Info4 = new javax.swing.JPanel();
         appointmentsListLabel1 = new javax.swing.JLabel();
-        newAppointmentButton1 = new javax.swing.JButton();
+        appointmentDetailsButton1 = new javax.swing.JButton();
         deleteAppointmentButton1 = new javax.swing.JButton();
         appointmentsListScrollPane1 = new javax.swing.JScrollPane();
         appointmentsListTable1 = new javax.swing.JTable();
         examListLabel1 = new javax.swing.JLabel();
         examListScrollPane1 = new javax.swing.JScrollPane();
         examListTable1 = new javax.swing.JTable();
-        newExamButton3 = new javax.swing.JButton();
+        examDetailsButton3 = new javax.swing.JButton();
         deleteExamButton2 = new javax.swing.JButton();
         ScheduleAppointment = new javax.swing.JPanel();
         Top2 = new javax.swing.JPanel();
@@ -158,8 +147,6 @@ public class MainView extends javax.swing.JFrame {
         Bottom4 = new javax.swing.JPanel();
         newVaccJPanel = new javax.swing.JPanel();
         newVaccLabel = new javax.swing.JLabel();
-        selectedAnimalVaccLabel = new javax.swing.JLabel();
-        selectedAnimalVaccTextField = new javax.swing.JTextField();
         selectedVetVaccLabel = new javax.swing.JLabel();
         selectedVetVaccTextField = new javax.swing.JTextField();
         vaccLabel = new javax.swing.JLabel();
@@ -184,8 +171,6 @@ public class MainView extends javax.swing.JFrame {
         Bottom5 = new javax.swing.JPanel();
         newHospitalizeJPanel = new javax.swing.JPanel();
         newHospitalizeLabel = new javax.swing.JLabel();
-        selectedAnimalHospitalizeLabel = new javax.swing.JLabel();
-        selectedAnimalHospitalizeTextField = new javax.swing.JTextField();
         selectedVetHospitalizeLabel = new javax.swing.JLabel();
         selectedVetHospitalizeTextField = new javax.swing.JTextField();
         newHospitalizeDateLabel = new javax.swing.JLabel();
@@ -278,7 +263,7 @@ public class MainView extends javax.swing.JFrame {
         selectedAnimalLabel.setForeground(new java.awt.Color(0, 0, 0));
         selectedAnimalLabel.setText("Animal Selecionado");
 
-        selectedClientLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        selectedClientLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         selectedClientLabel.setForeground(new java.awt.Color(0, 0, 0));
         selectedClientLabel.setText("Cliente:");
 
@@ -288,7 +273,7 @@ public class MainView extends javax.swing.JFrame {
         selectedClientTextField.setForeground(new java.awt.Color(102, 102, 102));
         selectedClientTextField.setText("Selecione um Cliente...");
 
-        selectedAnimalNameLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        selectedAnimalNameLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         selectedAnimalNameLabel.setForeground(new java.awt.Color(0, 0, 0));
         selectedAnimalNameLabel.setText("Animal:");
 
@@ -298,7 +283,7 @@ public class MainView extends javax.swing.JFrame {
         selectedAnimalNameTextField.setForeground(new java.awt.Color(102, 102, 102));
         selectedAnimalNameTextField.setText("Selecione um Cliente...");
 
-        selectedSpeciesLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        selectedSpeciesLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         selectedSpeciesLabel.setForeground(new java.awt.Color(0, 0, 0));
         selectedSpeciesLabel.setText("Espécie:");
 
@@ -317,18 +302,18 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(selectedAnimalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(selectedAnimalPanelLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(selectedAnimalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(selectedAnimalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(selectedAnimalPanelLayout.createSequentialGroup()
-                                .addComponent(selectedClientLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(selectedClientLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(selectedClientTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(selectedClientTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(selectedAnimalPanelLayout.createSequentialGroup()
                                 .addGroup(selectedAnimalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(selectedSpeciesLabel)
                                     .addComponent(selectedAnimalNameLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(selectedAnimalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(selectedAnimalNameTextField)
+                                .addGroup(selectedAnimalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(selectedAnimalNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
                                     .addComponent(selectedSpeciesTextField)))))
                     .addComponent(selectedAnimalLabel))
                 .addContainerGap(48, Short.MAX_VALUE))
@@ -464,7 +449,7 @@ public class MainView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
-        clientListTable0.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        clientListTable0.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         clientListTable0.setSelectionBackground(new java.awt.Color(9, 163, 88));
         clientListTable0.setSelectionForeground(new java.awt.Color(255, 255, 255));
         clientListTable0.setShowGrid(false);
@@ -577,6 +562,7 @@ public class MainView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
+        animalListTable0.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         animalListTable0.setSelectionBackground(new java.awt.Color(9, 163, 88));
         animalListTable0.setSelectionForeground(new java.awt.Color(255, 255, 255));
         animalListTable0.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -699,6 +685,7 @@ public class MainView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
+        treatmentListTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         treatmentListTable1.setSelectionBackground(new java.awt.Color(9, 163, 88));
         treatmentListTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
         treatmentListTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -775,11 +762,16 @@ public class MainView extends javax.swing.JFrame {
         appointmentsListLabel1.setForeground(new java.awt.Color(0, 0, 0));
         appointmentsListLabel1.setText("Lista de Consultas");
 
-        newAppointmentButton1.setBackground(new java.awt.Color(255, 255, 255));
-        newAppointmentButton1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        newAppointmentButton1.setForeground(new java.awt.Color(0, 0, 0));
-        newAppointmentButton1.setText("Nova Consulta");
-        newAppointmentButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        appointmentDetailsButton1.setBackground(new java.awt.Color(255, 255, 255));
+        appointmentDetailsButton1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        appointmentDetailsButton1.setForeground(new java.awt.Color(0, 0, 0));
+        appointmentDetailsButton1.setText("Acessar Detalhes");
+        appointmentDetailsButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        appointmentDetailsButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentDetailsButton1ActionPerformed(evt);
+            }
+        });
 
         deleteAppointmentButton1.setBackground(new java.awt.Color(255, 255, 255));
         deleteAppointmentButton1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
@@ -806,6 +798,7 @@ public class MainView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
+        appointmentsListTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         appointmentsListTable1.setSelectionBackground(new java.awt.Color(9, 163, 88));
         appointmentsListTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
         appointmentsListTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -838,15 +831,21 @@ public class MainView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
+        examListTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         examListTable1.setSelectionBackground(new java.awt.Color(9, 163, 88));
         examListTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
         examListScrollPane1.setViewportView(examListTable1);
 
-        newExamButton3.setBackground(new java.awt.Color(255, 255, 255));
-        newExamButton3.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        newExamButton3.setForeground(new java.awt.Color(0, 0, 0));
-        newExamButton3.setText("Novo Exame");
-        newExamButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        examDetailsButton3.setBackground(new java.awt.Color(255, 255, 255));
+        examDetailsButton3.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        examDetailsButton3.setForeground(new java.awt.Color(0, 0, 0));
+        examDetailsButton3.setText("AcessarDetalhes");
+        examDetailsButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        examDetailsButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                examDetailsButton3ActionPerformed(evt);
+            }
+        });
 
         deleteExamButton2.setBackground(new java.awt.Color(255, 255, 255));
         deleteExamButton2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
@@ -864,7 +863,7 @@ public class MainView extends javax.swing.JFrame {
                     .addGroup(Info4Layout.createSequentialGroup()
                         .addComponent(appointmentsListLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(newAppointmentButton1)
+                        .addComponent(appointmentDetailsButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteAppointmentButton1))
                     .addComponent(appointmentsListScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -874,7 +873,7 @@ public class MainView extends javax.swing.JFrame {
                     .addGroup(Info4Layout.createSequentialGroup()
                         .addComponent(examListLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(newExamButton3)
+                        .addComponent(examDetailsButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteExamButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -885,9 +884,9 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(Info4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(appointmentsListLabel1)
                     .addComponent(deleteAppointmentButton1)
-                    .addComponent(newAppointmentButton1)
+                    .addComponent(appointmentDetailsButton1)
                     .addComponent(examListLabel1)
-                    .addComponent(newExamButton3)
+                    .addComponent(examDetailsButton3)
                     .addComponent(deleteExamButton2))
                 .addGap(8, 8, 8)
                 .addGroup(Info4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -918,11 +917,6 @@ public class MainView extends javax.swing.JFrame {
         vetListScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
         vetListScrollPane2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         vetListScrollPane2.setForeground(new java.awt.Color(204, 204, 204));
-        vetListScrollPane2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                vetListScrollPane2MousePressed(evt);
-            }
-        });
 
         vetListTable2.setAutoCreateRowSorter(true);
         vetListTable2.setBackground(new java.awt.Color(250, 250, 250));
@@ -939,6 +933,7 @@ public class MainView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
+        vetListTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vetListTable2.setSelectionBackground(new java.awt.Color(9, 163, 88));
         vetListTable2.setSelectionForeground(new java.awt.Color(255, 255, 255));
         vetListTable2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1194,6 +1189,7 @@ public class MainView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
+        animalAppointmentsTable3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         animalAppointmentsTable3.setSelectionBackground(new java.awt.Color(9, 163, 88));
         animalAppointmentsTable3.setSelectionForeground(new java.awt.Color(255, 255, 255));
         animalAppointmentsTable3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1416,6 +1412,7 @@ public class MainView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
+        vetListTable4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vetListTable4.setSelectionBackground(new java.awt.Color(9, 163, 88));
         vetListTable4.setSelectionForeground(new java.awt.Color(255, 255, 255));
         vetListTable4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1479,23 +1476,9 @@ public class MainView extends javax.swing.JFrame {
         newVaccLabel.setForeground(new java.awt.Color(0, 0, 0));
         newVaccLabel.setText("Nova Vacinação");
 
-        selectedAnimalVaccLabel.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        selectedAnimalVaccLabel.setForeground(new java.awt.Color(0, 0, 0));
-        selectedAnimalVaccLabel.setText("Animal:");
-
-        selectedAnimalVaccTextField.setEditable(false);
-        selectedAnimalVaccTextField.setBackground(new java.awt.Color(250, 250, 250));
-        selectedAnimalVaccTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        selectedAnimalVaccTextField.setForeground(new java.awt.Color(102, 102, 102));
-        selectedAnimalVaccTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectedAnimalVaccTextFieldActionPerformed(evt);
-            }
-        });
-
         selectedVetVaccLabel.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         selectedVetVaccLabel.setForeground(new java.awt.Color(0, 0, 0));
-        selectedVetVaccLabel.setText("Veterinário (a):");
+        selectedVetVaccLabel.setText("Veterinário(a):");
 
         selectedVetVaccTextField.setEditable(false);
         selectedVetVaccTextField.setBackground(new java.awt.Color(250, 250, 250));
@@ -1565,10 +1548,6 @@ public class MainView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vaccTextField))
                     .addGroup(newVaccJPanelLayout.createSequentialGroup()
-                        .addComponent(selectedAnimalVaccLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selectedAnimalVaccTextField))
-                    .addGroup(newVaccJPanelLayout.createSequentialGroup()
                         .addComponent(selectedVetVaccLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(selectedVetVaccTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1593,28 +1572,23 @@ public class MainView extends javax.swing.JFrame {
                 .addComponent(newVaccLabel)
                 .addGap(7, 7, 7)
                 .addGroup(newVaccJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(newVaccJPanelLayout.createSequentialGroup()
-                        .addGroup(newVaccJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(selectedAnimalVaccLabel)
-                            .addComponent(selectedAnimalVaccTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(newVaccJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(selectedVetVaccLabel)
-                            .addComponent(selectedVetVaccTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(newVaccJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(vaccLabel)
-                            .addComponent(vaccTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(newVaccJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(vaccLabel)
+                        .addComponent(vaccTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(newVaccJPanelLayout.createSequentialGroup()
                         .addComponent(vaccDateLabel)
                         .addGap(3, 3, 3)
-                        .addComponent(vaccDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(newVaccJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(vaccDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(newVaccJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(selectedVetVaccLabel)
+                                .addComponent(selectedVetVaccTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(vaccNextDoseLabel)
                         .addGap(2, 2, 2)
                         .addComponent(vaccNextDoseTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(newVaccButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(newVaccButton, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                 .addGap(25, 25, 25))
         );
 
@@ -1698,6 +1672,7 @@ public class MainView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
+        vetListTable5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vetListTable5.setSelectionBackground(new java.awt.Color(9, 163, 88));
         vetListTable5.setSelectionForeground(new java.awt.Color(255, 255, 255));
         vetListTable5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1760,20 +1735,6 @@ public class MainView extends javax.swing.JFrame {
         newHospitalizeLabel.setForeground(new java.awt.Color(0, 0, 0));
         newHospitalizeLabel.setText("Nova Internação");
 
-        selectedAnimalHospitalizeLabel.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        selectedAnimalHospitalizeLabel.setForeground(new java.awt.Color(0, 0, 0));
-        selectedAnimalHospitalizeLabel.setText("Animal:");
-
-        selectedAnimalHospitalizeTextField.setEditable(false);
-        selectedAnimalHospitalizeTextField.setBackground(new java.awt.Color(250, 250, 250));
-        selectedAnimalHospitalizeTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        selectedAnimalHospitalizeTextField.setForeground(new java.awt.Color(102, 102, 102));
-        selectedAnimalHospitalizeTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectedAnimalHospitalizeTextFieldActionPerformed(evt);
-            }
-        });
-
         selectedVetHospitalizeLabel.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         selectedVetHospitalizeLabel.setForeground(new java.awt.Color(0, 0, 0));
         selectedVetHospitalizeLabel.setText("Veterinário (a):");
@@ -1820,12 +1781,8 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(newHospitalizeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(newHospitalizeJPanelLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addGroup(newHospitalizeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(newHospitalizeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(newHospitalizeLabel)
-                            .addGroup(newHospitalizeJPanelLayout.createSequentialGroup()
-                                .addComponent(selectedAnimalHospitalizeLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(selectedAnimalHospitalizeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE))
                             .addGroup(newHospitalizeJPanelLayout.createSequentialGroup()
                                 .addGroup(newHospitalizeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(selectedVetHospitalizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
@@ -1844,19 +1801,15 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(newHospitalizeJPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(newHospitalizeLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(newHospitalizeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(selectedAnimalHospitalizeLabel)
-                    .addComponent(selectedAnimalHospitalizeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(newHospitalizeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(selectedVetHospitalizeLabel)
                     .addComponent(selectedVetHospitalizeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(27, 27, 27)
                 .addGroup(newHospitalizeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newHospitalizeDateLabel)
                     .addComponent(newHospitalizeDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(26, 26, 26)
                 .addComponent(newHospitalizeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                 .addGap(27, 27, 27))
         );
@@ -2067,11 +2020,24 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteAnimalButton0ActionPerformed
 
     private void allTreatmentsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allTreatmentsButton1ActionPerformed
-        // TODO add your handling code here:
+        Controller.loadAllTreatments(
+                treatmentListTable1,
+                appointmentsListTable1,
+                examListTable1
+        );
     }//GEN-LAST:event_allTreatmentsButton1ActionPerformed
 
     private void selectedAnimalTreatmentsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedAnimalTreatmentsButton1ActionPerformed
-        // TODO add your handling code here:
+        if (Controller.getSelectedAnimal() != null) {
+            Controller.loadTreatmentsByAnimal(
+                    treatmentListTable1,
+                    appointmentsListTable1,
+                    examListTable1
+            );
+        } else {
+            pleaseSelectAnAnimal();
+        }
+
     }//GEN-LAST:event_selectedAnimalTreatmentsButton1ActionPerformed
 
     private void appointmentVetTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentVetTextField2ActionPerformed
@@ -2106,10 +2072,6 @@ public class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_vaccTextFieldActionPerformed
 
-    private void selectedAnimalVaccTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedAnimalVaccTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_selectedAnimalVaccTextFieldActionPerformed
-
     private void vaccDateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaccDateTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_vaccDateTextFieldActionPerformed
@@ -2117,10 +2079,6 @@ public class MainView extends javax.swing.JFrame {
     private void newVaccButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newVaccButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newVaccButtonActionPerformed
-
-    private void selectedAnimalHospitalizeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedAnimalHospitalizeTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_selectedAnimalHospitalizeTextFieldActionPerformed
 
     private void selectedVetHospitalizeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedVetHospitalizeTextFieldActionPerformed
         // TODO add your handling code here:
@@ -2139,87 +2097,58 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_addProgressButtonActionPerformed
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
-        // TODO add your handling code here:
         // Abrir a interface principal
         new Profile().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_profileButtonActionPerformed
 
-    private void clientListTable0MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientListTable0MousePressed
-        Controller.setSelected(((GenericTableModel)clientListTable0.getModel()).getItem(clientListTable0.getSelectedRow()));
-    }//GEN-LAST:event_clientListTable0MousePressed
 
     // Muda as tabelas de acordo com as páginas
     private void pagesTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_pagesTabbedPaneStateChanged
         int selectedIndex = pagesTabbedPane.getSelectedIndex();
         String selectedTabTitle = pagesTabbedPane.getTitleAt(selectedIndex);
 
-        // Renderizador dos itens ao meio da célula
-        DefaultTableCellRenderer leftRenderer  = new DefaultTableCellRenderer();
-        leftRenderer .setHorizontalAlignment(SwingConstants.LEFT);
-
         switch (selectedTabTitle) {
-            case "<html> <b>Clientes e Animais<b> </html>": // Clientes e Animais
-                // Tabela dos Clientes:
-                Controller.setTableModel(clientListTable0, new ClientTableModel(ClientDAO.getInstance().retrieveAll()));
-                applyLeftAlignment(clientListTable0, leftRenderer);
+            case "<html> <b>Clientes e Animais<b> </html>":
+                Controller.loadAllClients(clientListTable0);
 
-                // Tabela dos Animais: Apenas aparece quando um cliente for selecionado
-                if (Controller.getSelectedClient() != null) {
-                    Controller.setAnimalsBySelectedClient(Controller.getSelectedClient()); // Aparece a tabela de animais
-                    applyLeftAlignment(animalListTable0, leftRenderer);
-                } else {
-                    Controller.setTableModel(animalListTable0, new AnimalTableModel(new ArrayList<>())); // Tabela Vazia
-                    applyLeftAlignment(animalListTable0, leftRenderer);
-                }
-
-                break;
-
-            case "<html> <b>Tratamentos<b> </html>": // Tratamentos
-                // Tabela dos Tratamentos:
-                Controller.setTableModel(treatmentListTable1, new TreatmentTableModel(TreatmentDAO.getInstance().retrieveAll()));
-                applyLeftAlignment(treatmentListTable1, leftRenderer);
-                // Por padrão vem todos os tratamentos, mas clicando no botão tem como filtrar.
-                // Isso foi feito no listener do botão.
-
-                // Tabela das Consultas:
-                // A tabela de consultas deverá aparecer quando selecionar um tratamento.
-                Controller.setTableModel(appointmentsListTable1, new AppointmentTableModel(new ArrayList<>())); // Vazia
-                applyLeftAlignment(appointmentsListTable1, leftRenderer);
-
-                // Tabela de Exames:
-                // A tabela de exames só irá aparecer quando selecionar uma consulta
-                Controller.setTableModel(examListTable1, new ExamTableModel(new ArrayList<>()));
-                applyLeftAlignment(examListTable1, leftRenderer);
-                break;
-
-            case "<html> <b>Consultas<b> </html>": // Consultas
-                Controller.setTableModel(vetListTable2, new VeterinarianTableModel(VeterinarianDAO.getInstance().retrieveAll()));
-                applyLeftAlignment(vetListTable2, leftRenderer);
-                break;
-
-            case "<html> <b>Exames<b> </html>": // Exames: A tabela de consultas deve ser do animal selecionado anteriormente:
-                if (Controller.getSelectedAnimal() != null) {
-                    Controller.setTableModel(animalAppointmentsTable3, new AppointmentTableModel(
-                            AppointmentDAO.getInstance().retrieveByAnimalId(
-                                    Controller.getSelectedAnimal().getAnimalId())));
-                    applyLeftAlignment(animalAppointmentsTable3, leftRenderer);
-
-                } else {
-                    Controller.setTableModel(animalAppointmentsTable3, new AppointmentTableModel(new ArrayList<>()));
-                    applyLeftAlignment(animalAppointmentsTable3, leftRenderer);
-                    JOptionPane.showMessageDialog(this, "Selecione um Animal.");
+                if (Controller.getSelectedClient() == null) {
+                    Controller.loadEmptyAnimalTable(animalListTable0);
                 }
                 break;
 
-            case "<html> <b>Vacinações<b> </html>": // Vacinações
-                Controller.setTableModel(vetListTable4, new VeterinarianTableModel(VeterinarianDAO.getInstance().retrieveAll()));
-                applyLeftAlignment(vetListTable4, leftRenderer);
+            case "<html> <b>Tratamentos<b> </html>":
+                Controller.loadAllTreatments(
+                        treatmentListTable1,
+                        appointmentsListTable1,
+                        examListTable1
+                );
                 break;
 
-            case "<html> <b>Internações<b> </html>": // Internações
-                Controller.setTableModel(vetListTable5, new VeterinarianTableModel(VeterinarianDAO.getInstance().retrieveAll()));
-                applyLeftAlignment(vetListTable5, leftRenderer);
+            case "<html> <b>Consultas<b> </html>":
+                Controller.loadAllVets(vetListTable2);
+
+                if (Controller.getSelectedAnimal() == null) {
+                    pleaseSelectAnAnimal();
+                }
+                break;
+
+            case "<html> <b>Exames<b> </html>":
+                if (Controller.getSelectedAnimal() == null) {
+                    // A tabela de consultas deve ser do animal selecionado anteriormente
+                    Controller.loadEmptyAppointmentsTable(animalAppointmentsTable3);
+                    pleaseSelectAnAnimal();
+                } else {
+                    Controller.loadAppointmentsByAnimal(animalAppointmentsTable3);
+                }
+                break;
+
+            case "<html> <b>Vacinações<b> </html>":
+                Controller.loadAllVets(vetListTable4);
+                break;
+
+            case "<html> <b>Internações<b> </html>":
+                Controller.loadAllVets(vetListTable5);
                 break;
 
             default:
@@ -2229,48 +2158,84 @@ public class MainView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_pagesTabbedPaneStateChanged
 
-    // Aplica o alinhamento à esquerda em todas as colunas de uma tabela
-    private void applyLeftAlignment(javax.swing.JTable table, DefaultTableCellRenderer renderer) {
-        for (int i = 0; i < table.getColumnCount(); i++) {
-            Class<?> columnClass = table.getColumnClass(i);
-            if (!columnClass.equals(Boolean.class)) { // Verifica se a coluna não é do tipo Boolean
-                table.getColumnModel().getColumn(i).setCellRenderer(renderer);
-            }
-        }
+    private void pleaseSelectAnAnimal() {
+        JOptionPane.showMessageDialog(this, "Por favor, selecione um Animal.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+        pagesTabbedPane.setSelectedIndex(0); // Redireciona para a aba de "Clientes e Animais"
     }
 
+    private void clientListTable0MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientListTable0MousePressed
+        Controller.setSelected(((GenericTableModel)clientListTable0.getModel())
+                .getItem(clientListTable0.getSelectedRow()));
+
+        // Cria a tabela de Animais de acordo com o cliente selecionado
+       Controller.loadAnimalsByOwner(animalListTable0);
+
+    }//GEN-LAST:event_clientListTable0MousePressed
 
     private void animalListTable0MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_animalListTable0MousePressed
-        Controller.setSelected(((GenericTableModel)animalListTable0.getModel()).getItem(animalListTable0.getSelectedRow()));
+        Controller.setSelected(((GenericTableModel)animalListTable0.getModel())
+                .getItem(animalListTable0.getSelectedRow()));
+
+        // Modifica as outras informações (Consultas Recentes e Próxima Vacinação)
+        recentAppointmentsTextArea.setText(Controller.loadAnimalInfo());
+
     }//GEN-LAST:event_animalListTable0MousePressed
 
     private void treatmentListTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_treatmentListTable1MousePressed
-        Controller.setSelected(((GenericTableModel)treatmentListTable1.getModel()).getItem(treatmentListTable1.getSelectedRow()));
+        Controller.setSelected(((GenericTableModel)treatmentListTable1.getModel())
+                .getItem(treatmentListTable1.getSelectedRow()));
+
+        // Mostra as Consultas de acordo com o tratamento selecionado
+        Controller.loadAppointmentsByTreatment(appointmentsListTable1);
+
+        // Mostra TODOS os Exames de acordo com o tratamento selecionado
+        Controller.loadExamsByTreatment(examListTable1);
+
     }//GEN-LAST:event_treatmentListTable1MousePressed
 
     private void appointmentsListTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsListTable1MousePressed
-        Controller.setSelected(((GenericTableModel)appointmentsListTable1.getModel()).getItem(appointmentsListTable1.getSelectedRow()));
+        Controller.setSelected(((GenericTableModel)appointmentsListTable1.getModel())
+                .getItem(appointmentsListTable1.getSelectedRow()));
+
+        // Mostra os Exames de acordo com a consulta selecionada
+        Controller.loadExamsByAppointment(examListTable1);
+
     }//GEN-LAST:event_appointmentsListTable1MousePressed
 
-    // CÓDIGO AQUI EMBAIXO FOI ERRADO MAS A PORR# DO NETBEANS NÃO DEIXA APAGAR
-    private void vetListScrollPane2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vetListScrollPane2MousePressed
-    }//GEN-LAST:event_vetListScrollPane2MousePressed
-
     private void vetListTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vetListTable2MousePressed
-        Controller.setSelected(((GenericTableModel)vetListTable2.getModel()).getItem(vetListTable2.getSelectedRow()));
+        Controller.setSelected(((GenericTableModel)vetListTable2.getModel())
+                .getItem(vetListTable2.getSelectedRow()));
+
+        // Muda o TextField
+        appointmentVetTextField2.setText(
+                Controller.getSelectedVet().getName()
+                + " - " + Controller.getSelectedVet().getSpecialty()
+        );
+
     }//GEN-LAST:event_vetListTable2MousePressed
 
     private void animalAppointmentsTable3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_animalAppointmentsTable3MousePressed
-        Controller.setSelected(((GenericTableModel)animalAppointmentsTable3.getModel()).getItem(animalAppointmentsTable3.getSelectedRow()));
+        Controller.setSelected(((GenericTableModel)animalAppointmentsTable3.getModel())
+                .getItem(animalAppointmentsTable3.getSelectedRow()));
     }//GEN-LAST:event_animalAppointmentsTable3MousePressed
 
     private void vetListTable4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vetListTable4MousePressed
-        Controller.setSelected(((GenericTableModel)vetListTable4.getModel()).getItem(vetListTable4.getSelectedRow()));
+        Controller.setSelected(((GenericTableModel)vetListTable4.getModel())
+                .getItem(vetListTable4.getSelectedRow()));
     }//GEN-LAST:event_vetListTable4MousePressed
 
     private void vetListTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vetListTable5MousePressed
-        Controller.setSelected(((GenericTableModel)vetListTable5.getModel()).getItem(vetListTable5.getSelectedRow()));
+        Controller.setSelected(((GenericTableModel)vetListTable5.getModel())
+                .getItem(vetListTable5.getSelectedRow()));
     }//GEN-LAST:event_vetListTable5MousePressed
+
+    private void appointmentDetailsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentDetailsButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_appointmentDetailsButton1ActionPerformed
+
+    private void examDetailsButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examDetailsButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_examDetailsButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2351,6 +2316,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField animalSearchTextField0;
     private javax.swing.JFormattedTextField appointmentDateFormattedTextField2;
     private javax.swing.JLabel appointmentDateLabel2;
+    private javax.swing.JButton appointmentDetailsButton1;
     private javax.swing.JLabel appointmentSymptomsLabel2;
     private javax.swing.JScrollPane appointmentSymptomsScrollPane2;
     private javax.swing.JTextArea appointmentSymptomsTextArea2;
@@ -2381,6 +2347,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel examDescriptionLabel3;
     private javax.swing.JScrollPane examDescriptionScrollPane3;
     private javax.swing.JTextArea examDescriptionTextArea3;
+    private javax.swing.JButton examDetailsButton3;
     private javax.swing.JLabel examListLabel1;
     private javax.swing.JScrollPane examListScrollPane1;
     private javax.swing.JTable examListTable1;
@@ -2397,10 +2364,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton generateNewReportButton;
     private javax.swing.JPanel headerSection;
     private javax.swing.JButton newAnimalButton0;
-    private javax.swing.JButton newAppointmentButton1;
     private javax.swing.JLabel newAppointmentLabel2;
     private javax.swing.JButton newClientButton0;
-    private javax.swing.JButton newExamButton3;
     private javax.swing.JLabel newExamRequestLabel3;
     private javax.swing.JButton newHospitalizeButton;
     private javax.swing.JLabel newHospitalizeDateLabel;
@@ -2427,15 +2392,11 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextArea reportTextArea;
     private javax.swing.JButton sabeReportButton;
     private javax.swing.JButton scheduleAppointmentButton2;
-    private javax.swing.JLabel selectedAnimalHospitalizeLabel;
-    private javax.swing.JTextField selectedAnimalHospitalizeTextField;
     private javax.swing.JLabel selectedAnimalLabel;
     private javax.swing.JLabel selectedAnimalNameLabel;
     private javax.swing.JTextField selectedAnimalNameTextField;
     private javax.swing.JPanel selectedAnimalPanel;
     private javax.swing.JButton selectedAnimalTreatmentsButton1;
-    private javax.swing.JLabel selectedAnimalVaccLabel;
-    private javax.swing.JTextField selectedAnimalVaccTextField;
     private javax.swing.JPanel selectedAnimalVaccsJPanel;
     private javax.swing.JLabel selectedAnimalVaccsLabel;
     private javax.swing.JScrollPane selectedAnimalVaccsScrollPane;
