@@ -91,6 +91,14 @@ public class TreatmentDAO extends DAO {
         return this.retrieve("SELECT * FROM Tratamento WHERE idAnimal = " + animalId);
     }
 
+    // Recupera os tratamentos não finalizados de um animal
+    public List<Treatment> retrieveUnfinishedTreatments(int animalId) {
+        return this.retrieve(
+                "SELECT * FROM Tratamento WHERE idAnimal = " + animalId
+                + " AND encerrado = 0"
+        );
+    }
+
     // UPDATE --------------------------------------
     public void update(Treatment treatment) {
         try {

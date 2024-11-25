@@ -113,7 +113,6 @@ public class DAO {
                 idVeterinario INTEGER PRIMARY KEY AUTOINCREMENT,
                 cpf VARCHAR UNIQUE NOT NULL,
                 especialidade VARCHAR NOT NULL,
-                horaAtendimento VARCHAR NOT NULL,
                 numSala INTEGER NOT NULL,
                 FOREIGN KEY(cpf) REFERENCES Funcionario(cpf)
                 );""");

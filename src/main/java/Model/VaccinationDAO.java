@@ -25,7 +25,7 @@ public class VaccinationDAO extends DAO {
     // OPERAÇÕES CRUD
 
     // CREATE --------------------------------------
-    public Vaccination create(int vetId, int animalId, String vaccineName, String vaccineDate) {
+    public Vaccination create(int vetId, int animalId, String vaccineName, String vaccineDate, String nextDose) {
         try {
             PreparedStatement statement = DAO.getConnection().prepareStatement(
                     "INSERT INTO Vacinacao (idVeterinario, idAnimal, nomeVacina, data, proximaDose) VALUES (?, ?, ?, ?, ?)");
@@ -33,14 +33,14 @@ public class VaccinationDAO extends DAO {
             statement.setInt(2, animalId);
             statement.setString(3, vaccineName);
             statement.setString(4, vaccineDate);
-            statement.setString(5, null);
+            statement.setString(5, nextDose);
             executeUpdate(statement);
-
         } catch (SQLException exception) {
             Logger.getLogger(VaccinationDAO.class.getName()).log(Level.SEVERE, null, exception);
         }
         return this.retrieveById(lastId("Vacinacao", "idVacinacao"));
     }
+
 
     // Criando um objeto a partir de um ResultSet do Banco de Dados
     private Vaccination buildObject(ResultSet resultSet) {
@@ -59,6 +59,7 @@ public class VaccinationDAO extends DAO {
         }
         return vaccination;
     }
+
 
     // RETRIEVE --------------------------------------
     // Recuperador geral de vacinações
@@ -96,6 +97,14 @@ public class VaccinationDAO extends DAO {
         return this.retrieve("SELECT * FROM Vacinacao WHERE idVeterinario = " + vetId);
     }
 
+    // Recupera a próxima vacinação do Animal
+    public List<Vaccination> retrieveNextVacc(int animalId, String currentDate) {
+        return this.retrieve(
+                "SELECT * FROM Vacinacao WHERE idAnimal = " + animalId +
+                 " AND proximaDose >= '" + currentDate + "' ORDER BY proximaDose DESC"
+        );
+    }
+
     // UPDATE --------------------------------------
     public void update(Vaccination vaccination) {
         try {
@@ -112,6 +121,7 @@ public class VaccinationDAO extends DAO {
             System.err.println("Erro: " + exception.getMessage());
         }
     }
+
 
     // DELETE --------------------------------------
     public void delete(Vaccination vaccination) {

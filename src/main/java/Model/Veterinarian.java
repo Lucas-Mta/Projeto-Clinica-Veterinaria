@@ -3,14 +3,12 @@ package Model;
 public class Veterinarian extends Employee {
     private int vetId;
     private String specialty;
-    private String serviceHour;
     private int roomNum;
 
-    public Veterinarian(String cpf, String name, String address, String phone, String email, String login, String password, int vetId, String specialty, String serviceHour, int roomNum) {
+    public Veterinarian(String cpf, String name, String address, String phone, String email, String login, String password, int vetId, String specialty, int roomNum) {
         super(cpf, name, address, phone, email, 1, login, password); // Nível de Acesso: 1 -> Veterinário(a)
         this.vetId = vetId;
         this.specialty = specialty;
-        this.serviceHour = serviceHour;
         this.roomNum = roomNum;
     }
 
@@ -23,9 +21,6 @@ public class Veterinarian extends Employee {
         return specialty;
     }
 
-    public String getServiceHour() {
-        return serviceHour;
-    }
 
     public int getRoomNum() {
         return roomNum;
@@ -34,10 +29,6 @@ public class Veterinarian extends Employee {
     // Setters
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
-    }
-
-    public void setServiceHour(String serviceHour) {
-        this.serviceHour = serviceHour;
     }
 
     public void setRoomNum(int roomNum) {
@@ -52,7 +43,6 @@ public class Veterinarian extends Employee {
                 + ", Email: " + getEmail()
                 + ", ID: " + vetId
                 + ", Especialidade: " + specialty
-                + ", Hora de Atendimento: " + serviceHour
                 + ", Número da Sala: " + roomNum
                 + "]";
     }

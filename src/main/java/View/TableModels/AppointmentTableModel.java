@@ -9,7 +9,7 @@ import Model.*;
 public class AppointmentTableModel extends GenericTableModel {
 
     public AppointmentTableModel(List<Appointment> dataVector) {
-        super(dataVector, new String[]{"ID da Consulta", "Animal", "Veterinário", "Data", "Hora"});
+        super(dataVector, new String[]{"ID da Consulta", "Animal", "Veterinário(a)", "Data", "Hora"});
     }
 
     @Override

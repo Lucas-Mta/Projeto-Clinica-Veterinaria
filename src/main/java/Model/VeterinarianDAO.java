@@ -25,7 +25,7 @@ public class VeterinarianDAO extends DAO {
     // OPERAÇÕES CRUD
 
     // CREATE --------------------------------------
-    public Veterinarian create(String cpf, String name, String address, String phone, String email, String login, String password, String specialty, String serviceHour, int roomNum) {
+    public Veterinarian create(String cpf, String name, String address, String phone, String email, String login, String password, String specialty, int roomNum) {
         try {
             // Inserir na tabela Pessoa (herança de Veterinarian)
             PreparedStatement statement = DAO.getConnection().prepareStatement(
@@ -48,11 +48,10 @@ public class VeterinarianDAO extends DAO {
 
             // Inserir na tabela Veterinario
             statement = DAO.getConnection().prepareStatement(
-                    "INSERT INTO Veterinario (cpf, especialidade, horaAtendimento, numSala) VALUES (?, ?, ?, ?)");
+                    "INSERT INTO Veterinario (cpf, especialidade,numSala) VALUES (?, ?, ?)");
             statement.setString(1, cpf);
             statement.setString(2, specialty);
-            statement.setString(3, serviceHour);
-            statement.setInt(4, roomNum);
+            statement.setInt(3, roomNum);
             executeUpdate(statement);
 
         } catch (SQLException exception) {
@@ -75,7 +74,6 @@ public class VeterinarianDAO extends DAO {
                     resultSet.getString("senha"),
                     resultSet.getInt("idVeterinario"),
                     resultSet.getString("especialidade"),
-                    resultSet.getString("horaAtendimento"),
                     resultSet.getInt("numSala")
             );
         } catch (SQLException exception) {
@@ -139,11 +137,10 @@ public class VeterinarianDAO extends DAO {
 
             // Atualiza dados da tabela Veterinario
             statement = DAO.getConnection().prepareStatement(
-                    "UPDATE Veterinario SET especialidade=?, horaAtendimento=?, numSala=? WHERE cpf=?");
+                    "UPDATE Veterinario SET especialidade=?, numSala=? WHERE cpf=?");
             statement.setString(1, veterinarian.getSpecialty());
-            statement.setString(2, veterinarian.getServiceHour());
-            statement.setInt(3, veterinarian.getRoomNum());
-            statement.setString(4, veterinarian.getCpf());
+            statement.setInt(2, veterinarian.getRoomNum());
+            statement.setString(3, veterinarian.getCpf());
             executeUpdate(statement);
 
         } catch (SQLException exception) {
