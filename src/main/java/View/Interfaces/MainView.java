@@ -8,6 +8,7 @@ import Controller.Controller;
 import View.TableModels.*;
 
 import javax.swing.*;
+import java.awt.event.ItemEvent;
 
 /**
  * @author Lucca
@@ -104,13 +105,13 @@ public class MainView extends javax.swing.JFrame {
         newTreatmentCheckbox2 = new javax.swing.JCheckBox();
         newAppointmentLabel2 = new javax.swing.JLabel();
         appointmentDateLabel2 = new javax.swing.JLabel();
-        appointmentDateFormattedTextField2 = new javax.swing.JFormattedTextField();
+        appointmentDateTextField2 = new javax.swing.JTextField();
         appointmentVetLabel2 = new javax.swing.JLabel();
         appointmentVetTextField2 = new javax.swing.JTextField();
         appointmentTreatmentLabel2 = new javax.swing.JLabel();
         appointmentTreatmentComboBox2 = new javax.swing.JComboBox<>();
         appointmentTimeLabel2 = new javax.swing.JLabel();
-        appointmentTimeComboBox2 = new javax.swing.JComboBox<>();
+        appointmentTimeTextField2 = new javax.swing.JTextField();
         appointmentSymptomsLabel2 = new javax.swing.JLabel();
         appointmentSymptomsScrollPane2 = new javax.swing.JScrollPane();
         appointmentSymptomsTextArea2 = new javax.swing.JTextArea();
@@ -127,7 +128,6 @@ public class MainView extends javax.swing.JFrame {
         Info8 = new javax.swing.JPanel();
         newExamRequestLabel3 = new javax.swing.JLabel();
         examRequestDateLabel3 = new javax.swing.JLabel();
-        examRequestDateFormattedTextField3 = new javax.swing.JFormattedTextField();
         examTypeLabel3 = new javax.swing.JLabel();
         examTypeTextField3 = new javax.swing.JTextField();
         examAppointmentLabel3 = new javax.swing.JLabel();
@@ -136,6 +136,7 @@ public class MainView extends javax.swing.JFrame {
         examDescriptionScrollPane3 = new javax.swing.JScrollPane();
         examDescriptionTextArea3 = new javax.swing.JTextArea();
         examRequestButton3 = new javax.swing.JButton();
+        examRequestDateTextField3 = new javax.swing.JTextField();
         Vaccination = new javax.swing.JPanel();
         Top4 = new javax.swing.JPanel();
         Info10 = new javax.swing.JPanel();
@@ -159,7 +160,7 @@ public class MainView extends javax.swing.JFrame {
         selectedAnimalVaccsJPanel = new javax.swing.JPanel();
         selectedAnimalVaccsLabel = new javax.swing.JLabel();
         selectedAnimalVaccsScrollPane = new javax.swing.JScrollPane();
-        selectedAnimalVaccsTable = new javax.swing.JTextArea();
+        selectedAnimalVaccsTextArea = new javax.swing.JTextArea();
         Hospitalize = new javax.swing.JPanel();
         Top5 = new javax.swing.JPanel();
         Info11 = new javax.swing.JPanel();
@@ -357,6 +358,7 @@ public class MainView extends javax.swing.JFrame {
         recentAppointmentsTextArea.setForeground(new java.awt.Color(102, 102, 102));
         recentAppointmentsTextArea.setLineWrap(true);
         recentAppointmentsTextArea.setRows(5);
+        recentAppointmentsTextArea.setToolTipText("");
         recentAppointmentsTextArea.setCaretColor(new java.awt.Color(153, 153, 153));
         recentAppointmentsTextArea.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         recentAppointmentsScrollPane.setViewportView(recentAppointmentsTextArea);
@@ -434,7 +436,6 @@ public class MainView extends javax.swing.JFrame {
         clientListScrollPane0.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         clientListScrollPane0.setForeground(new java.awt.Color(255, 255, 255));
 
-        clientListTable0.setAutoCreateRowSorter(true);
         clientListTable0.setBackground(new java.awt.Color(255, 255, 255));
         clientListTable0.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         clientListTable0.setForeground(new java.awt.Color(0, 0, 0));
@@ -493,6 +494,14 @@ public class MainView extends javax.swing.JFrame {
         clientSearchTextField0.setForeground(new java.awt.Color(102, 102, 102));
         clientSearchTextField0.setText("Busque um Cliente...");
         clientSearchTextField0.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        clientSearchTextField0.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                clientSearchTextField0FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                clientSearchTextField0FocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout Info1Layout = new javax.swing.GroupLayout(Info1);
         Info1.setLayout(Info1Layout);
@@ -547,7 +556,6 @@ public class MainView extends javax.swing.JFrame {
         animalListScrollPane0.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         animalListScrollPane0.setForeground(new java.awt.Color(204, 204, 204));
 
-        animalListTable0.setAutoCreateRowSorter(true);
         animalListTable0.setBackground(new java.awt.Color(250, 250, 250));
         animalListTable0.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         animalListTable0.setForeground(new java.awt.Color(0, 0, 0));
@@ -607,6 +615,14 @@ public class MainView extends javax.swing.JFrame {
         animalSearchTextField0.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         animalSearchTextField0.setSelectionEnd(20);
         animalSearchTextField0.setSelectionStart(20);
+        animalSearchTextField0.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                animalSearchTextField0FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                animalSearchTextField0FocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout Info2Layout = new javax.swing.GroupLayout(Info2);
         Info2.setLayout(Info2Layout);
@@ -670,7 +686,6 @@ public class MainView extends javax.swing.JFrame {
         treatmentListScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         treatmentListScrollPane1.setForeground(new java.awt.Color(204, 204, 204));
 
-        treatmentListTable1.setAutoCreateRowSorter(true);
         treatmentListTable1.setBackground(new java.awt.Color(250, 250, 250));
         treatmentListTable1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         treatmentListTable1.setForeground(new java.awt.Color(0, 0, 0));
@@ -783,7 +798,6 @@ public class MainView extends javax.swing.JFrame {
         appointmentsListScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         appointmentsListScrollPane1.setForeground(new java.awt.Color(204, 204, 204));
 
-        appointmentsListTable1.setAutoCreateRowSorter(true);
         appointmentsListTable1.setBackground(new java.awt.Color(250, 250, 250));
         appointmentsListTable1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         appointmentsListTable1.setForeground(new java.awt.Color(0, 0, 0));
@@ -816,7 +830,6 @@ public class MainView extends javax.swing.JFrame {
         examListScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         examListScrollPane1.setForeground(new java.awt.Color(204, 204, 204));
 
-        examListTable1.setAutoCreateRowSorter(true);
         examListTable1.setBackground(new java.awt.Color(250, 250, 250));
         examListTable1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         examListTable1.setForeground(new java.awt.Color(0, 0, 0));
@@ -918,7 +931,6 @@ public class MainView extends javax.swing.JFrame {
         vetListScrollPane2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         vetListScrollPane2.setForeground(new java.awt.Color(204, 204, 204));
 
-        vetListTable2.setAutoCreateRowSorter(true);
         vetListTable2.setBackground(new java.awt.Color(250, 250, 250));
         vetListTable2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         vetListTable2.setForeground(new java.awt.Color(0, 0, 0));
@@ -950,8 +962,16 @@ public class MainView extends javax.swing.JFrame {
         vetSearchTextField2.setBackground(new java.awt.Color(250, 250, 250));
         vetSearchTextField2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         vetSearchTextField2.setForeground(new java.awt.Color(102, 102, 102));
-        vetSearchTextField2.setText("Busque um Veterinário...");
+        vetSearchTextField2.setText("Busque um(a) Veterinário(a)...");
         vetSearchTextField2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        vetSearchTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                vetSearchTextField2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                vetSearchTextField2FocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout Info5Layout = new javax.swing.GroupLayout(Info5);
         Info5.setLayout(Info5Layout);
@@ -996,6 +1016,11 @@ public class MainView extends javax.swing.JFrame {
         newTreatmentCheckbox2.setForeground(new java.awt.Color(102, 102, 102));
         newTreatmentCheckbox2.setText("Novo Tratamento?");
         newTreatmentCheckbox2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        newTreatmentCheckbox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newTreatmentCheckbox2ActionPerformed(evt);
+            }
+        });
 
         newAppointmentLabel2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         newAppointmentLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -1005,11 +1030,14 @@ public class MainView extends javax.swing.JFrame {
         appointmentDateLabel2.setForeground(new java.awt.Color(0, 0, 0));
         appointmentDateLabel2.setText("Data:");
 
-        appointmentDateFormattedTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        appointmentDateFormattedTextField2.setForeground(new java.awt.Color(102, 102, 102));
-        appointmentDateFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        appointmentDateFormattedTextField2.setText("dd/mm/yyyy");
-        appointmentDateFormattedTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        appointmentDateTextField2.setBackground(new java.awt.Color(255, 255, 255));
+        appointmentDateTextField2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        appointmentDateTextField2.setForeground(new java.awt.Color(102, 102, 102));
+        appointmentDateTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                appointmentDateTextField2FocusLost(evt);
+            }
+        });
 
         appointmentVetLabel2.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         appointmentVetLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -1019,7 +1047,7 @@ public class MainView extends javax.swing.JFrame {
         appointmentVetTextField2.setBackground(new java.awt.Color(250, 250, 250));
         appointmentVetTextField2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         appointmentVetTextField2.setForeground(new java.awt.Color(102, 102, 102));
-        appointmentVetTextField2.setText("Selecione um Veterinário na tabela acima....");
+        appointmentVetTextField2.setText("Selecione um(a) Veterinário(a)");
         appointmentVetTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 appointmentVetTextField2ActionPerformed(evt);
@@ -1034,22 +1062,25 @@ public class MainView extends javax.swing.JFrame {
         appointmentTreatmentComboBox2.setEditable(true);
         appointmentTreatmentComboBox2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         appointmentTreatmentComboBox2.setForeground(new java.awt.Color(102, 102, 102));
-        appointmentTreatmentComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tratamento A", "Tratamento B", "Tratamento C" }));
         appointmentTreatmentComboBox2.setRequestFocusEnabled(true);
-        appointmentTreatmentComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                appointmentTreatmentComboBox2ActionPerformed(evt);
+        appointmentTreatmentComboBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                appointmentTreatmentComboBox2ItemStateChanged(evt);
             }
         });
 
         appointmentTimeLabel2.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         appointmentTimeLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        appointmentTimeLabel2.setText("Horários Disponíveis:");
+        appointmentTimeLabel2.setText("Horário:");
 
-        appointmentTimeComboBox2.setBackground(new java.awt.Color(250, 250, 250));
-        appointmentTimeComboBox2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        appointmentTimeComboBox2.setForeground(new java.awt.Color(102, 102, 102));
-        appointmentTimeComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "14:00", "15:00", "16:00", "17:00", "18:00" }));
+        appointmentTimeTextField2.setBackground(new java.awt.Color(255, 255, 255));
+        appointmentTimeTextField2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        appointmentTimeTextField2.setForeground(new java.awt.Color(102, 102, 102));
+        appointmentTimeTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                appointmentTimeTextField2FocusLost(evt);
+            }
+        });
 
         appointmentSymptomsLabel2.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         appointmentSymptomsLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -1064,6 +1095,14 @@ public class MainView extends javax.swing.JFrame {
         appointmentSymptomsTextArea2.setLineWrap(true);
         appointmentSymptomsTextArea2.setRows(5);
         appointmentSymptomsTextArea2.setText("Coloque os sintomas aqui....");
+        appointmentSymptomsTextArea2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                appointmentSymptomsTextArea2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                appointmentSymptomsTextArea2FocusLost(evt);
+            }
+        });
         appointmentSymptomsScrollPane2.setViewportView(appointmentSymptomsTextArea2);
 
         scheduleAppointmentButton2.setBackground(new java.awt.Color(255, 255, 255));
@@ -1099,12 +1138,12 @@ public class MainView extends javax.swing.JFrame {
                                     .addGroup(Info6Layout.createSequentialGroup()
                                         .addComponent(appointmentDateLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(appointmentDateFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(26, 26, 26)
+                                        .addComponent(appointmentDateTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(appointmentTimeLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(appointmentTimeComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Info6Layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(appointmentTimeTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                                    .addGroup(Info6Layout.createSequentialGroup()
                                         .addGroup(Info6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(appointmentVetLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(appointmentTreatmentLabel2))
@@ -1126,12 +1165,15 @@ public class MainView extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(newAppointmentLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(Info6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(appointmentDateLabel2)
-                    .addComponent(appointmentTimeLabel2)
-                    .addComponent(appointmentTimeComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(appointmentDateFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(appointmentSymptomsLabel2))
+                .addGroup(Info6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Info6Layout.createSequentialGroup()
+                        .addComponent(appointmentSymptomsLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(Info6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(appointmentDateTextField2)
+                        .addComponent(appointmentDateLabel2)
+                        .addComponent(appointmentTimeLabel2))
+                    .addComponent(appointmentTimeTextField2))
                 .addGap(18, 18, 18)
                 .addGroup(Info6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(appointmentVetTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1174,7 +1216,6 @@ public class MainView extends javax.swing.JFrame {
         animalAppointmentsScrollPane3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         animalAppointmentsScrollPane3.setForeground(new java.awt.Color(204, 204, 204));
 
-        animalAppointmentsTable3.setAutoCreateRowSorter(true);
         animalAppointmentsTable3.setBackground(new java.awt.Color(250, 250, 250));
         animalAppointmentsTable3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         animalAppointmentsTable3.setForeground(new java.awt.Color(0, 0, 0));
@@ -1208,6 +1249,14 @@ public class MainView extends javax.swing.JFrame {
         animalAppointmentsSearchTextField3.setForeground(new java.awt.Color(102, 102, 102));
         animalAppointmentsSearchTextField3.setText("Busque uma Consulta...");
         animalAppointmentsSearchTextField3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        animalAppointmentsSearchTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                animalAppointmentsSearchTextField3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                animalAppointmentsSearchTextField3FocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout Info7Layout = new javax.swing.GroupLayout(Info7);
         Info7.setLayout(Info7Layout);
@@ -1256,12 +1305,6 @@ public class MainView extends javax.swing.JFrame {
         examRequestDateLabel3.setForeground(new java.awt.Color(0, 0, 0));
         examRequestDateLabel3.setText("Data Solicitação:");
 
-        examRequestDateFormattedTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        examRequestDateFormattedTextField3.setForeground(new java.awt.Color(102, 102, 102));
-        examRequestDateFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        examRequestDateFormattedTextField3.setText("dd/mm/yyyy");
-        examRequestDateFormattedTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         examTypeLabel3.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         examTypeLabel3.setForeground(new java.awt.Color(0, 0, 0));
         examTypeLabel3.setText("Tipo:");
@@ -1270,9 +1313,12 @@ public class MainView extends javax.swing.JFrame {
         examTypeTextField3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         examTypeTextField3.setForeground(new java.awt.Color(102, 102, 102));
         examTypeTextField3.setText("Especifique o tipo do Exame...");
-        examTypeTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                examTypeTextField3ActionPerformed(evt);
+        examTypeTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                examTypeTextField3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                examTypeTextField3FocusLost(evt);
             }
         });
 
@@ -1284,7 +1330,7 @@ public class MainView extends javax.swing.JFrame {
         examAppointmentTextField3.setBackground(new java.awt.Color(250, 250, 250));
         examAppointmentTextField3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         examAppointmentTextField3.setForeground(new java.awt.Color(102, 102, 102));
-        examAppointmentTextField3.setText("Selecione uma Consulta na tabela acima...");
+        examAppointmentTextField3.setText("Selecione uma Consulta...");
         examAppointmentTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 examAppointmentTextField3ActionPerformed(evt);
@@ -1301,7 +1347,15 @@ public class MainView extends javax.swing.JFrame {
         examDescriptionTextArea3.setForeground(new java.awt.Color(102, 102, 102));
         examDescriptionTextArea3.setLineWrap(true);
         examDescriptionTextArea3.setRows(5);
-        examDescriptionTextArea3.setText("\n");
+        examDescriptionTextArea3.setText("Digite a descrição do Exame...");
+        examDescriptionTextArea3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                examDescriptionTextArea3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                examDescriptionTextArea3FocusLost(evt);
+            }
+        });
         examDescriptionScrollPane3.setViewportView(examDescriptionTextArea3);
 
         examRequestButton3.setBackground(new java.awt.Color(255, 255, 255));
@@ -1317,6 +1371,15 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
+        examRequestDateTextField3.setBackground(new java.awt.Color(255, 255, 255));
+        examRequestDateTextField3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        examRequestDateTextField3.setForeground(new java.awt.Color(102, 102, 102));
+        examRequestDateTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                examRequestDateTextField3FocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout Info8Layout = new javax.swing.GroupLayout(Info8);
         Info8.setLayout(Info8Layout);
         Info8Layout.setHorizontalGroup(
@@ -1329,7 +1392,7 @@ public class MainView extends javax.swing.JFrame {
                             .addGroup(Info8Layout.createSequentialGroup()
                                 .addComponent(examRequestDateLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(examRequestDateFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(examRequestDateTextField3))
                             .addGroup(Info8Layout.createSequentialGroup()
                                 .addComponent(examTypeLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1337,7 +1400,7 @@ public class MainView extends javax.swing.JFrame {
                             .addGroup(Info8Layout.createSequentialGroup()
                                 .addComponent(examAppointmentLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(examAppointmentTextField3)))
+                                .addComponent(examAppointmentTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)))
                         .addGap(36, 36, 36)
                         .addComponent(examDescriptionLabel3))
                     .addComponent(newExamRequestLabel3))
@@ -1358,7 +1421,7 @@ public class MainView extends javax.swing.JFrame {
                         .addGroup(Info8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(examRequestDateLabel3)
                             .addComponent(examDescriptionLabel3)
-                            .addComponent(examRequestDateFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(examRequestDateTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(Info8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(examTypeLabel3)
@@ -1397,7 +1460,6 @@ public class MainView extends javax.swing.JFrame {
         vetListScrollPane4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         vetListScrollPane4.setForeground(new java.awt.Color(204, 204, 204));
 
-        vetListTable4.setAutoCreateRowSorter(true);
         vetListTable4.setBackground(new java.awt.Color(250, 250, 250));
         vetListTable4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         vetListTable4.setForeground(new java.awt.Color(0, 0, 0));
@@ -1429,8 +1491,16 @@ public class MainView extends javax.swing.JFrame {
         vetSearchTextField4.setBackground(new java.awt.Color(250, 250, 250));
         vetSearchTextField4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         vetSearchTextField4.setForeground(new java.awt.Color(102, 102, 102));
-        vetSearchTextField4.setText("Busque um Veterinário...");
+        vetSearchTextField4.setText("Busque um(a) Veterinário(a)...");
         vetSearchTextField4.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        vetSearchTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                vetSearchTextField4FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                vetSearchTextField4FocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout Info10Layout = new javax.swing.GroupLayout(Info10);
         Info10.setLayout(Info10Layout);
@@ -1484,6 +1554,7 @@ public class MainView extends javax.swing.JFrame {
         selectedVetVaccTextField.setBackground(new java.awt.Color(250, 250, 250));
         selectedVetVaccTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         selectedVetVaccTextField.setForeground(new java.awt.Color(102, 102, 102));
+        selectedVetVaccTextField.setText("Selecione um(a) Veterinário(a)");
         selectedVetVaccTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectedVetVaccTextFieldActionPerformed(evt);
@@ -1515,15 +1586,20 @@ public class MainView extends javax.swing.JFrame {
         vaccDateTextField.setBackground(new java.awt.Color(250, 250, 250));
         vaccDateTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         vaccDateTextField.setForeground(new java.awt.Color(102, 102, 102));
-        vaccDateTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vaccDateTextFieldActionPerformed(evt);
+        vaccDateTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                vaccDateTextFieldFocusLost(evt);
             }
         });
 
         vaccNextDoseTextField.setBackground(new java.awt.Color(250, 250, 250));
         vaccNextDoseTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         vaccNextDoseTextField.setForeground(new java.awt.Color(102, 102, 102));
+        vaccNextDoseTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                vaccNextDoseTextFieldFocusLost(evt);
+            }
+        });
 
         newVaccButton.setBackground(new java.awt.Color(255, 255, 255));
         newVaccButton.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
@@ -1578,11 +1654,11 @@ public class MainView extends javax.swing.JFrame {
                     .addGroup(newVaccJPanelLayout.createSequentialGroup()
                         .addComponent(vaccDateLabel)
                         .addGap(3, 3, 3)
-                        .addGroup(newVaccJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(vaccDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(newVaccJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(newVaccJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(selectedVetVaccLabel)
-                                .addComponent(selectedVetVaccTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(selectedVetVaccTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(vaccDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(vaccNextDoseLabel)
                         .addGap(2, 2, 2)
@@ -1604,14 +1680,14 @@ public class MainView extends javax.swing.JFrame {
 
         selectedAnimalVaccsScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        selectedAnimalVaccsTable.setEditable(false);
-        selectedAnimalVaccsTable.setBackground(new java.awt.Color(250, 250, 250));
-        selectedAnimalVaccsTable.setColumns(20);
-        selectedAnimalVaccsTable.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        selectedAnimalVaccsTable.setForeground(new java.awt.Color(102, 102, 102));
-        selectedAnimalVaccsTable.setLineWrap(true);
-        selectedAnimalVaccsTable.setRows(5);
-        selectedAnimalVaccsScrollPane.setViewportView(selectedAnimalVaccsTable);
+        selectedAnimalVaccsTextArea.setEditable(false);
+        selectedAnimalVaccsTextArea.setBackground(new java.awt.Color(250, 250, 250));
+        selectedAnimalVaccsTextArea.setColumns(20);
+        selectedAnimalVaccsTextArea.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        selectedAnimalVaccsTextArea.setForeground(new java.awt.Color(102, 102, 102));
+        selectedAnimalVaccsTextArea.setLineWrap(true);
+        selectedAnimalVaccsTextArea.setRows(5);
+        selectedAnimalVaccsScrollPane.setViewportView(selectedAnimalVaccsTextArea);
 
         javax.swing.GroupLayout selectedAnimalVaccsJPanelLayout = new javax.swing.GroupLayout(selectedAnimalVaccsJPanel);
         selectedAnimalVaccsJPanel.setLayout(selectedAnimalVaccsJPanelLayout);
@@ -1657,7 +1733,6 @@ public class MainView extends javax.swing.JFrame {
         vetListScrollPane5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         vetListScrollPane5.setForeground(new java.awt.Color(204, 204, 204));
 
-        vetListTable5.setAutoCreateRowSorter(true);
         vetListTable5.setBackground(new java.awt.Color(250, 250, 250));
         vetListTable5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         vetListTable5.setForeground(new java.awt.Color(0, 0, 0));
@@ -1689,8 +1764,16 @@ public class MainView extends javax.swing.JFrame {
         vetSearchTextField5.setBackground(new java.awt.Color(250, 250, 250));
         vetSearchTextField5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         vetSearchTextField5.setForeground(new java.awt.Color(102, 102, 102));
-        vetSearchTextField5.setText("Busque um Veterinário...");
+        vetSearchTextField5.setText("Busque um(a) Veterinário(a)...");
         vetSearchTextField5.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        vetSearchTextField5.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                vetSearchTextField5FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                vetSearchTextField5FocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout Info11Layout = new javax.swing.GroupLayout(Info11);
         Info11.setLayout(Info11Layout);
@@ -1743,6 +1826,7 @@ public class MainView extends javax.swing.JFrame {
         selectedVetHospitalizeTextField.setBackground(new java.awt.Color(250, 250, 250));
         selectedVetHospitalizeTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         selectedVetHospitalizeTextField.setForeground(new java.awt.Color(102, 102, 102));
+        selectedVetHospitalizeTextField.setText("Selecione um(a) Veterinário(a)");
         selectedVetHospitalizeTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectedVetHospitalizeTextFieldActionPerformed(evt);
@@ -1756,9 +1840,9 @@ public class MainView extends javax.swing.JFrame {
         newHospitalizeDateTextField.setBackground(new java.awt.Color(250, 250, 250));
         newHospitalizeDateTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         newHospitalizeDateTextField.setForeground(new java.awt.Color(102, 102, 102));
-        newHospitalizeDateTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newHospitalizeDateTextFieldActionPerformed(evt);
+        newHospitalizeDateTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                newHospitalizeDateTextFieldFocusLost(evt);
             }
         });
 
@@ -1831,7 +1915,6 @@ public class MainView extends javax.swing.JFrame {
         followHospitalizeTextArea.setForeground(new java.awt.Color(102, 102, 102));
         followHospitalizeTextArea.setLineWrap(true);
         followHospitalizeTextArea.setRows(5);
-        followHospitalizeTextArea.setText("Não há nenhuma internação deste animal...");
         followHospitalizeScrollPane.setViewportView(followHospitalizeTextArea);
 
         progressLabel.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
@@ -1847,6 +1930,16 @@ public class MainView extends javax.swing.JFrame {
         progressTextArea.setForeground(new java.awt.Color(102, 102, 102));
         progressTextArea.setLineWrap(true);
         progressTextArea.setRows(5);
+        progressTextArea.setText("Adicione uma nova evolução da internação...");
+        progressTextArea.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        progressTextArea.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                progressTextAreaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                progressTextAreaFocusLost(evt);
+            }
+        });
         progressScrollPane.setViewportView(progressTextArea);
 
         endHospitalizeCheckBox.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
@@ -2044,17 +2137,9 @@ public class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_appointmentVetTextField2ActionPerformed
 
-    private void appointmentTreatmentComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentTreatmentComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_appointmentTreatmentComboBox2ActionPerformed
-
     private void scheduleAppointmentButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleAppointmentButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_scheduleAppointmentButton2ActionPerformed
-
-    private void examTypeTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examTypeTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_examTypeTextField3ActionPerformed
 
     private void examRequestButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examRequestButton3ActionPerformed
         // TODO add your handling code here:
@@ -2072,10 +2157,6 @@ public class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_vaccTextFieldActionPerformed
 
-    private void vaccDateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaccDateTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vaccDateTextFieldActionPerformed
-
     private void newVaccButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newVaccButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newVaccButtonActionPerformed
@@ -2083,10 +2164,6 @@ public class MainView extends javax.swing.JFrame {
     private void selectedVetHospitalizeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedVetHospitalizeTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_selectedVetHospitalizeTextFieldActionPerformed
-
-    private void newHospitalizeDateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newHospitalizeDateTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_newHospitalizeDateTextFieldActionPerformed
 
     private void newHospitalizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newHospitalizeButtonActionPerformed
         // TODO add your handling code here:
@@ -2127,10 +2204,17 @@ public class MainView extends javax.swing.JFrame {
 
             case "<html> <b>Consultas<b> </html>":
                 Controller.loadAllVets(vetListTable2);
+                // Coloca o TextField de Data  com a Data atual por padrão (mas é possível mudar)
+                appointmentDateTextField2.setText(Controller.getCurrentDate());
 
                 if (Controller.getSelectedAnimal() == null) {
                     pleaseSelectAnAnimal();
+                    appointmentTreatmentComboBox2.getEditor().setItem("");
+                } else {
+                    // Popula o ComboBox dos Tratamentos
+                    Controller.populateTreatmentComboBox(appointmentTreatmentComboBox2, newTreatmentCheckbox2);
                 }
+
                 break;
 
             case "<html> <b>Exames<b> </html>":
@@ -2140,15 +2224,28 @@ public class MainView extends javax.swing.JFrame {
                     pleaseSelectAnAnimal();
                 } else {
                     Controller.loadAppointmentsByAnimal(animalAppointmentsTable3);
+                    // Coloca o TextField de Data da Solicitação com a Data atual por padrão (mas é possível mudar)
+                    examRequestDateTextField3.setText(Controller.getCurrentDate());
                 }
                 break;
 
             case "<html> <b>Vacinações<b> </html>":
                 Controller.loadAllVets(vetListTable4);
+
+                if (Controller.getSelectedAnimal() == null) {
+                    pleaseSelectAnAnimal();
+                } else {
+                    // Coloca o TextField de Data com a Data atual por padrão (mas é possível mudar)
+                    vaccDateTextField.setText(Controller.getCurrentDate());
+                    // Mostra as vacinações do Animal no TextArea
+                    selectedAnimalVaccsTextArea.setText(Controller.loadAllAnimalVaccs());
+                }
                 break;
 
             case "<html> <b>Internações<b> </html>":
                 Controller.loadAllVets(vetListTable5);
+                // Coloca o TextField de Data com a Data atual por padrão (mas é possível mudar)
+                newHospitalizeDateTextField.setText(Controller.getCurrentDate());
                 break;
 
             default:
@@ -2168,7 +2265,11 @@ public class MainView extends javax.swing.JFrame {
                 .getItem(clientListTable0.getSelectedRow()));
 
         // Cria a tabela de Animais de acordo com o cliente selecionado
-       Controller.loadAnimalsByOwner(animalListTable0);
+        Controller.loadAnimalsByOwner(animalListTable0);
+
+        // Limpa as informações anteriores, se existirem, de Consultas Recentes e Próxima Vacinação
+        recentAppointmentsTextArea.setText("");
+        nextVaccTextField.setText("");
 
     }//GEN-LAST:event_clientListTable0MousePressed
 
@@ -2177,7 +2278,8 @@ public class MainView extends javax.swing.JFrame {
                 .getItem(animalListTable0.getSelectedRow()));
 
         // Modifica as outras informações (Consultas Recentes e Próxima Vacinação)
-        recentAppointmentsTextArea.setText(Controller.loadAnimalInfo());
+        recentAppointmentsTextArea.setText(Controller.loadAnimalRecentAppointments());
+        nextVaccTextField.setText(Controller.loadAnimalNextVaccDate());
 
     }//GEN-LAST:event_animalListTable0MousePressed
 
@@ -2217,16 +2319,36 @@ public class MainView extends javax.swing.JFrame {
     private void animalAppointmentsTable3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_animalAppointmentsTable3MousePressed
         Controller.setSelected(((GenericTableModel)animalAppointmentsTable3.getModel())
                 .getItem(animalAppointmentsTable3.getSelectedRow()));
+
+        // Muda o TextField
+        examAppointmentTextField3.setText(
+                "Data: " + Controller.getSelectedAppointment().getDate()
+                + " | Veterinário: " + Controller.getSelectedVet().getName()
+        );
     }//GEN-LAST:event_animalAppointmentsTable3MousePressed
 
     private void vetListTable4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vetListTable4MousePressed
         Controller.setSelected(((GenericTableModel)vetListTable4.getModel())
                 .getItem(vetListTable4.getSelectedRow()));
+
+        // Muda o TextField
+        selectedVetVaccTextField.setText(
+                Controller.getSelectedVet().getName()
+                + " - " + Controller.getSelectedVet().getSpecialty()
+        );
+
     }//GEN-LAST:event_vetListTable4MousePressed
 
     private void vetListTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vetListTable5MousePressed
         Controller.setSelected(((GenericTableModel)vetListTable5.getModel())
                 .getItem(vetListTable5.getSelectedRow()));
+
+        // Muda o TextField
+        selectedVetHospitalizeTextField.setText(
+                Controller.getSelectedVet().getName()
+                        + " - " + Controller.getSelectedVet().getSpecialty()
+        );
+
     }//GEN-LAST:event_vetListTable5MousePressed
 
     private void appointmentDetailsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentDetailsButton1ActionPerformed
@@ -2236,6 +2358,177 @@ public class MainView extends javax.swing.JFrame {
     private void examDetailsButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examDetailsButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_examDetailsButton3ActionPerformed
+
+
+    // ÁREA DE FOCO DE TEXT FIELDS
+
+    private void clientSearchTextField0FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_clientSearchTextField0FocusGained
+        if (clientSearchTextField0.getText().equals("Busque um Cliente...")) {
+            clientSearchTextField0.setText("");
+        }
+    }//GEN-LAST:event_clientSearchTextField0FocusGained
+
+    private void clientSearchTextField0FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_clientSearchTextField0FocusLost
+        if ((clientSearchTextField0.getText()).isBlank()) {
+            clientSearchTextField0.setText("Busque um Cliente...");
+        }
+    }//GEN-LAST:event_clientSearchTextField0FocusLost
+
+    private void animalSearchTextField0FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_animalSearchTextField0FocusGained
+        if (animalSearchTextField0.getText().equals("Busque um Animal...")) {
+            animalSearchTextField0.setText("");
+        }
+    }//GEN-LAST:event_animalSearchTextField0FocusGained
+
+    private void animalSearchTextField0FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_animalSearchTextField0FocusLost
+        if ((animalSearchTextField0.getText()).isBlank()) {
+            animalSearchTextField0.setText("Busque um Animal...");
+        }
+    }//GEN-LAST:event_animalSearchTextField0FocusLost
+
+    private void vetSearchTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vetSearchTextField2FocusGained
+        if (vetSearchTextField2.getText().equals("Busque um(a) Veterinário(a)...")) {
+            vetSearchTextField2.setText("");
+        }
+    }//GEN-LAST:event_vetSearchTextField2FocusGained
+
+    private void vetSearchTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vetSearchTextField2FocusLost
+        if ((vetSearchTextField2.getText()).isBlank()) {
+            vetSearchTextField2.setText("Busque um(a) Veterinário(a)...");
+        }
+    }//GEN-LAST:event_vetSearchTextField2FocusLost
+
+    private void appointmentSymptomsTextArea2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_appointmentSymptomsTextArea2FocusGained
+        if (appointmentSymptomsTextArea2.getText().equals("Coloque os sintomas aqui....")) {
+            appointmentSymptomsTextArea2.setText("");
+        }
+    }//GEN-LAST:event_appointmentSymptomsTextArea2FocusGained
+
+    private void appointmentSymptomsTextArea2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_appointmentSymptomsTextArea2FocusLost
+        if ((appointmentSymptomsTextArea2.getText()).isBlank()) {
+            appointmentSymptomsTextArea2.setText("Coloque os sintomas aqui....");
+        }
+    }//GEN-LAST:event_appointmentSymptomsTextArea2FocusLost
+
+    private void examTypeTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_examTypeTextField3FocusGained
+        if (examTypeTextField3.getText().equals("Especifique o tipo do Exame...")) {
+            examTypeTextField3.setText("");
+        }
+    }//GEN-LAST:event_examTypeTextField3FocusGained
+
+    private void examTypeTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_examTypeTextField3FocusLost
+        if ((examTypeTextField3.getText()).isBlank()) {
+            examTypeTextField3.setText("Especifique o tipo do Exame...");
+        }
+    }//GEN-LAST:event_examTypeTextField3FocusLost
+
+    private void examDescriptionTextArea3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_examDescriptionTextArea3FocusGained
+        if (examDescriptionTextArea3.getText().equals("Digite a descrição do Exame...")) {
+            examDescriptionTextArea3.setText("");
+        }
+    }//GEN-LAST:event_examDescriptionTextArea3FocusGained
+
+    private void examDescriptionTextArea3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_examDescriptionTextArea3FocusLost
+        if ((examDescriptionTextArea3.getText()).isBlank()) {
+            examDescriptionTextArea3.setText("Digite a descrição do Exame...");
+        }
+    }//GEN-LAST:event_examDescriptionTextArea3FocusLost
+
+    private void animalAppointmentsSearchTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_animalAppointmentsSearchTextField3FocusGained
+        if (animalAppointmentsSearchTextField3.getText().equals("Busque uma Consulta...")) {
+            animalAppointmentsSearchTextField3.setText("");
+        }
+    }//GEN-LAST:event_animalAppointmentsSearchTextField3FocusGained
+
+    private void animalAppointmentsSearchTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_animalAppointmentsSearchTextField3FocusLost
+        if ((animalAppointmentsSearchTextField3.getText()).isBlank()) {
+            animalAppointmentsSearchTextField3.setText("Busque uma Consulta...");
+        }
+    }//GEN-LAST:event_animalAppointmentsSearchTextField3FocusLost
+
+    private void vetSearchTextField4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vetSearchTextField4FocusGained
+        if (vetSearchTextField4.getText().equals("Busque um(a) Veterinário(a)...")) {
+            vetSearchTextField4.setText("");
+        }
+    }//GEN-LAST:event_vetSearchTextField4FocusGained
+
+    private void vetSearchTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vetSearchTextField4FocusLost
+        if ((vetSearchTextField4.getText()).isBlank()) {
+            vetSearchTextField4.setText("Busque um(a) Veterinário(a)...");
+        }
+    }//GEN-LAST:event_vetSearchTextField4FocusLost
+
+    private void vetSearchTextField5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vetSearchTextField5FocusGained
+        if (vetSearchTextField5.getText().equals("Busque um(a) Veterinário(a)...")) {
+            vetSearchTextField5.setText("");
+        }
+    }//GEN-LAST:event_vetSearchTextField5FocusGained
+
+    private void vetSearchTextField5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vetSearchTextField5FocusLost
+        if ((vetSearchTextField5.getText()).isBlank()) {
+            vetSearchTextField5.setText("Busque um(a) Veterinário(a)...");
+        }
+    }//GEN-LAST:event_vetSearchTextField5FocusLost
+
+    private void progressTextAreaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_progressTextAreaFocusGained
+        if (progressTextArea.getText().equals("Adicione uma nova evolução da internação...")) {
+            progressTextArea.setText("");
+        }
+    }//GEN-LAST:event_progressTextAreaFocusGained
+
+    private void progressTextAreaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_progressTextAreaFocusLost
+        if ((progressTextArea.getText()).isBlank()) {
+            progressTextArea.setText("Adicione uma nova evolução da internação...");
+        }
+    }//GEN-LAST:event_progressTextAreaFocusLost
+
+    private void appointmentDateTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_appointmentDateTextField2FocusLost
+        checkDate(appointmentDateTextField2);
+    }//GEN-LAST:event_appointmentDateTextField2FocusLost
+
+    private void examRequestDateTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_examRequestDateTextField3FocusLost
+        checkDate(examRequestDateTextField3);
+    }//GEN-LAST:event_examRequestDateTextField3FocusLost
+
+    private void vaccDateTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaccDateTextFieldFocusLost
+        checkDate(vaccDateTextField);
+    }//GEN-LAST:event_vaccDateTextFieldFocusLost
+
+    private void vaccNextDoseTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaccNextDoseTextFieldFocusLost
+        checkDate(vaccNextDoseTextField);
+    }//GEN-LAST:event_vaccNextDoseTextFieldFocusLost
+
+    private void newHospitalizeDateTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_newHospitalizeDateTextFieldFocusLost
+        checkDate(newHospitalizeDateTextField);
+    }//GEN-LAST:event_newHospitalizeDateTextFieldFocusLost
+
+    private void appointmentTimeTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_appointmentTimeTextField2FocusLost
+        if (!Controller.isValidTime(appointmentTimeTextField2)) {
+            JOptionPane.showMessageDialog(null, "O horário é inválido. Coloque um horário no formáto (HH:mm).", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+            appointmentTimeTextField2.setText("");
+        }
+    }//GEN-LAST:event_appointmentTimeTextField2FocusLost
+
+    private void appointmentTreatmentComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_appointmentTreatmentComboBox2ItemStateChanged
+        Controller.validateAndHandleTreatmentInput(appointmentTreatmentComboBox2, newTreatmentCheckbox2);
+    }//GEN-LAST:event_appointmentTreatmentComboBox2ItemStateChanged
+
+    private void newTreatmentCheckbox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTreatmentCheckbox2ActionPerformed
+        Controller.handleNewTreatmentCheckbox(appointmentTreatmentComboBox2, newTreatmentCheckbox2);
+    }//GEN-LAST:event_newTreatmentCheckbox2ActionPerformed
+
+    public void checkDate(JTextField dateTextField) {
+        // Se estiver vazio, coloca a data atual
+        if ((dateTextField.getText()).isBlank()) {
+            dateTextField.setText(Controller.getCurrentDate());
+        }
+
+        // Verifica se a data é válida, se não for, mostra um Alerta
+        if (!Controller.isValidDate(dateTextField)) {
+            JOptionPane.showMessageDialog(null, "A data informada é inválida. Coloque uma data no formato (dd/MM/yyyy).", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 
     /**
      * @param args the command line arguments
@@ -2314,14 +2607,14 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTable animalListTable0;
     private javax.swing.JLabel animalSearchLabel0;
     private javax.swing.JTextField animalSearchTextField0;
-    private javax.swing.JFormattedTextField appointmentDateFormattedTextField2;
     private javax.swing.JLabel appointmentDateLabel2;
+    private javax.swing.JTextField appointmentDateTextField2;
     private javax.swing.JButton appointmentDetailsButton1;
     private javax.swing.JLabel appointmentSymptomsLabel2;
     private javax.swing.JScrollPane appointmentSymptomsScrollPane2;
     private javax.swing.JTextArea appointmentSymptomsTextArea2;
-    private javax.swing.JComboBox<String> appointmentTimeComboBox2;
     private javax.swing.JLabel appointmentTimeLabel2;
+    private javax.swing.JTextField appointmentTimeTextField2;
     private javax.swing.JComboBox<String> appointmentTreatmentComboBox2;
     private javax.swing.JLabel appointmentTreatmentLabel2;
     private javax.swing.JLabel appointmentVetLabel2;
@@ -2352,8 +2645,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JScrollPane examListScrollPane1;
     private javax.swing.JTable examListTable1;
     private javax.swing.JButton examRequestButton3;
-    private javax.swing.JFormattedTextField examRequestDateFormattedTextField3;
     private javax.swing.JLabel examRequestDateLabel3;
+    private javax.swing.JTextField examRequestDateTextField3;
     private javax.swing.JLabel examTypeLabel3;
     private javax.swing.JTextField examTypeTextField3;
     private javax.swing.JPanel fixedInfoContent;
@@ -2400,7 +2693,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel selectedAnimalVaccsJPanel;
     private javax.swing.JLabel selectedAnimalVaccsLabel;
     private javax.swing.JScrollPane selectedAnimalVaccsScrollPane;
-    private javax.swing.JTextArea selectedAnimalVaccsTable;
+    private javax.swing.JTextArea selectedAnimalVaccsTextArea;
     private javax.swing.JLabel selectedClientLabel;
     private javax.swing.JTextField selectedClientTextField;
     private javax.swing.JLabel selectedSpeciesLabel;
